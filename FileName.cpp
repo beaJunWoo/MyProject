@@ -527,7 +527,7 @@ void RandomTile()
 	{
 		randtile[i].x = rand() % 35 + 1;
 		randtile[i].y = rand() % 6 + 10;
-		randtile[i].randomtime =rand()% 100;
+		randtile[i].randomtime % 100;
 	}
 
 }
