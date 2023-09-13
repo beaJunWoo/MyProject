@@ -1,0 +1,8 @@
+﻿  FileName.cpp
+C:\Users\Administrator\source\repos\Project7\FileName.cpp(269,15): warning C4129: ' ': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+C:\Users\Administrator\source\repos\Project7\FileName.cpp(272,15): warning C4129: '_': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+C:\Users\Administrator\source\repos\Project7\FileName.cpp(273,15): warning C4129: ' ': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+C:\Users\Administrator\source\repos\Project7\FileName.cpp(275,15): warning C4129: '_': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+C:\Users\Administrator\source\repos\Project7\FileName.cpp(530,26): warning C4552: '%': 식의 결과가 사용되지 않습니다.
+C:\Users\Administrator\source\repos\Project7\FileName.cpp(543,48): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+  Project7.vcxproj -> C:\Users\Administrator\source\repos\Project7\x64\Debug\Project7.exe

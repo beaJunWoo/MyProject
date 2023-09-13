@@ -1,0 +1,10 @@
+﻿  FileName.cpp
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(235,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(235,21): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(370,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(370,20): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(547,37): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(547,23): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(550,42): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\source\repos\Project4\FileName.cpp(550,24): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Project4.vcxproj -> C:\Users\Administrator\source\repos\Project4\x64\Debug\Project4.exe
