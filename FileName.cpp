@@ -75,7 +75,7 @@ enum MyEnum
 	PLAY,
 	Avoid,
 };
-MyEnum menu = LOGO;
+MyEnum menu = PLAY;
 
 struct Obj
 {
@@ -134,11 +134,6 @@ struct Tile
 	int randomtime;
 };
 Tile* randtile;
-//Initialize 초기화
-//Progress 진행
-//Render 출력
-//Release 할당해제
-
 
 #pragma region Base
 void posXY(int x, int y);
@@ -195,6 +190,11 @@ void createTile();
 void CreateBullte(int i);
 void Creategrenade();
 #pragma endregion
+
+#pragma region UI
+void HPBar(Obj* obj);
+#pragma endregion
+
 ///////////////////////////////////////////////////////////////////////////////////
 int main()
 {
@@ -391,8 +391,7 @@ void LogoRelease()
 #pragma endregion
 
 #pragma region Menu
-
-
+int next = 0;
 void MenuInitialize()
 {
 
@@ -1071,7 +1070,6 @@ void MenuInitialize()
 
 
 }
-
 void MenuProgress()
 {
 	int menuNum = 1;
@@ -1090,7 +1088,6 @@ void MenuProgress()
 		Sleep(100);
 	}
 }
-int next = 0;
 void MenuRender(int Num)
 {
 	if (Num == 1)
@@ -1231,7 +1228,7 @@ void PlayInitialize()
 	enemy[0]->Die = "퍼<";
 
 	enemy[1] = (Obj*)malloc(sizeof(Obj));
-	enemy[1]->x = 25;
+	enemy[1]->x = 5;
 	enemy[1]->y = 10;
 	enemy[1]->HP = 5;
 	enemy[1]->shape[0] = "봇";
@@ -1499,7 +1496,21 @@ void PlayRender()
 		printf(enemy[0]->Die);
 		printf("%d", enemy[0]->HP);
 	}
+
+	if (enemy[1]->HP > 0)
+	{
+		posXY(enemy[1]->x, enemy[1]->y);
+		printf(enemy[1]->shape[0]);
+		printf("%d", enemy[1]->HP);
+	}
+	else
+	{
+		posXY(enemy[1]->x, enemy[1]->y);
+		printf(enemy[1]->Die);
+		printf("%d", enemy[1]->HP);
+	}
 	MoveGrenadeAndDelete();
+	HPBar(enemy[0]);
 }
 void PlayRelease()
 {
@@ -1722,3 +1733,15 @@ void Creategrenade()
 
 }
 #pragma endregion
+
+void HPBar(Obj* obj)
+{
+	if (obj->HP > 0)
+	{
+		for (int i = 0; i < obj->HP / 5 + 1; i++)
+		{
+			posXY(obj->x+i, obj->y - 1);
+			printf("◆");
+		}
+	}
+}
