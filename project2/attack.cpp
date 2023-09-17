@@ -60,7 +60,8 @@ int Map[20][50] =
 };
 
 const char* Weaphone[10][10];
-
+const float G = 9.81;
+float time = 0.f;
 struct Player
 {
 	int x;
@@ -160,19 +161,19 @@ void UseItem();
 //¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è¡è
 int main()
 {
-	DeleteCurosr();
+	
 
 	SettingPlayer(20, 10);
 	CreateEnemy(10, 10, 1);
 	CreateEnemy(15, 10, 1);
 	CreateEnemy(30, 10, 1);
-	
+	DeleteCurosr();
 	Weaphone_MapInitialize();
 	CreateItem();
 	while (true)
 	{
 		system("cls");
-
+		
 		//Ãâ·Â
 		ShowGunUI();
 		ShowMap();
@@ -189,7 +190,7 @@ int main()
 
 		UseItem();
 
-		Sleep(15);
+		Sleep(50);
 	}
 	return 0;
 }
@@ -930,8 +931,7 @@ void PlayerGravity()
 {
 	if (player != nullptr)
 	{
-		if (Map[player->y+1][player->x] < 4)
-			player->y++;
+		player->y++;
 	}
 }
 void EnemyGravity()
@@ -1072,3 +1072,4 @@ void UseItem()
 	}
 }
 #pragma endregion
+

@@ -1,57 +1,58 @@
 ﻿  attack.cpp
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(324,47): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(324,26): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(340,24): warning C4552: '-': 식의 결과가 사용되지 않습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(370,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(370,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(374,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(374,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(378,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(378,28): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(382,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(382,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(386,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(386,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(390,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(390,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(394,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(394,28): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(398,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(398,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(428,47): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(428,26): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(474,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(474,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(478,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(478,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(482,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(482,28): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(486,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(486,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(490,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(490,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(494,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(494,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(498,53): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(498,28): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(502,57): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(502,32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(644,50): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(644,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(648,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(648,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(652,50): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(652,27): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(656,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(656,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(660,50): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(660,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(664,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(664,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(668,50): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(668,27): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(672,54): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(672,31): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(681,45): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(681,26): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Project9.vcxproj -> C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\x64\Debug\Project9.exe
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(63,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(325,47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(325,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(341,24): warning C4552: '-': result of expression not used
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(371,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(371,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(375,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(375,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(379,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(379,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(383,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(383,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(387,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(387,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(391,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(391,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(395,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(395,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(399,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(399,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(429,47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(429,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(475,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(475,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(479,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(479,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(483,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(483,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(487,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(487,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(491,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(491,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(495,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(495,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(499,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(499,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(503,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(503,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(645,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(645,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(649,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(649,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(653,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(653,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(657,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(657,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(661,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(661,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(665,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(665,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(669,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(669,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(673,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(673,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(682,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\attack.cpp(682,26): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Project9.vcxproj -> C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\project2\x64\Debug\Project9.exe
