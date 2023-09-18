@@ -217,7 +217,7 @@ void PlayerHpDownEffect();
 #pragma region Enemy
 void ShowEnemy();
 void CreateEnemy(int x, int y, int lv);
-void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* die);
+void SettingEnemy(int x, int y, int lv);
 void AttackEnemy();
 void EnemyMove();
 void EnemyHpDownEffect();
@@ -260,8 +260,9 @@ int main()
 	CreateTrap(1, 21, 2, 1,10, "M");
 	CreateEnemy(10, 20, 1);
 	CreateEnemy(12, 20, 1);
-	CreateEnemy(14, 7, 1);
-	CreateEnemy(60, 7, 1);
+	CreateEnemy(14, 7, 2);
+	CreateEnemy(60, 7, 2);
+	CreateEnemy(60, 7, 2);
 	Weaphone_MapInitialize();
 	CreateItem(4,21,HEAL);
 	
@@ -912,18 +913,18 @@ void CreateEnemy(int x, int y, int lv) // [적생성] 입력값: x좌표, y좌표, 적레벨(
 {
 	if (lv == 1)
 	{   //         좌표x,y,HP,lv,shape,die
-		SettingEnemy(x, y, 5, 1, 50, "퍼<");
+		SettingEnemy(x, y, 1);
 	}
 	if (lv == 2)
 	{
-		SettingEnemy(x, y, 10, 2, 35, "퍼<");
+		SettingEnemy(x, y, 2 );
 	}
 	if (lv == 3)
 	{
-		SettingEnemy(x, y, 20, 3, 20, "퍼<");
+		SettingEnemy(x, y, 3);
 	}
 }
-void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* die) //CreateEnemy용
+void SettingEnemy(int x, int y, int lv) //CreateEnemy용
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
@@ -932,35 +933,93 @@ void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* di
 			enemy[i] = (Enemy*)malloc(sizeof(Enemy));
 			enemy[i]->x = x;
 			enemy[i]->y = y;
-			enemy[i]->hp = hp;
+			
 			enemy[i]->Lv = lv;
-			enemy[i]->rerodingTime[0] = rerodingTime;
 			enemy[i]->rerodingTime[1] = 0;
 			enemy[i]->responTime = 30;
-			enemy[i]->shape[0][0] = "↑@ ";
-			enemy[i]->shape[0][1] = " o|)";
-			enemy[i]->shape[0][2] = "  ^ ";
-			enemy[i]->shape[0][3] = " - -";
+			if (lv == 1)
+			{
+				enemy[i]->shape[0][0] = "↑@ ";
+				enemy[i]->shape[0][1] = " o|)";
+				enemy[i]->shape[0][2] = "  ^ ";
+				enemy[i]->shape[0][3] = " - -";
+
+				enemy[i]->shape[1][0] = " @↑";
+				enemy[i]->shape[1][1] = "(|o";
+				enemy[i]->shape[1][2] = " ^ ";
+				enemy[i]->shape[1][3] = "- -";
+
+				enemy[i]->die[0][0] = "";
+				enemy[i]->die[0][1] = "-   o →";
+				enemy[i]->die[0][2] = "  > ㅡ @";
+				enemy[i]->die[0][3] = "-";
+
+				enemy[i]->die[1][0] = "";
+				enemy[i]->die[1][1] = "← o    -";
+				enemy[i]->die[1][2] = "@ ㅡ < ";
+				enemy[i]->die[1][3] = "       -";
+
+				enemy[i]->hp = 10;
+				enemy[i]->rerodingTime[0] = 50;
+				enemy[i]->color = LIGHTMAGENTA;
+			}
+			if (lv == 2)
+			{
+				enemy[i]->shape[0][0] = "*@ ";
+				enemy[i]->shape[0][1] = "│o|)";
+				enemy[i]->shape[0][2] = "  ^ ";
+				enemy[i]->shape[0][3] = " - -";
+
+				enemy[i]->shape[1][0] = " @ *";
+				enemy[i]->shape[1][1] = "(|o│";
+				enemy[i]->shape[1][2] = " ^ ";
+				enemy[i]->shape[1][3] = "- -";
+
+				enemy[i]->die[0][0] = "";
+				enemy[i]->die[0][1] = "-   o ㅡ*";
+				enemy[i]->die[0][2] = "  > ㅡ @";
+				enemy[i]->die[0][3] = "-";
+
+				enemy[i]->die[1][0] = "";
+				enemy[i]->die[1][1] = "*ㅡ o  -";
+				enemy[i]->die[1][2] = "@ ㅡ < ";
+				enemy[i]->die[1][3] = "       -";
+
+				enemy[i]->rerodingTime[0] = 35;
+				enemy[i]->color = RED;
+				enemy[i]->hp = 30;
+			}
+			if (lv == 3)
+			{
+				enemy[i]->shape[0][0] = "*@ ";
+				enemy[i]->shape[0][1] = "│o|)";
+				enemy[i]->shape[0][2] = "  ^ ";
+				enemy[i]->shape[0][3] = " - -";
+
+				enemy[i]->shape[1][0] = " @ *";
+				enemy[i]->shape[1][1] = "(|o│";
+				enemy[i]->shape[1][2] = " ^ ";
+				enemy[i]->shape[1][3] = "- -";
+
+				enemy[i]->die[0][0] = "";
+				enemy[i]->die[0][1] = "-   o ㅡ*";
+				enemy[i]->die[0][2] = "  > ㅡ @";
+				enemy[i]->die[0][3] = "-";
+
+				enemy[i]->die[1][0] = "";
+				enemy[i]->die[1][1] = "*ㅡ o  -";
+				enemy[i]->die[1][2] = "@ ㅡ < ";
+				enemy[i]->die[1][3] = "       -";
+
+				enemy[i]->rerodingTime[0] = 20;
+				enemy[i]->color = RED;
+				enemy[i]->hp = 30;
+			}
 			enemy[i]->isLeft = false;
-			enemy[i]->shape[1][0] = " @↑";
-			enemy[i]->shape[1][1] = "(|o";
-			enemy[i]->shape[1][2] = " ^ ";
-			enemy[i]->shape[1][3] = "- -";
-
-			enemy[i]->die[0][0] = "";
-			enemy[i]->die[0][1] = "-   o →";
-			enemy[i]->die[0][2] = "  > ㅡ @";
-			enemy[i]->die[0][3] = "-";
-
-			enemy[i]->die[1][0] ="";
-			enemy[i]->die[1][1] ="← o    -";
-			enemy[i]->die[1][2] ="@ ㅡ < ";
-			enemy[i]->die[1][3] ="       -";
-
 			enemy[i]->isDownHp = false;
 			enemy[i]->downHpDelay[0] = 3;
 			enemy[i]->downHpDelay[1] = 0;
-			enemy[i]->color = LIGHTRED;
+			
 			break;
 		}	
 	}
@@ -1190,14 +1249,32 @@ void EnemyHpDownEffect()
 		{
 			if (enemy[i]->isDownHp)
 			{
-				enemy[i]->color = WHITE;
-				enemy[i]->downHpDelay[1]++;
-				if (enemy[i]->downHpDelay[1] > enemy[i]->downHpDelay[0])
+				switch (enemy[i]->Lv)
 				{
-					enemy[i]->isDownHp = false;
-					enemy[i]->downHpDelay[1] = 0;
-					enemy[i]->color = RED;
+				case 1:
+					enemy[i]->color = WHITE;
+					enemy[i]->downHpDelay[1]++;
+					if (enemy[i]->downHpDelay[1] > enemy[i]->downHpDelay[0])
+					{
+						enemy[i]->isDownHp = false;
+						enemy[i]->downHpDelay[1] = 0;
+						enemy[i]->color = LIGHTMAGENTA;
+					}
+					break;
+				case 2:
+					enemy[i]->color = WHITE;
+					enemy[i]->downHpDelay[1]++;
+					if (enemy[i]->downHpDelay[1] > enemy[i]->downHpDelay[0])
+					{
+						enemy[i]->isDownHp = false;
+						enemy[i]->downHpDelay[1] = 0;
+						enemy[i]->color = RED;
+					}
+					break;
+				default:
+					break;
 				}
+				
 			}
 		}
 	}
@@ -1272,8 +1349,20 @@ void CreateEnemyBullet(Enemy* enemy)
 			}
 			else if (enemy->Lv == 2)
 			{
-				enemyBullet[i]->shape[0] = "0";
+				enemyBullet[i]->shape[0] = "⇔";
 				enemyBullet[i]->damage = 2;
+				enemyBullet[i]->destroy[0] = " :";
+				enemyBullet[i]->destroy[1] = "'.";
+				enemyBullet[i]->destroy[2] = "''";
+				enemyBullet[i]->destroy[3] = ".'";
+				enemyBullet[i]->destroy[4] = ": ";
+				enemyBullet[i]->destroy[5] = "'.";
+				enemyBullet[i]->destroy[6] = "..";
+				enemyBullet[i]->destroy[7] = ".'";
+				enemyBullet[i]->Xcount[0] = 2;
+				enemyBullet[i]->Xcount[1] = 0;
+				enemyBullet[i]->Ycount[0] = 2;
+				enemyBullet[i]->Ycount[1] = 0;
 			}
 			else if (enemy->Lv == 3)
 			{

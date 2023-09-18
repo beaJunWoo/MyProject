@@ -1,9 +1,9 @@
 ﻿  attack.cpp
 C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(108,21): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(330,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(330,23): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(336,65): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(1408,41): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(1442,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(1482,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(331,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(331,23): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(337,65): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(1497,41): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(1531,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\attack.cpp(1571,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Project9.vcxproj -> C:\Users\Administrator\Desktop\새 폴더\MyProject\project2\x64\Debug\Project9.exe
