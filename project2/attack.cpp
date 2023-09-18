@@ -53,36 +53,36 @@ enum ItemEffect
 int Map[MapY][MapX] =
    //                    10                  20                  30                  40                  50                  60 
 {  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//1
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//2
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//3
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//4
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//5
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//6
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//7
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//8
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//9
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,7,},//0	10
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//1
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//2
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//3
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//4
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//5
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//6
-	{7,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//7
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//8
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//9
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//0	20
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//1
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//2
-	{7,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,7,},//3
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//4
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//5
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//6
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//7
-	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//8
-	{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,},//9
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//0	30
+	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,},//1
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//2
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//3
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//4
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//5
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//6
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//7
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//8
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,7,},//9
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,7,},//0	10
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//1
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//2
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//3
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//4
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//5
+	{7,5,0,0,0,0,0,0,0,0,5,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//6
+	{7,5,0,0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//7
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//8
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//9
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//0	20
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//1
+	{7,5,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//2
+	{7,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,5,7,},//3
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//4
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//5
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//6
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//7
+	{7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,},//8
+	{7,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,7,},//9
+	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,},//0	30
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//1
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//2
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//3
@@ -172,8 +172,10 @@ struct Trap
 Trap* trap[10] = {};
 struct Bullet
 {
-	float x;
-	float y;
+	int x;
+	int y;
+	int Xcount[2];
+	int Ycount[2];
 	int damage;
 	int direction;
 	int speed;
@@ -188,7 +190,7 @@ Gun* playerBullet[playerBulletCount] = {};
 
 Bullet* playerBullet2[playerBulletCount] = {};
 Bullet* enemyBullet[enemyBulletCount] = {};
-const char* bulletShape[8];
+const char* bulletShape[3][8];
 
 #pragma region DoubleBuffer
 void InitBuffer();
@@ -219,12 +221,13 @@ void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* di
 void AttackEnemy();
 void EnemyMove();
 void EnemyHpDownEffect();
+void EnemyRespawn();
 #pragma endregion
 
 #pragma region Bullet
 void SettingBulletShape();
 void CreateEnemyBullet(Enemy* enemy);
-void CreatePlayerBullet(double speed, int damage);
+void CreatePlayerBullet(double speed, int damage, int weaponNumber);
 #pragma endregion
 
 #pragma region Physics
@@ -241,8 +244,10 @@ void UseItem();
 void CreateTrap(int x, int y, int width, int damage, int delay, const char* shape);
 void ShowTrap();
 void ShowKeyInfo();
+void ShowNumber(int x, int y, int number, int color);
 #pragma endregion
 
+const char* NumberShow(int number);
 
 //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
@@ -251,13 +256,18 @@ int main()
 
 	InitBuffer();
 
-	SettingPlayer(5,28);
+	SettingPlayer(5,27);
 	CreateTrap(1, 21, 2, 1,10, "M");
 	CreateEnemy(10, 20, 1);
+	CreateEnemy(12, 20, 1);
+	CreateEnemy(14, 7, 1);
 	CreateEnemy(60, 7, 1);
 	Weaphone_MapInitialize();
 	CreateItem(4,21,HEAL);
-	CreateItem(20,8, ADD_02);
+	
+	CreateItem(7, 27, ADD_02);
+	CreateItem(9, 27, ADD_02);
+	CreateItem(11, 27, ADD_02);
 	while (true)
 	{
 		
@@ -275,7 +285,7 @@ int main()
 		ShowTrap();
 		PlayerHpDownEffect();
 		EnemyHpDownEffect();
-		
+		EnemyRespawn();
 		//공격
 		AttackPlayer();
 		AttackEnemy();
@@ -377,7 +387,15 @@ void ShowPlayer()
 
 	for (int i = 0; i < player->hp; i++)
 	{
-		WriteBuffer(1 + i, 1, "♥", RED);
+		if (player->color == WHITE)
+		{
+			WriteBuffer(1 + i, 1, "♥", RED);
+		}
+		else
+		{
+			WriteBuffer(1 + i, 1, "♥", WHITE);
+		}
+		
 	}
 
 	for (int i = 0; i < PlyaerSizeY; i++)
@@ -402,6 +420,10 @@ void ShowPlayer()
 		showGunY = -3;
 		break;
 	case 4:
+		if (player->weaponNum == 2)
+		{
+			showGunX = -1;
+		}
 		showGunY = -2;
 		break;
 	case 5:
@@ -417,27 +439,29 @@ void ShowPlayer()
 	default:
 		break;
 	}
-	WriteBuffer(player->x + showGunX, player->y + showGunY, Weaphone[player->direction][0], CYAN);
+	WriteBuffer(player->x + showGunX, player->y + showGunY, Weaphone[player->direction][player->weaponNum-1], CYAN);
 
 }
 void SettingPlayer(int x, int y)
 {
 	SettingBulletShape();
-	Weaphone[0][0] = "┌";
-
+	Weaphone[0][0] = "┌─";
 	Weaphone[1][0] = "/";
-
 	Weaphone[2][0] = "|";
-
 	Weaphone[3][0] = "\\";
-
 	Weaphone[4][0] = "┐";
-
 	Weaphone[5][0] = "/";
-
 	Weaphone[6][0] = "|";
-
 	Weaphone[7][0] = "\\";
+
+	Weaphone[0][1] = "┌┬─";
+	Weaphone[1][1] = "/";
+	Weaphone[2][1] = "┃";
+	Weaphone[3][1] = "\\";
+	Weaphone[4][1] = "─┬┐";
+	Weaphone[5][1] = "/";
+	Weaphone[6][1] = "┃";
+	Weaphone[7][1] = "\\";
 
 	player = (Player*)malloc(sizeof(Player));
 	player->x = x;
@@ -533,7 +557,7 @@ void PlayerMove()
 		case 1:
 			if (player->bulletDelay[0][0] <= player->bulletDelay[1][0])
 			{
-				CreatePlayerBullet(Weaphone1_Speed, 1);
+				CreatePlayerBullet(Weaphone1_Speed, 1,0);
 				player->bulletDelay[1][0] = 0;
 			}
 
@@ -541,7 +565,7 @@ void PlayerMove()
 		case 2:
 			if (player->bulletDelay[0][1] <= player->bulletDelay[1][1])
 			{
-				CreatePlayerBullet(5, 3);
+				CreatePlayerBullet(Weaphone1_Speed, 3, 1);
 				player->bulletDelay[2][0] = 0;
 				player->bulletNum[0]--;
 			}
@@ -689,7 +713,7 @@ void BasicGunAttack()
 					{
 						if (enemy[k] != nullptr && playerBullet[i] != nullptr)
 						{
-							if (playerBullet[i]->bullet[j]->x == enemy[k]->x && playerBullet[i]->bullet[j]->y == enemy[k]->y - s)
+							if (playerBullet[i]->bullet[j]->x == enemy[k]->x && playerBullet[i]->bullet[j]->y == enemy[k]->y - s &&enemy[k]->hp>0)
 							{
 								enemy[k]->isDownHp = true;
 								enemy[k]->hp--;
@@ -934,14 +958,11 @@ void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* di
 			enemy[i]->die[1][3] ="       -";
 
 			enemy[i]->isDownHp = false;
-			enemy[i]->downHpDelay[0] = 5;
+			enemy[i]->downHpDelay[0] = 3;
 			enemy[i]->downHpDelay[1] = 0;
-			enemy[i]->color = RED;
+			enemy[i]->color = LIGHTRED;
 			break;
-		}
-		
-			
-			
+		}	
 	}
 }
 void AttackEnemy()
@@ -972,14 +993,14 @@ void AttackEnemy()
 				{
 
 				}
-				if (enemyBullet[i]->x < 0 || enemyBullet[i]->x>30 || enemyBullet[i]->y < 0 || enemyBullet[i]->y>30)
+				if (enemyBullet[i]->x < 0 || enemyBullet[i]->x>100 || enemyBullet[i]->y < 0 || enemyBullet[i]->y>30)
 				{
 					free(enemyBullet[i]);
 					enemyBullet[i] = nullptr;
 				}
 				else if (Map[(int)enemyBullet[i]->y][(int)enemyBullet[i]->x] > 4 || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 1) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 2) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 3))
 				{
-					if ((enemyBullet[i]->x == player->x && enemyBullet[i]->y) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 1) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 2) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 3))
+					if ((enemyBullet[i]->x == player->x && enemyBullet[i]->y ==player->y)|| (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y-1)||(enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y-2)|| (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y-3))
 					{
 						player->isDownHp = true;
 						player->hp--;
@@ -1021,32 +1042,72 @@ void AttackEnemy()
 					switch (enemyBullet[i]->direction)
 					{
 					case 0:
-						enemyBullet[i]->x+=0.5;
+						enemyBullet[i]->x++;
 						break;
 					case 1:
-						enemyBullet[i]->x+= 0.5;
-						enemyBullet[i]->y-= 0.5;
+						enemyBullet[i]->Xcount[1]++;
+						enemyBullet[i]->Ycount[1]++;
+						if (enemyBullet[i]->Xcount[0] <= enemyBullet[i]->Xcount[1])
+						{
+							enemyBullet[i]->Xcount[1] = 0;
+							enemyBullet[i]->x++;
+						}
+						if (enemyBullet[i]->Ycount[0] <= enemyBullet[i]->Ycount[1])
+						{
+							enemyBullet[i]->Ycount[1] = 0;
+							enemyBullet[i]->y--;
+						}
 						break;
 					case 2:
-						enemyBullet[i]->y-= 0.5;
+						enemyBullet[i]->y--;
 						break;
 					case 3:
-						enemyBullet[i]->x-= 0.5;
-						enemyBullet[i]->y-= 0.5;
+						enemyBullet[i]->Xcount[1]++;
+						enemyBullet[i]->Ycount[1]++;
+						if (enemyBullet[i]->Xcount[0] <= enemyBullet[i]->Xcount[1])
+						{
+							enemyBullet[i]->Xcount[1] = 0;
+							enemyBullet[i]->x--;
+						}
+						if (enemyBullet[i]->Ycount[0] <= enemyBullet[i]->Ycount[1])
+						{
+							enemyBullet[i]->Ycount[1] = 0;
+							enemyBullet[i]->y--;
+						}
 						break;
 					case 4:
-						enemyBullet[i]->x-= 0.5;
+						enemyBullet[i]->x--;
 						break;
 					case 5:
-						enemyBullet[i]->x-= 0.5;
-						enemyBullet[i]->y+= 0.5;
+						enemyBullet[i]->Xcount[1]++;
+						enemyBullet[i]->Ycount[1]++;
+						if (enemyBullet[i]->Xcount[0] <= enemyBullet[i]->Xcount[1])
+						{
+							enemyBullet[i]->Xcount[1] = 0;
+							enemyBullet[i]->x--;
+						}
+						if (enemyBullet[i]->Ycount[0] <= enemyBullet[i]->Ycount[1])
+						{
+							enemyBullet[i]->Ycount[1] = 0;
+							enemyBullet[i]->y++;
+						}
 						break;
 					case 6:
-						enemyBullet[i]->y+= 0.5;
+						enemyBullet[i]->y++;
 						break;
 					case 7:
-						enemyBullet[i]->x+= 0.5;
-						enemyBullet[i]->y+= 0.5;
+						enemyBullet[i]->Xcount[1]++;
+						enemyBullet[i]->Ycount[1]++;
+						if (enemyBullet[i]->Xcount[0] <= enemyBullet[i]->Xcount[1])
+						{
+							enemyBullet[i]->Xcount[1] = 0;
+							enemyBullet[i]->x++;
+						}
+						if (enemyBullet[i]->Ycount[0] <= enemyBullet[i]->Ycount[1])
+						{
+							enemyBullet[i]->Ycount[1] = 0;
+							enemyBullet[i]->y++;
+						}
 						break;
 					default:
 						break;
@@ -1102,18 +1163,20 @@ void EnemyMove()
 				enemy[i]->moveDir[0] = 0;
 				enemy[i]->moveDir[1] = 0;
 			}
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < EnemyCount; j++)
 			{
-				WriteBuffer(enemy[i]->x-1, enemy[i]->y, "옷", WHITE);
-				if (Map[enemy[i]->y - j][enemy[i]->x] > 4)
+				if (enemy[j] != nullptr && j != i && enemy[i]->x == enemy[j]->x && (enemy[i]->y == enemy[j]->y || enemy[i]->x+1 == enemy[j]->x-1 && enemy[i]->y == enemy[j]->y))
 				{
-					WriteBuffer(enemy[i]->x, enemy[i]->y - 5, "왼쪽점프가능", WHITE);
+					enemy[j]->x++;
+					enemy[i]->x--;
 				}
-				if (Map[enemy[i]->y - j][enemy[i]->x +1] > 4)
+			}
+			for (int j = 0; j <7; j++)
+			{
+				if (Map[enemy[i]->y-j][enemy[i]->x] > 4)
 				{
-					WriteBuffer(enemy[i]->x, enemy[i]->y - 5, "오른쪽점프가능", WHITE);
+					WriteBuffer(enemy[i]->x, enemy[i]->y-7, "올라갈수있음", WHITE);
 				}
-
 			}
 		}
 	}
@@ -1139,20 +1202,49 @@ void EnemyHpDownEffect()
 		}
 	}
 }
+void EnemyRespawn()
+{
+	int i = 0;
+	int j = 0;
+	if (Map[player->y][player->x] == 3)
+	{
+		while (Map[player->y + j][player->x] == 3)
+		{
+			Map[player->y+j][player->x] = 2;
+			j++;
+		}
+		while (Map[player->y -1- i][player->x] == 3)
+		{
+			Map[player->y-1-i][player->x] = 2;
+			i++;
+		}
+		
+		CreateEnemy(rand() % 55+5, rand() % 28, 1);
+	}
+}
 #pragma endregion
 
 
 #pragma region Bullet
 void SettingBulletShape()
 {
-	bulletShape[0] = "--";
-	bulletShape[1] = "/";
-	bulletShape[2] = "|";
-	bulletShape[3] = "\\";
-	bulletShape[4] = "--";
-	bulletShape[5] = "/";
-	bulletShape[6] = "|";
-	bulletShape[7] = "\\";
+	bulletShape[0][0] = "--";
+	bulletShape[0][1] = "/";
+	bulletShape[0][2] = "|";
+	bulletShape[0][3] = "\\";
+	bulletShape[0][4] = "--";
+	bulletShape[0][5] = "/";
+	bulletShape[0][6] = "|";
+	bulletShape[0][7] = "\\";
+
+	bulletShape[1][0] = ">";
+	bulletShape[1][1] = "ㄱ";
+	bulletShape[1][2] = "^";
+	bulletShape[1][3] = "┌";
+	bulletShape[1][4] = "<";
+	bulletShape[1][5] = "ㄴ";
+	bulletShape[1][6] = "\\/";
+	bulletShape[1][7] = "┘";
 }
 void CreateEnemyBullet(Enemy* enemy)
 {
@@ -1173,6 +1265,10 @@ void CreateEnemyBullet(Enemy* enemy)
 				enemyBullet[i]->destroy[5] = "'.";
 				enemyBullet[i]->destroy[6] = "..";
 				enemyBullet[i]->destroy[7] = ".'";
+				enemyBullet[i]->Xcount[0] = 2;
+				enemyBullet[i]->Xcount[1] = 0;
+				enemyBullet[i]->Ycount[0] = 2;
+				enemyBullet[i]->Ycount[1] = 0;
 			}
 			else if (enemy->Lv == 2)
 			{
@@ -1245,7 +1341,7 @@ void CreateEnemyBullet(Enemy* enemy)
 		}
 	}
 }
-void CreatePlayerBullet(double speed, int damage)
+void CreatePlayerBullet(double speed, int damage,int weaponNumber)
 {
 	for (int i = 0; i < playerBulletCount; i++)
 	{
@@ -1294,9 +1390,10 @@ void CreatePlayerBullet(double speed, int damage)
 					playerBullet[i]->bullet[j]->y = player->y + PlayerGunY;
 					break;
 				}
+				
 				for (int k = 0; k < 8; k++)
 				{
-					playerBullet[i]->bullet[j]->shape[k] = bulletShape[k];
+					playerBullet[i]->bullet[j]->shape[k] = bulletShape[weaponNumber][k];
 				}
 				playerBullet[i]->bullet[j]->damage = damage;
 				playerBullet[i]->bullet[j]->destroy[0] = " :";
@@ -1309,6 +1406,23 @@ void CreatePlayerBullet(double speed, int damage)
 				playerBullet[i]->bullet[j]->destroy[7] = ".'";
 				playerBullet[i]->bullet[j]->direction = player->direction;
 				playerBullet[i]->bullet[j]->speed = speed;
+				for (int k = 0; k < EnemyCount; k++)
+				{
+					if (enemy[k] != nullptr)
+					{
+						if (playerBullet[i]->bullet[j]->x == enemy[k]->x && playerBullet[i]->bullet[j]->y == enemy[k]->y)
+						{
+							enemy[k]->isDownHp = true;
+							enemy[k]->hp--;
+						}
+					}
+				}
+
+				if (Map[(int)playerBullet[i]->bullet[j]->y][(int)playerBullet[i]->bullet[j]->x] > 4)
+				{
+					free(playerBullet[i]); playerBullet[i] = nullptr;
+					break;
+				}
 
 			}
 			break;
@@ -1404,6 +1518,12 @@ void ShowMap()
 		{
 			switch (Map[y][x])
 			{
+			case 2:
+				WriteBuffer(x, y, "|", GREEN);
+				break;
+			case 3:
+				WriteBuffer(x, y, "|", YELLOW);
+				break;
 			case 5:
 				WriteBuffer(x, y, "■", LIGHTGRAY);
 				break;
@@ -1432,8 +1552,10 @@ void ShowGunUI()
 		}
 		WriteBuffer(2, 33, "[1]", CYAN);
 		WriteBuffer(8, 33, "[2]", WHITE);
-		posXY(10, 50);
-		//printf("X %d발", player->bulletNum[0]);
+		WriteBuffer(2, 34, "∞", CYAN);
+		ShowNumber(8, 34, player->bulletNum[0], WHITE);
+		WriteBuffer(11, 34, "발", WHITE);
+
 	}
 	if (player->weaponNum == 2)
 	{
@@ -1448,7 +1570,9 @@ void ShowGunUI()
 		}
 		WriteBuffer(2, 33, "[1]", WHITE);
 		WriteBuffer(8, 33, "[2]", CYAN);
-		//printf("X %d발", player->bulletNum[0]);
+		WriteBuffer(2, 34, "∞", WHITE);	
+		ShowNumber(8, 34, player->bulletNum[0], CYAN);
+		WriteBuffer(11, 34, "발", CYAN);
 	}
 }
 void Weaphone_MapInitialize()
@@ -1518,7 +1642,16 @@ void UseItem()
 					player->hp++;
 					break;
 				case ADD_02:
-					WriteBuffer(8, 20, "+ 50", player->bulletNum[0] += 50);
+					if (player->bulletNum[0] >= 200)
+					{
+						WriteBuffer(8, 20, "+ 50",WHITE);
+						player->bulletNum[0] = 200;
+					}
+					else
+					{
+						WriteBuffer(8, 20, "+ 50", player->bulletNum[0] += 50);
+					}
+					
 					break;
 				default:
 					break;
@@ -1641,4 +1774,113 @@ void ShowKeyInfo()
 	}
 
 }
+void ShowNumber(int x, int y, int number, int color)
+{
+	switch (number / 100)
+	{
+	case 0:
+		WriteBuffer(x, y, "0", color);
+		break;
+	case 1:
+		WriteBuffer(x, y, "1", color);
+		break;
+	case 2:
+		WriteBuffer(x, y, "2", color);
+		break;
+	case 3:
+		WriteBuffer(x, y, "3", color);
+		break;
+	case 4:
+		WriteBuffer(x, y, "4", color);
+		break;
+	case 5:
+		WriteBuffer(x, y, "5", color);
+		break;
+	case 6:
+		WriteBuffer(x, y, "6", color);
+		break;
+	case 7:
+		WriteBuffer(x, y, "7", color);
+		break;
+	case 8:
+		WriteBuffer(x, y, "8", color);
+		break;
+	case 9:
+		WriteBuffer(x, y, "9", color);
+		break;
+	default:
+		break;
+	}
+	switch ((number - (number / 100) * 100) / 10)
+	{
+	case 0:
+		WriteBuffer(x + 1, y, "0", color);
+		break;
+	case 1:
+		WriteBuffer(x + 1, y, "1", color);
+		break;
+	case 2:
+		WriteBuffer(x + 1, y, "2", color);
+		break;
+	case 3:
+		WriteBuffer(x + 1, y, "3", color);
+		break;
+	case 4:
+		WriteBuffer(x + 1, y, "4", color);
+		break;
+	case 5:
+		WriteBuffer(x + 1, y, "5", color);
+		break;
+	case 6:
+		WriteBuffer(x + 1, y, "6", color);
+		break;
+	case 7:
+		WriteBuffer(x + 1, y, "7", color);
+		break;
+	case 8:
+		WriteBuffer(x + 1, y, "8", color);
+		break;
+	case 9:
+		WriteBuffer(x + 1, y, "9", color);
+		break;
+	default:
+		break;
+	}
+	switch (number % 10)
+	{
+	case 0:
+		WriteBuffer(x + 2, y, "0", color);
+		break;
+	case 1:
+		WriteBuffer(x + 2, y, "1", color);
+		break;
+	case 2:
+		WriteBuffer(x + 2, y, "2", color);
+		break;
+	case 3:
+		WriteBuffer(x + 2, y, "3", color);
+		break;
+	case 4:
+		WriteBuffer(x + 2, y, "4", color);
+		break;
+	case 5:
+		WriteBuffer(x + 2, y, "5", color);
+		break;
+	case 6:
+		WriteBuffer(x + 2, y, "6", color);
+		break;
+	case 7:
+		WriteBuffer(x + 2, y, "7", color);
+		break;
+	case 8:
+		WriteBuffer(x + 2, y, "8", color);
+		break;
+	case 9:
+		WriteBuffer(x + 2, y, "9", color);
+		break;
+	default:
+		break;
+	}
+}
 #pragma endregion
+
