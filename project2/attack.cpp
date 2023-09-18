@@ -1,13 +1,28 @@
 #include <stdio.h>
 #include <Windows.h>
 
-#define MapX 50
-#define MapY 20
+#define MapX 100
+#define MapY 50
 
 #define EnemyCount 30
-#define playerBulletCount 100
-#define enemyBulletCount 100
+#define playerBulletCount 10
+#define enemyBulletCount 10
 #define ItemCount 10
+
+#define PlayerGunY -2
+#define PlayerGunX 1
+#define PlyaerSizeY 4
+
+#define Weaphone1_Speed 4
+#define EnemyHight -3
+#define EnmeyWidth 3
+#pragma endregion
+
+#define BufferWidth 150
+#define BufferHeight 70
+
+HANDLE hBuffer[2];
+int screenIndex;
 
 #pragma region Enum
 enum Color
@@ -35,47 +50,87 @@ enum ItemEffect
 	ADD_02,    //2번 총알 추가
 };
 #pragma endregion
-int Map[20][50] =
-{
-	{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,5,0,0,0,0,0,6,6,6,6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-	{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5},
+int Map[MapY][MapX] =
+   //                    10                  20                  30                  40                  50                  60 
+{  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//1
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//2
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//3
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//4
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//5
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//6
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//7
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//8
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//9
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,7,},//0	10
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//1
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//2
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//3
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//4
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//5
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//6
+	{7,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//7
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//8
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//9
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//0	20
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//1
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//2
+	{7,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,7,},//3
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//4
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//5
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//6
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//7
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,},//8
+	{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,},//9
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//0	30
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//1
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//2
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//3
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//4
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},//5
+	
+};
+int KeyInfoMap[10][50] = {
+	{3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	{5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
 };
 
-const char* Weaphone[10][10];
+const char* WeaphoneMap[10][10];
+const char* Weaphone[8][2];
 const float G = 9.81;
+float V = 12.0f;
 float time = 0.f;
+bool isKeyInfo;
+int keyInfoDelay[2] = { 3,0 };
+
 struct Player
 {
 	int x;
 	int y;
 	Color color;
-	int direction =1;
-	int speed[2];  
+	int direction = 1;
+	int speed[2];
 	int bulletNum[3];//[0]=1번무기 탄수
+	int bulletDelay[2][3];
+	int downHpDelay[2];
 	int hp;
+	int h;
 	int weaponNum;
-	const char* shape;
+	bool isfloat;
+	bool isJump;
+	bool isDownHp;
+	const char* shape[8][5];
 	const char* die;
 };
-Player* player=nullptr;
+Player* player = nullptr;
 
 struct Enemy
 {
@@ -86,9 +141,12 @@ struct Enemy
 	int hp;
 	int rerodingTime[2];
 	int responTime;
+	bool isLeft;
+	bool isDownHp;
+	int downHpDelay[2];
 	int moveDir[2] = { 0,0 };
-	const char* shape;
-	const char* die;
+	const char* shape[2][5];
+	const char* die[2][5];
 };
 Enemy* enemy[EnemyCount] = {};
 
@@ -98,24 +156,47 @@ struct Item
 	int y;
 	Color color;
 	ItemEffect itemEffect;
-	const char* shape;
+	const char* shape[3];
 };
 Item* item[ItemCount] = {};
 
+struct Trap
+{
+	int x;
+	int y;
+	int width;
+	int damage;
+	int attackDelay[2];
+	const char* shape;
+};
+Trap* trap[10] = {};
 struct Bullet
 {
-	double x;
-	double y;
+	float x;
+	float y;
 	int damage;
 	int direction;
-	double speed;
-	const char* shape[4];
+	int speed;
+	const char* shape[8];
 	const char* destroy[8];
 };
-Bullet* playerBullet1[playerBulletCount] = {};
+struct Gun
+{
+	Bullet* bullet[4] = {};
+};
+Gun* playerBullet[playerBulletCount] = {};
+
 Bullet* playerBullet2[playerBulletCount] = {};
 Bullet* enemyBullet[enemyBulletCount] = {};
+const char* bulletShape[8];
 
+#pragma region DoubleBuffer
+void InitBuffer();
+void WriteBuffer(int x, int y, const char* shape, int color);
+void FlipBuffer();
+void ClearBuffer();
+void DestroyBuffer();
+#pragma endregion
 
 #pragma region API
 void posXY(int x, int y);
@@ -128,19 +209,22 @@ void ShowPlayer();
 void SettingPlayer(int x, int y);
 void PlayerMove();
 void AttackPlayer();
+void PlayerHpDownEffect();
 #pragma endregion
 
 #pragma region Enemy
 void ShowEnemy();
 void CreateEnemy(int x, int y, int lv);
-void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* shape, const char* die);
+void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* die);
 void AttackEnemy();
 void EnemyMove();
+void EnemyHpDownEffect();
 #pragma endregion
 
 #pragma region Bullet
+void SettingBulletShape();
 void CreateEnemyBullet(Enemy* enemy);
-void CreatePlayerBullet(Bullet* bullet[], double speed, int damage, const char* shape);
+void CreatePlayerBullet(double speed, int damage);
 #pragma endregion
 
 #pragma region Physics
@@ -152,8 +236,11 @@ void EnemyGravity();
 void ShowMap();
 void ShowGunUI();
 void Weaphone_MapInitialize();
-void CreateItem();
+void CreateItem(int x, int y, int ItemNumber);
 void UseItem();
+void CreateTrap(int x, int y, int width, int damage, int delay, const char* shape);
+void ShowTrap();
+void ShowKeyInfo();
 #pragma endregion
 
 
@@ -161,41 +248,103 @@ void UseItem();
 //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 int main()
 {
-	
 
-	SettingPlayer(20, 10);
-	CreateEnemy(10, 10, 1);
-	CreateEnemy(15, 10, 1);
-	CreateEnemy(30, 10, 1);
-	DeleteCurosr();
+	InitBuffer();
+
+	SettingPlayer(5,28);
+	CreateTrap(1, 21, 2, 1,10, "M");
+	CreateEnemy(10, 20, 1);
+	CreateEnemy(60, 7, 1);
 	Weaphone_MapInitialize();
-	CreateItem();
+	CreateItem(4,21,HEAL);
+	CreateItem(20,8, ADD_02);
 	while (true)
 	{
-		system("cls");
 		
+		//움직임
+		PlayerMove();
+		EnemyMove();
+
+		UseItem();
+
 		//출력
 		ShowGunUI();
 		ShowMap();
 		ShowEnemy();
 		ShowPlayer();
-
-		//움직임
-		PlayerMove();
-		EnemyMove();
+		ShowTrap();
+		PlayerHpDownEffect();
+		EnemyHpDownEffect();
 		
 		//공격
 		AttackPlayer();
 		AttackEnemy();
 
-		UseItem();
-
-		Sleep(50);
+		ShowKeyInfo();
+		FlipBuffer();
+		ClearBuffer();
+		Sleep(20);
 	}
 	return 0;
 }
 //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+#pragma region DoubleBuffer
+void InitBuffer()
+{
+	screenIndex = 0;
+
+	COORD size = { BufferWidth, BufferHeight };
+	SMALL_RECT rect = { 0, 0, BufferWidth, BufferHeight };
+
+	hBuffer[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	SetConsoleScreenBufferSize(hBuffer[0], size);
+	SetConsoleWindowInfo(hBuffer[0], TRUE, &rect);
+
+	hBuffer[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+	SetConsoleScreenBufferSize(hBuffer[1], size);
+	SetConsoleWindowInfo(hBuffer[1], TRUE, &rect);
+
+	CONSOLE_CURSOR_INFO Info;
+	Info.dwSize = 1;
+	Info.bVisible = FALSE;
+
+	SetConsoleCursorInfo(hBuffer[0], &Info);
+	SetConsoleCursorInfo(hBuffer[1], &Info);
+
+
+}
+void WriteBuffer(int x, int y, const char* shape, int color)
+{
+	COORD pos = { x * 2, y };
+
+	SetConsoleCursorPosition(hBuffer[screenIndex], pos);
+	SetConsoleTextAttribute(hBuffer[screenIndex], color);
+
+	DWORD dw;
+	WriteFile(hBuffer[screenIndex], shape, strlen(shape), &dw, NULL);
+
+
+}
+void FlipBuffer()
+{
+	SetConsoleActiveScreenBuffer(hBuffer[screenIndex]);
+	screenIndex = !screenIndex;
+}
+void ClearBuffer()
+{
+	COORD pos = { 0,0 };
+	DWORD dw;
+	FillConsoleOutputCharacter(hBuffer[screenIndex], ' ', BufferWidth * BufferHeight, pos, &dw);
+}
+void DestroyBuffer()
+{
+	CloseHandle(hBuffer[0]);
+	CloseHandle(hBuffer[1]);
+}
+#pragma endregion
+
 
 #pragma region API
 void posXY(int x, int y)
@@ -219,36 +368,156 @@ void SetColor(int color)
 #pragma endregion
 
 
+
 #pragma region Player
 void ShowPlayer()
 {
-	SetColor(player->color);
-	posXY(player->x, player->y);
-	printf(player->shape);
+	int showGunX = 0;
+	int showGunY = 0;
 
 	for (int i = 0; i < player->hp; i++)
 	{
-		posXY(1 + i, 1);
-		printf("%s", "♥");
+		WriteBuffer(1 + i, 1, "♥", RED);
 	}
-	
+
+	for (int i = 0; i < PlyaerSizeY; i++)
+	{
+		WriteBuffer(player->x, player->y - i, player->shape[player->direction][PlyaerSizeY - i], player->color);
+	}
+	switch (player->direction)
+	{
+	case 0:
+		showGunX = 2;
+		showGunY = -2;
+		break;
+	case 1:
+		showGunX = 2;
+		showGunY = -3;
+		break;
+	case 2:
+		showGunX = 1;
+		showGunY = -4;
+		break;
+	case 3:
+		showGunY = -3;
+		break;
+	case 4:
+		showGunY = -2;
+		break;
+	case 5:
+		showGunY = -1;
+		break;
+	case 6:
+		showGunX = 1;
+		break;
+	case 7:
+		showGunX = 2;
+		showGunY = -1;
+		break;
+	default:
+		break;
+	}
+	WriteBuffer(player->x + showGunX, player->y + showGunY, Weaphone[player->direction][0], CYAN);
+
 }
 void SettingPlayer(int x, int y)
 {
+	SettingBulletShape();
+	Weaphone[0][0] = "┌";
+
+	Weaphone[1][0] = "/";
+
+	Weaphone[2][0] = "|";
+
+	Weaphone[3][0] = "\\";
+
+	Weaphone[4][0] = "┐";
+
+	Weaphone[5][0] = "/";
+
+	Weaphone[6][0] = "|";
+
+	Weaphone[7][0] = "\\";
+
 	player = (Player*)malloc(sizeof(Player));
 	player->x = x;
 	player->y = y;
 	player->hp = 10;
 	player->color = WHITE;
-	player->shape = "옷";
+
+	player->shape[0][0] = " ";
+	player->shape[0][1] = "  O";
+	player->shape[0][2] = " (|o";
+	player->shape[0][3] = "  ^";
+	player->shape[0][4] = " - -";
+
+	player->shape[1][0] = " ";
+	player->shape[1][1] = "  Oo";
+	player->shape[1][2] = " (|┘";
+	player->shape[1][3] = "  ^ ";
+	player->shape[1][4] = " - -";
+
+	player->shape[2][0] = " ";
+	player->shape[2][1] = " oOo";
+	player->shape[2][2] = " (|)";
+	player->shape[2][3] = "  ^ ";
+	player->shape[2][4] = " - -";
+
+	player->shape[3][0] = " ";
+	player->shape[3][1] = " oO";
+	player->shape[3][2] = "  |)";
+	player->shape[3][3] = "  ^";
+	player->shape[3][4] = " - -";
+
+	player->shape[4][0] = " ";
+	player->shape[4][1] = "  O ";
+	player->shape[4][2] = " o|)";
+	player->shape[4][3] = "  ^ ";
+	player->shape[4][4] = " - -";
+
+	player->shape[5][0] = " ";
+	player->shape[5][1] = "  O";
+	player->shape[5][2] = " o|)";
+	player->shape[5][3] = "  ^ ";
+	player->shape[5][4] = " - - ";
+
+	player->shape[6][0] = " ";
+	player->shape[6][1] = "  O ";
+	player->shape[6][2] = " o|o";
+	player->shape[6][3] = "  ^ ";
+	player->shape[6][4] = " - -";
+
+	player->shape[7][0] = " ";
+	player->shape[7][1] = "  O";
+	player->shape[7][2] = " (|o";
+	player->shape[7][3] = "  ^ ";
+	player->shape[7][4] = " - -";
+
+
 	player->die = "어<";
 	player->weaponNum = 1;
 	player->bulletNum[0] = 100;
 	player->bulletNum[1] = 100;
 	player->bulletNum[2] = 100;
+	player->isJump = false;
+	player->isfloat = false;
+	player->direction = 1;
+	player->bulletDelay[0][0] = 10;
+	player->bulletDelay[0][1] = 5;
+	player->bulletDelay[0][2] = 20;
+	player->bulletDelay[1][0] = 0;
+	player->bulletDelay[1][1] = 0;
+	player->bulletDelay[1][2] = 0;
+	player->downHpDelay[0] = 5;
+	player->downHpDelay[1] = 0;
+	player->h = player->y;
+	player->isDownHp = false;
 }
 void PlayerMove()
 {
+	player->bulletDelay[1][0]++;
+	player->bulletDelay[1][1]++;
+	//player->bulletDelay[1][2]++;
 	if (GetAsyncKeyState(0x31))
 	{
 		player->weaponNum = 1;
@@ -257,266 +526,277 @@ void PlayerMove()
 	{
 		player->weaponNum = 2;
 	}
-	if (GetAsyncKeyState(VK_SPACE))
+	if (GetAsyncKeyState(0x41))
 	{
 		switch (player->weaponNum)
 		{
 		case 1:
-			CreatePlayerBullet(playerBullet1,0.5,1,"o");
+			if (player->bulletDelay[0][0] <= player->bulletDelay[1][0])
+			{
+				CreatePlayerBullet(Weaphone1_Speed, 1);
+				player->bulletDelay[1][0] = 0;
+			}
+
 			break;
 		case 2:
-			CreatePlayerBullet(playerBullet2, 0.5,3, "O");
-			player->bulletNum[0]--;
+			if (player->bulletDelay[0][1] <= player->bulletDelay[1][1])
+			{
+				CreatePlayerBullet(5, 3);
+				player->bulletDelay[2][0] = 0;
+				player->bulletNum[0]--;
+			}
 			if (player->bulletNum[0] == 0) { player->weaponNum = 1; }
 			break;
 		default:
 			break;
 		}
-		
+
 	}
-	if (player->speed[0] <= player->speed[1])
+
+	if (GetAsyncKeyState(VK_LEFT) && Map[player->y][player->x - 1] < 4)
 	{
-		if (GetAsyncKeyState(VK_LEFT) && Map[player->y][player->x - 1] < 4)
-		{
-			player->x--;
-			player->direction = 4;
-		}
-		if (GetAsyncKeyState(VK_RIGHT) && Map[player->y][player->x + 1] < 4)
-		{
-			player->x++;
-			player->direction = 0;
-		}
-		if (GetAsyncKeyState(VK_UP))
-		{
-			player->y--;
-			player->direction = 2;
-		}
-		if (GetAsyncKeyState(VK_DOWN))
-		{
-			player->y++;
-			player->direction = 6;
-		}
-		if (GetAsyncKeyState(VK_RIGHT) && GetAsyncKeyState(VK_UP)) { player->direction = 1; }
-		if (GetAsyncKeyState(VK_LEFT) && GetAsyncKeyState(VK_UP)) { player->direction = 3; }
-		if (GetAsyncKeyState(VK_LEFT) && GetAsyncKeyState(VK_DOWN)) { player->direction = 5; }
-		if (GetAsyncKeyState(VK_RIGHT) && GetAsyncKeyState(VK_DOWN)) { player->direction = 7; }
-		
-		if (GetAsyncKeyState(VK_CONTROL))
-		{
-			player->speed[0] = 1;
-		}
-		else
-		{
-			player->speed[0] = 0;
-			player->speed[1] = 0;
-		}
+		player->x--;
+		player->direction = 4;
+	}
+	if (GetAsyncKeyState(VK_RIGHT) && Map[player->y][player->x + 1] < 4 && Map[player->y][player->x + 2] < 4)
+	{
+		player->x++;
+		player->direction = 0;
+	}
+	if (GetAsyncKeyState(VK_UP))
+	{
+		player->direction = 2;
+	}
+	if (GetAsyncKeyState(VK_DOWN))
+	{
+		player->direction = 6;
+	}
+	if (GetAsyncKeyState(VK_RIGHT) && GetAsyncKeyState(VK_UP)) { player->direction = 1; }
+	if (GetAsyncKeyState(VK_LEFT) && GetAsyncKeyState(VK_UP)) { player->direction = 3; }
+	if (GetAsyncKeyState(VK_LEFT) && GetAsyncKeyState(VK_DOWN)) { player->direction = 5; }
+	if (GetAsyncKeyState(VK_RIGHT) && GetAsyncKeyState(VK_DOWN)) { player->direction = 7; }
+
+	if (GetAsyncKeyState(VK_CONTROL))
+	{
+		player->speed[0] = 1;
 	}
 	else
-		player->speed[1]++;
-	
-	//PlayerGravity();
+	{
+		player->speed[0] = 0;
+		player->speed[1] = 0;
+	}
+	if (GetAsyncKeyState(VK_SPACE) && !player->isJump)
+	{
+		player->isJump = true; time = 0.f; player->h = player->y;
+	}
+	PlayerGravity();
 }
 void BasicGunAttack()
 {
+
 	for (int i = 0; i < playerBulletCount; i++)
 	{
-		if (playerBullet1[i] != nullptr)
+		for (int j = 0; j < 4; j++)
 		{
-			posXY(playerBullet1[i]->x, playerBullet1[i]->y);
-			printf(playerBullet1[i]->shape[0]);
-			switch (playerBullet1[i]->direction)
+			if (playerBullet[i] != nullptr)
 			{
-			case 0:
-				playerBullet1[i]->x+=playerBullet1[i]->speed;
-				break;
-			case 1:
-				playerBullet1[i]->x+= playerBullet1[i]->speed;
-				playerBullet1[i]->y-= playerBullet1[i]->speed;
-				break;
-			case 2:
-				playerBullet1[i]->y-= playerBullet1[i]->speed;
-				break;
-			case 3:
-				playerBullet1[i]->x-= playerBullet1[i]->speed;
-				playerBullet1[i]->y- playerBullet1[i]->speed;
-				break;
-			case 4:
-				playerBullet1[i]->x-=playerBullet1[i]->speed;
-				break;
-			case 5:
-				playerBullet1[i]->x-= playerBullet1[i]->speed;
-				playerBullet1[i]->y+= playerBullet1[i]->speed;
-				break;
-			case 6:
-				playerBullet1[i]->y+= playerBullet1[i]->speed;
-				break;
-			case 7:
-				playerBullet1[i]->x+= playerBullet1[i]->speed;
-				playerBullet1[i]->y+= playerBullet1[i]->speed;
-				break;
-			default:
-				playerBullet1[i]->x+= playerBullet1[i]->speed;
-				break;
-			}
-			if (playerBullet1[i]->x < 0 || playerBullet1[i]->x>MapX || playerBullet1[i]->y < 0 || playerBullet1[i]->y>MapY)
-			{
-				free(playerBullet1[i]);
-				playerBullet1[i] = nullptr;
-			}
-			else if (Map[(int)playerBullet1[i]->y][(int)playerBullet1[i]->x] > 4)
-			{
-				switch (playerBullet1[i]->direction)
+				WriteBuffer(playerBullet[i]->bullet[j]->x, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->shape[playerBullet[i]->bullet[j]->direction], YELLOW);
+				switch (playerBullet[i]->bullet[j]->direction)
 				{
 				case 0:
-					posXY(playerBullet1[i]->x - 1, playerBullet1[i]->y);
-					printf(playerBullet1[i]->destroy[0]);
+					playerBullet[i]->bullet[j]->x += playerBullet[i]->bullet[j]->speed;
 					break;
 				case 1:
-					posXY(playerBullet1[i]->x - 1, playerBullet1[i]->y + 1);
-					printf(playerBullet1[i]->destroy[1]);
+					playerBullet[i]->bullet[j]->x += playerBullet[i]->bullet[j]->speed;
+					playerBullet[i]->bullet[j]->y -= playerBullet[i]->bullet[j]->speed;
 					break;
 				case 2:
-					posXY(playerBullet1[i]->x, playerBullet1[i]->y + 1);
-					printf(playerBullet1[i]->destroy[2]);
+					playerBullet[i]->bullet[j]->y -= playerBullet[i]->bullet[j]->speed;
 					break;
 				case 3:
-					posXY(playerBullet1[i]->x + 1, playerBullet1[i]->y + 1);
-					printf(playerBullet1[i]->destroy[3]);
+					playerBullet[i]->bullet[j]->x -= playerBullet[i]->bullet[j]->speed;
+					playerBullet[i]->bullet[j]->y -= playerBullet[i]->bullet[j]->speed;
 					break;
 				case 4:
-					posXY(playerBullet1[i]->x + 1, playerBullet1[i]->y);
-					printf(playerBullet1[i]->destroy[4]);
+					playerBullet[i]->bullet[j]->x -= playerBullet[i]->bullet[j]->speed;
 					break;
 				case 5:
-					posXY(playerBullet1[i]->x + 1, playerBullet1[i]->y - 1);
-					printf(playerBullet1[i]->destroy[5]);
+					playerBullet[i]->bullet[j]->x -= playerBullet[i]->bullet[j]->speed;
+					playerBullet[i]->bullet[j]->y += playerBullet[i]->bullet[j]->speed;
 					break;
 				case 6:
-					posXY(playerBullet1[i]->x, playerBullet1[i]->y - 1);
-					printf(playerBullet1[i]->destroy[6]);
+					playerBullet[i]->bullet[j]->y += playerBullet[i]->bullet[j]->speed;
 					break;
 				case 7:
-					posXY(playerBullet1[i]->x - 1, playerBullet1[i]->y - 1);
-					printf(playerBullet1[i]->destroy[7]);
+					playerBullet[i]->bullet[j]->x += playerBullet[i]->bullet[j]->speed;
+					playerBullet[i]->bullet[j]->y += playerBullet[i]->bullet[j]->speed;
+					break;
+				default:
+					playerBullet[i]->bullet[j]->x += playerBullet[i]->bullet[j]->speed;
 					break;
 				}
-				free(playerBullet1[i]);
-				playerBullet1[i] = nullptr;
-				continue;
-			}
-			for (int j = 0; j < EnemyCount; j++)
-			{
-				if (enemy[j] != nullptr && playerBullet1[i] != nullptr)
+				if (playerBullet[i]->bullet[j]->x < 0 || playerBullet[i]->bullet[j]->x>MapX || playerBullet[i]->bullet[j]->y < 0 || playerBullet[i]->bullet[j]->y>MapY)
 				{
-					if (playerBullet1[i]->x == enemy[j]->x && playerBullet1[i]->y == enemy[j]->y)
+					for (int k = 0; k < 4; k++)
 					{
-						enemy[j]->color = RED;
-						free(playerBullet1[i]);
-						playerBullet1[i] = nullptr;
-						enemy[j]->hp--;
+						free(playerBullet[i]->bullet[k]);
+						playerBullet[i]->bullet[j] = nullptr;
+					}
+					free(playerBullet[i]);
+					playerBullet[i] = nullptr;
+				}
+				else if (Map[(int)playerBullet[i]->bullet[j]->y][(int)playerBullet[i]->bullet[j]->x] > 4)
+				{
+					switch (playerBullet[i]->bullet[j]->direction)
+					{
+					case 0:
+						WriteBuffer(playerBullet[i]->bullet[j]->x - 1, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->destroy[0], RED);
+						break;
+					case 1:
+						WriteBuffer(playerBullet[i]->bullet[j]->x - 1, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[1], RED);
+						break;
+					case 2:
+						WriteBuffer(playerBullet[i]->bullet[j]->x, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[2], RED);
+						break;
+					case 3:
+						WriteBuffer(playerBullet[i]->bullet[j]->x + 1, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[3], RED);
+						break;
+					case 4:
+						WriteBuffer(playerBullet[i]->bullet[j]->x + 1, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->destroy[4], RED);
+						break;
+					case 5:
+						WriteBuffer(playerBullet[i]->bullet[j]->x + 1, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[5], RED);
+						break;
+					case 6:
+						WriteBuffer(playerBullet[i]->bullet[j]->x, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[6], RED);
+						break;
+					case 7:
+						WriteBuffer(playerBullet[i]->bullet[j]->x - 1, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[7], RED);
+						break;
+					}
+					for (int k = 0; k < 4; k++)
+					{
+						free(playerBullet[i]->bullet[k]);
+						playerBullet[i]->bullet[j] = nullptr;
+					}
+					free(playerBullet[i]);
+					playerBullet[i] = nullptr;
+					continue;
+				}
+				for (int s = 0; s < 4; s++)
+				{
+					for (int k = 0; k < EnemyCount; k++)
+					{
+						if (enemy[k] != nullptr && playerBullet[i] != nullptr)
+						{
+							if (playerBullet[i]->bullet[j]->x == enemy[k]->x && playerBullet[i]->bullet[j]->y == enemy[k]->y - s)
+							{
+								enemy[k]->isDownHp = true;
+								enemy[k]->hp--;
+								for (int k = 0; k < 4; k++)
+								{
+									free(playerBullet[i]->bullet[k]);
+									playerBullet[i]->bullet[j] = nullptr;
+								}
+								free(playerBullet[i]);
+								playerBullet[i] = nullptr;
+							}
+						}
 					}
 				}
 			}
 		}
+
 	}
 }
 void StringGunAttack()
 {
 	for (int i = 0; i < playerBulletCount; i++)
 	{
-		if (playerBullet2[i] != nullptr)
+		if (playerBullet2[i] != 0)
 		{
-			posXY(playerBullet2[i]->x, playerBullet2[i]->y);
-			printf(playerBullet2[i]->shape[0]);
+			WriteBuffer(playerBullet2[i]->x, playerBullet2[i]->y, playerBullet2[i]->shape[0], WHITE);
 			switch (playerBullet2[i]->direction)
 			{
 			case 0:
-				playerBullet2[i]->x+= 1/playerBullet2[i]->speed;
+				playerBullet2[i]->x += 1 / playerBullet2[i]->speed;
 				break;
 			case 1:
-				playerBullet2[i]->x+= 1/playerBullet2[i]->speed;
-				playerBullet2[i]->y-= 1/playerBullet2[i]->speed;
+				playerBullet2[i]->x += 1 / playerBullet2[i]->speed;
+				playerBullet2[i]->y -= 1 / playerBullet2[i]->speed;
 				break;
 			case 2:
-				playerBullet2[i]->y-= 1/playerBullet2[i]->speed;
+				playerBullet2[i]->y -= 1 / playerBullet2[i]->speed;
 				break;
 			case 3:
-				playerBullet2[i]->x-= 1/playerBullet2[i]->speed;
-				playerBullet2[i]->y-= 1/playerBullet2[i]->speed;
+				playerBullet2[i]->x -= 1 / playerBullet2[i]->speed;
+				playerBullet2[i]->y -= 1 / playerBullet2[i]->speed;
 				break;
 			case 4:
-				playerBullet2[i]->x-= 1/playerBullet2[i]->speed;
+				playerBullet2[i]->x -= 1 / playerBullet2[i]->speed;
 				break;
 			case 5:
-				playerBullet2[i]->x-= 1/playerBullet2[i]->speed;
-				playerBullet2[i]->y+= 1/playerBullet2[i]->speed;
+				playerBullet2[i]->x -= 1 / playerBullet2[i]->speed;
+				playerBullet2[i]->y += 1 / playerBullet2[i]->speed;
 				break;
 			case 6:
-				playerBullet2[i]->y+= playerBullet2[i]->speed;
+				playerBullet2[i]->y += playerBullet2[i]->speed;
 				break;
 			case 7:
-				playerBullet2[i]->x+= playerBullet2[i]->speed;
-				playerBullet2[i]->y+= playerBullet2[i]->speed;
+				playerBullet2[i]->x += playerBullet2[i]->speed;
+				playerBullet2[i]->y += playerBullet2[i]->speed;
 				break;
 			default:
-				playerBullet2[i]->x+= playerBullet2[i]->speed;
+				playerBullet2[i]->x += playerBullet2[i]->speed;
 				break;
 			}
 			if (playerBullet2[i]->x < 0 || playerBullet2[i]->x>MapX || playerBullet2[i]->y < 0 || playerBullet2[i]->y>MapY)
 			{
 				free(playerBullet2[i]);
-				playerBullet2[i] = nullptr;
+				playerBullet2[i] = 0;
 			}
 			else if (Map[(int)playerBullet2[i]->y][(int)playerBullet2[i]->x] > 4)
 			{
 				switch (playerBullet2[i]->direction)
 				{
 				case 0:
-					posXY(playerBullet2[i]->x - 1, playerBullet2[i]->y);
-					printf(playerBullet2[i]->destroy[0]);
+					WriteBuffer(playerBullet2[i]->x - 1, playerBullet2[i]->y, playerBullet2[i]->destroy[0], YELLOW);
 					break;
 				case 1:
-					posXY(playerBullet2[i]->x - 1, playerBullet2[i]->y + 1);
-					printf(playerBullet2[i]->destroy[1]);
+					WriteBuffer(playerBullet2[i]->x - 1, playerBullet2[i]->y + 1, playerBullet2[i]->destroy[1], YELLOW);
 					break;
 				case 2:
-					posXY(playerBullet2[i]->x, playerBullet2[i]->y + 1);
-					printf(playerBullet2[i]->destroy[2]);
+					WriteBuffer(playerBullet2[i]->x, playerBullet2[i]->y + 1, playerBullet2[i]->destroy[2], YELLOW);
 					break;
 				case 3:
-					posXY(playerBullet2[i]->x + 1, playerBullet2[i]->y + 1);
-					printf(playerBullet2[i]->destroy[3]);
+					WriteBuffer(playerBullet2[i]->x + 1, playerBullet2[i]->y + 1, playerBullet2[i]->destroy[3], YELLOW);
 					break;
 				case 4:
-					posXY(playerBullet2[i]->x + 1, playerBullet2[i]->y);
-					printf(playerBullet2[i]->destroy[4]);
+					WriteBuffer(playerBullet2[i]->x + 1, playerBullet2[i]->y, playerBullet2[i]->destroy[4], YELLOW);
 					break;
 				case 5:
-					posXY(playerBullet2[i]->x + 1, playerBullet2[i]->y - 1);
-					printf(playerBullet2[i]->destroy[5]);
+					WriteBuffer(playerBullet2[i]->x + 1, playerBullet2[i]->y - 1, playerBullet2[i]->destroy[5], YELLOW);
 					break;
 				case 6:
-					posXY(playerBullet2[i]->x, playerBullet2[i]->y - 1);
-					printf(playerBullet2[i]->destroy[6]);
+					WriteBuffer(playerBullet2[i]->x, playerBullet2[i]->y - 1, playerBullet2[i]->destroy[6], YELLOW);
 					break;
 				case 7:
-					posXY(playerBullet2[i]->x - 1, playerBullet2[i]->y - 1);
-					printf(playerBullet2[i]->destroy[7]);
+					WriteBuffer(playerBullet2[i]->x - 1, playerBullet2[i]->y - 1, playerBullet2[i]->destroy[7], YELLOW);
 					break;
 				}
 				free(playerBullet2[i]);
-				playerBullet2[i] = nullptr;
+				playerBullet2[i] = 0;
 				continue;
 			}
 			for (int j = 0; j < EnemyCount; j++)
 			{
-				if (enemy[j] != nullptr && playerBullet2[i] != nullptr)
+				if (enemy[j] != 0 && playerBullet2[i] != 0)
 				{
 					if (playerBullet2[i]->x == enemy[j]->x && playerBullet2[i]->y == enemy[j]->y)
 					{
-						enemy[j]->color = RED;
+						enemy[j]->color = WHITE;
 						free(playerBullet2[i]);
-						playerBullet2[i] = nullptr;
+						playerBullet2[i] = 0;
 						enemy[j]->hp--;
 					}
 				}
@@ -526,10 +806,24 @@ void StringGunAttack()
 }
 void AttackPlayer()
 {
-	
+
 	BasicGunAttack();
-	StringGunAttack();
-	
+	//	StringGunAttack();
+
+}
+void PlayerHpDownEffect()
+{
+	if (player->isDownHp)
+	{
+		player->color = RED;
+		player->downHpDelay[1]++;
+		if (player->downHpDelay[1] > player->downHpDelay[0])
+		{
+			player->isDownHp = false;
+			player->downHpDelay[1] = 0;
+			player->color = WHITE;
+		}
+	}
 }
 #pragma endregion
 
@@ -539,30 +833,54 @@ void ShowEnemy()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		if (enemy[i] != nullptr && enemy[i]->hp>0)
+		if (enemy[i] != nullptr && enemy[i]->hp > 0)
 		{
-			SetColor(enemy[i]->color);
-			posXY(enemy[i]->x, enemy[i]->y);
-			printf(enemy[i]->shape);
+			if (enemy[i]->isLeft)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					WriteBuffer(enemy[i]->x, enemy[i]->y - j, enemy[i]->shape[0][3 - j], enemy[i]->color);
+				}
+
+			}
+			else
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					WriteBuffer(enemy[i]->x, enemy[i]->y - j, enemy[i]->shape[1][3 - j], enemy[i]->color);
+				}
+			}
+
 		}
-		if (enemy[i] != nullptr && enemy[i]->hp< 0)
+		if (enemy[i] != nullptr && enemy[i]->hp <= 0)
 		{
-			SetColor(enemy[i]->color);
-			posXY(enemy[i]->x, enemy[i]->y);
-			printf(enemy[i]->die);
+
+			for (int j = 0; j < 4; j++)
+			{
+				switch (player->direction)
+				{
+				case 0:
+				case 1:
+				case 2:
+				case 7:
+					WriteBuffer(enemy[i]->x, enemy[i]->y - j + 1, enemy[i]->die[0][j], enemy[i]->color);
+					break;
+				case 3:
+				case 4:
+				case 5:
+				case 6:
+				default:
+					WriteBuffer(enemy[i]->x, enemy[i]->y - j + 1, enemy[i]->die[1][j], enemy[i]->color);
+					break;
+				}
+			}
+			
 			enemy[i]->responTime--;
-			if (enemy[i]->responTime<= 0)
+			if (enemy[i]->responTime <= 0)
 			{
 				free(enemy[i]);
 				enemy[i] = nullptr;
 			}
-		}
-	}
-	for (int j = 0; j < EnemyCount; j++)
-	{
-		if (enemy[j] != nullptr)
-		{
-			enemy[j]->color = BROWN;
 		}
 	}
 }
@@ -570,18 +888,18 @@ void CreateEnemy(int x, int y, int lv) // [적생성] 입력값: x좌표, y좌표, 적레벨(
 {
 	if (lv == 1)
 	{   //         좌표x,y,HP,lv,shape,die
-		SettingEnemy(x, y, 5, 1, 50, "봇", "퍼<");
+		SettingEnemy(x, y, 5, 1, 50, "퍼<");
 	}
 	if (lv == 2)
 	{
-		SettingEnemy(x, y, 10, 2, 35, "봇", "퍼<");
+		SettingEnemy(x, y, 10, 2, 35, "퍼<");
 	}
 	if (lv == 3)
 	{
-		SettingEnemy(x, y, 20, 3, 20, "봇", "퍼<");
+		SettingEnemy(x, y, 20, 3, 20, "퍼<");
 	}
 }
-void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* shape, const char* die) //CreateEnemy용
+void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* die) //CreateEnemy용
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
@@ -594,32 +912,55 @@ void SettingEnemy(int x, int y, int hp, int lv, int rerodingTime, const char* sh
 			enemy[i]->Lv = lv;
 			enemy[i]->rerodingTime[0] = rerodingTime;
 			enemy[i]->rerodingTime[1] = 0;
-			enemy[i]->responTime= 30;
-			enemy[i]->shape = shape;
-			enemy[i]->die = die;
-			enemy[i]->color = BROWN;
+			enemy[i]->responTime = 30;
+			enemy[i]->shape[0][0] = "↑@ ";
+			enemy[i]->shape[0][1] = " o|)";
+			enemy[i]->shape[0][2] = "  ^ ";
+			enemy[i]->shape[0][3] = " - -";
+			enemy[i]->isLeft = false;
+			enemy[i]->shape[1][0] = " @↑";
+			enemy[i]->shape[1][1] = "(|o";
+			enemy[i]->shape[1][2] = " ^ ";
+			enemy[i]->shape[1][3] = "- -";
+
+			enemy[i]->die[0][0] = "";
+			enemy[i]->die[0][1] = "-   o →";
+			enemy[i]->die[0][2] = "  > ㅡ @";
+			enemy[i]->die[0][3] = "-";
+
+			enemy[i]->die[1][0] ="";
+			enemy[i]->die[1][1] ="← o    -";
+			enemy[i]->die[1][2] ="@ ㅡ < ";
+			enemy[i]->die[1][3] ="       -";
+
+			enemy[i]->isDownHp = false;
+			enemy[i]->downHpDelay[0] = 5;
+			enemy[i]->downHpDelay[1] = 0;
+			enemy[i]->color = RED;
 			break;
 		}
 		
+			
+			
 	}
 }
 void AttackEnemy()
 {
 	if (player != nullptr)
 	{
-		player->color = WHITE;
+
 		for (int i = 0; i < EnemyCount; i++)
 		{
-			if (enemy[i] != nullptr && enemy[i]->hp>0)
+			if (enemy[i] != nullptr && enemy[i]->hp > 0)
 			{
-				
+
 				if (enemy[i]->rerodingTime[0] <= enemy[i]->rerodingTime[1])
 				{
-					CreateEnemyBullet(enemy[i]); 
+					CreateEnemyBullet(enemy[i]);
 					enemy[i]->rerodingTime[1] = 0;
 				}
 				else
-					enemy[i]->rerodingTime[1]++; 
+					enemy[i]->rerodingTime[1]++;
 			}
 		}
 
@@ -627,51 +968,48 @@ void AttackEnemy()
 		{
 			if (enemyBullet[i] != nullptr)
 			{
-				if (enemyBullet[i]->x < 0 || enemyBullet[i]->x>30 || enemyBullet[i]->y < 0 || enemyBullet[i]->y>30 )
+				for (int j = 0; j < 3; j++)
+				{
+
+				}
+				if (enemyBullet[i]->x < 0 || enemyBullet[i]->x>30 || enemyBullet[i]->y < 0 || enemyBullet[i]->y>30)
 				{
 					free(enemyBullet[i]);
 					enemyBullet[i] = nullptr;
 				}
-				else if (Map[(int)enemyBullet[i]->y][(int)enemyBullet[i]->x] > 4 ||(enemyBullet[i]->x==player->x &&enemyBullet[i]->y==player->y))
+				else if (Map[(int)enemyBullet[i]->y][(int)enemyBullet[i]->x] > 4 || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 1) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 2) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 3))
 				{
-					if (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y)
+					if ((enemyBullet[i]->x == player->x && enemyBullet[i]->y) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 1) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 2) || (enemyBullet[i]->x == player->x && enemyBullet[i]->y == player->y - 3))
 					{
-						player->color = RED;
+						player->isDownHp = true;
 						player->hp--;
-					}	
+						WriteBuffer(player->x + 1, player->y - 6, "아야!", WHITE);
+					}
 					switch (enemyBullet[i]->direction)
 					{
 					case 0:
-						posXY(enemyBullet[i]->x - 1, enemyBullet[i]->y);
-						printf(enemyBullet[i]->destroy[0]);
+						WriteBuffer(enemyBullet[i]->x - 1, enemyBullet[i]->y, enemyBullet[i]->destroy[0], WHITE);
 						break;
 					case 1:
-						posXY(enemyBullet[i]->x - 1, enemyBullet[i]->y + 1);
-						printf(enemyBullet[i]->destroy[1]);
+						WriteBuffer(enemyBullet[i]->x - 1, enemyBullet[i]->y + 1, enemyBullet[i]->destroy[1], WHITE);
 						break;
 					case 2:
-						posXY(enemyBullet[i]->x, enemyBullet[i]->y + 1);
-						printf(enemyBullet[i]->destroy[2]);
+						WriteBuffer(enemyBullet[i]->x, enemyBullet[i]->y + 1, enemyBullet[i]->destroy[2], WHITE);
 						break;
 					case 3:
-						posXY(enemyBullet[i]->x + 1, enemyBullet[i]->y + 1);
-						printf(enemyBullet[i]->destroy[3]);
+						WriteBuffer(enemyBullet[i]->x + 1, enemyBullet[i]->y + 1, enemyBullet[i]->destroy[3], WHITE);
 						break;
 					case 4:
-						posXY(enemyBullet[i]->x + 1, enemyBullet[i]->y);
-						printf(enemyBullet[i]->destroy[4]);
+						WriteBuffer(enemyBullet[i]->x + 1, enemyBullet[i]->y, enemyBullet[i]->destroy[4], WHITE);
 						break;
 					case 5:
-						posXY(enemyBullet[i]->x + 1, enemyBullet[i]->y - 1);
-						printf(enemyBullet[i]->destroy[5]);
+						WriteBuffer(enemyBullet[i]->x + 1, enemyBullet[i]->y - 1, enemyBullet[i]->destroy[5], WHITE);
 						break;
 					case 6:
-						posXY(enemyBullet[i]->x, enemyBullet[i]->y - 1);
-						printf(enemyBullet[i]->destroy[6]);
+						WriteBuffer(enemyBullet[i]->x, enemyBullet[i]->y - 1, enemyBullet[i]->destroy[6], WHITE);
 						break;
 					case 7:
-						posXY(enemyBullet[i]->x - 1, enemyBullet[i]->y - 1);
-						printf(enemyBullet[i]->destroy[7]);
+						WriteBuffer(enemyBullet[i]->x - 1, enemyBullet[i]->y - 1, enemyBullet[i]->destroy[7], WHITE);
 						break;
 					}
 					free(enemyBullet[i]);
@@ -679,37 +1017,36 @@ void AttackEnemy()
 				}
 				else
 				{
-					posXY(enemyBullet[i]->x, enemyBullet[i]->y);
-					printf(enemyBullet[i]->shape[0]);
+					WriteBuffer(enemyBullet[i]->x, enemyBullet[i]->y, enemyBullet[i]->shape[0], WHITE);
 					switch (enemyBullet[i]->direction)
 					{
 					case 0:
-						enemyBullet[i]->x++;
+						enemyBullet[i]->x+=0.5;
 						break;
 					case 1:
-						enemyBullet[i]->x++;
-						enemyBullet[i]->y--;
+						enemyBullet[i]->x+= 0.5;
+						enemyBullet[i]->y-= 0.5;
 						break;
 					case 2:
-						enemyBullet[i]->y--;
+						enemyBullet[i]->y-= 0.5;
 						break;
 					case 3:
-						enemyBullet[i]->x--;
-						enemyBullet[i]->y--;
+						enemyBullet[i]->x-= 0.5;
+						enemyBullet[i]->y-= 0.5;
 						break;
 					case 4:
-						enemyBullet[i]->x--;
+						enemyBullet[i]->x-= 0.5;
 						break;
 					case 5:
-						enemyBullet[i]->x--;
-						enemyBullet[i]->y++;
+						enemyBullet[i]->x-= 0.5;
+						enemyBullet[i]->y+= 0.5;
 						break;
 					case 6:
-						enemyBullet[i]->y++;
+						enemyBullet[i]->y+= 0.5;
 						break;
 					case 7:
-						enemyBullet[i]->x++;
-						enemyBullet[i]->y++;
+						enemyBullet[i]->x+= 0.5;
+						enemyBullet[i]->y+= 0.5;
 						break;
 					default:
 						break;
@@ -724,37 +1061,40 @@ void EnemyMove()
 {
 	for (int i = 0; i < EnemyCount; i++)
 	{
-		if (enemy[i] != nullptr && enemy[i]->hp>0)
+		if (enemy[i] != nullptr && enemy[i]->hp > 0)
 		{
 			if (rand() % 1000 < 1 && Map[enemy[i]->y][enemy[i]->x + 1] < 5)
 			{
 				enemy[i]->moveDir[0] = rand() % 4;
 			}
-			else if (rand() % 100 < 2 && rand() % 100 >= 1 )
+			else if (rand() % 100 < 2 && rand() % 100 >= 1)
 			{
 				enemy[i]->moveDir[0] = -(rand() % 4);
 			}
-			else if (rand() % 100 < 3 && rand() % 100 >= 2){
-				if (enemy[i]->x < player->x )
+			else if (rand() % 100 < 3 && rand() % 100 >= 2)
+			{
+				if (enemy[i]->x < player->x)
 				{
 					enemy[i]->moveDir[0] = rand() % 4;
 				}
-				else if(Map[enemy[i]->y][enemy[i]->x - 1] < 5)
+				else if (Map[enemy[i]->y][enemy[i]->x - 1] < 5)
 				{
 					enemy[i]->moveDir[0] = -(rand() % 4);
 				}
 			}
 			if (enemy[i]->moveDir[0] != enemy[i]->moveDir[1])
 			{
-				if (enemy[i]->moveDir[0] > enemy[i]->moveDir[1] && Map[enemy[i]->y][enemy[i]->x + 1] < 5 )
+				if (enemy[i]->moveDir[0] > enemy[i]->moveDir[1] && Map[enemy[i]->y][enemy[i]->x + 1] < 5)
 				{
 					enemy[i]->moveDir[1]++;
 					enemy[i]->x++;
+					enemy[i]->isLeft = false;
 				}
-				if (enemy[i]->moveDir[0] < enemy[i]->moveDir[1] && Map[enemy[i]->y][enemy[i]->x - 1] < 5 )
+				if (enemy[i]->moveDir[0] < enemy[i]->moveDir[1] && Map[enemy[i]->y][enemy[i]->x - 1] < 5)
 				{
 					enemy[i]->moveDir[1]--;
 					enemy[i]->x--;
+					enemy[i]->isLeft = true;
 				}
 			}
 			else
@@ -762,22 +1102,65 @@ void EnemyMove()
 				enemy[i]->moveDir[0] = 0;
 				enemy[i]->moveDir[1] = 0;
 			}
+			for (int j = 0; j < 5; j++)
+			{
+				WriteBuffer(enemy[i]->x-1, enemy[i]->y, "옷", WHITE);
+				if (Map[enemy[i]->y - j][enemy[i]->x] > 4)
+				{
+					WriteBuffer(enemy[i]->x, enemy[i]->y - 5, "왼쪽점프가능", WHITE);
+				}
+				if (Map[enemy[i]->y - j][enemy[i]->x +1] > 4)
+				{
+					WriteBuffer(enemy[i]->x, enemy[i]->y - 5, "오른쪽점프가능", WHITE);
+				}
+
+			}
 		}
 	}
 	EnemyGravity();
+}
+void EnemyHpDownEffect()
+{
+	for (int i = 0; i < EnemyCount; i++)
+	{
+		if (enemy[i] != nullptr)
+		{
+			if (enemy[i]->isDownHp)
+			{
+				enemy[i]->color = WHITE;
+				enemy[i]->downHpDelay[1]++;
+				if (enemy[i]->downHpDelay[1] > enemy[i]->downHpDelay[0])
+				{
+					enemy[i]->isDownHp = false;
+					enemy[i]->downHpDelay[1] = 0;
+					enemy[i]->color = RED;
+				}
+			}
+		}
+	}
 }
 #pragma endregion
 
 
 #pragma region Bullet
-void CreateEnemyBullet(Enemy* enemy){
+void SettingBulletShape()
+{
+	bulletShape[0] = "--";
+	bulletShape[1] = "/";
+	bulletShape[2] = "|";
+	bulletShape[3] = "\\";
+	bulletShape[4] = "--";
+	bulletShape[5] = "/";
+	bulletShape[6] = "|";
+	bulletShape[7] = "\\";
+}
+void CreateEnemyBullet(Enemy* enemy)
+{
 	for (int i = 0; i < enemyBulletCount; i++)
 	{
 		if (enemyBullet[i] == nullptr)
 		{
 			enemyBullet[i] = (Bullet*)malloc(sizeof(Bullet));
-			enemyBullet[i]->x = enemy->x;
-			enemyBullet[i]->y = enemy->y;
 			if (enemy->Lv == 1)
 			{
 				enemyBullet[i]->shape[0] = "&";
@@ -790,135 +1173,144 @@ void CreateEnemyBullet(Enemy* enemy){
 				enemyBullet[i]->destroy[5] = "'.";
 				enemyBullet[i]->destroy[6] = "..";
 				enemyBullet[i]->destroy[7] = ".'";
-			}else if (enemy->Lv == 2)
+			}
+			else if (enemy->Lv == 2)
 			{
 				enemyBullet[i]->shape[0] = "0";
 				enemyBullet[i]->damage = 2;
-			}else if (enemy->Lv == 3)
+			}
+			else if (enemy->Lv == 3)
 			{
 				enemyBullet[i]->shape[0] = "+";
 				enemyBullet[i]->damage = 3;
 			}
-			
+
 			int x = player->x - enemy->x;
 			int y = player->y - enemy->y;
 			if (y == 0 && x > 0)
 			{
 				enemyBullet[i]->direction = 0;
-				enemyBullet[i]->x = enemy->x + 1;
-				enemyBullet[i]->y = enemy->y;
-			}	
+				enemyBullet[i]->x = enemy->x + 1 - 3 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y + EnemyHight;
+			}
 			else if (x > 0 && y < 0)
 			{
 				enemyBullet[i]->direction = 1;
-				enemyBullet[i]->x = enemy->x + 1;
-				enemyBullet[i]->y = enemy->y - 1;
+				enemyBullet[i]->x = enemy->x + 1 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y - 1 + EnemyHight;
 			}
 			else if (x == 0 && y < 0)
 			{
 				enemyBullet[i]->direction = 2;
-				enemyBullet[i]->x = enemy->x;
-				enemyBullet[i]->y = enemy->y - 1;
+				enemyBullet[i]->x = enemy->x + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y - 1 + EnemyHight;
 			}
 			else if (x < 0 && y < 0)
 			{
 				enemyBullet[i]->direction = 3;
-				enemyBullet[i]->x = enemy->x - 1;
-				enemyBullet[i]->y = enemy->y - 1;
+				enemyBullet[i]->x = enemy->x - 1 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y - 1 + EnemyHight;
 			}
 			else if (y == 0 && x < 0)
 			{
 				enemyBullet[i]->direction = 4;
-				enemyBullet[i]->x = enemy->x - 1;
-				enemyBullet[i]->y = enemy->y;
-			}	
+				enemyBullet[i]->x = enemy->x - 1 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y + EnemyHight;
+			}
 			else if (x < 0 && y>0)
 			{
 				enemyBullet[i]->direction = 5;
-				enemyBullet[i]->x = enemy->x - 1;
-				enemyBullet[i]->y = enemy->y + 1;
+				enemyBullet[i]->x = enemy->x - 1 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y + 1 + EnemyHight;
 			}
 			else if (x == 0 && y > 0)
 			{
 				enemyBullet[i]->direction = 6;
-				enemyBullet[i]->x = enemy->x;
-				enemyBullet[i]->y = enemy->y + 1;
-			}						
+				enemyBullet[i]->x = enemy->x + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y + 1 + EnemyHight;
+			}
 			else if (x > 0 && y > 0)
 			{
 				enemyBullet[i]->direction = 7;
-				enemyBullet[i]->x = enemy->x + 1;
-				enemyBullet[i]->y = enemy->y + 1;
-			}				
+				enemyBullet[i]->x = enemy->x + 1 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y + 1 + EnemyHight;
+			}
 			else
 			{
 				enemyBullet[i]->direction = 0;
-				enemyBullet[i]->x = enemy->x + 1;
-				enemyBullet[i]->y = enemy->y;
+				enemyBullet[i]->x = enemy->x + 1 + EnmeyWidth;
+				enemyBullet[i]->y = enemy->y + EnemyHight;
 			}
 			break;
 		}
 	}
 }
-void CreatePlayerBullet(Bullet* bullet[], double speed, int damage,const char* shape)
+void CreatePlayerBullet(double speed, int damage)
 {
 	for (int i = 0; i < playerBulletCount; i++)
 	{
-		if (bullet[i] == nullptr)
+		if (playerBullet[i] == nullptr)
 		{
-			bullet[i] = (Bullet*)malloc(sizeof(Bullet));
-			switch (player->direction)
+			playerBullet[i] = (Gun*)malloc(sizeof(Gun));
+			for (int j = 0; j < 4; j++)
 			{
-			case 0:
-				bullet[i]->x = player->x + 1;
-				bullet[i]->y = player->y;
-				break;
-			case 1:
-				bullet[i]->x = player->x + 1;
-				bullet[i]->y = player->y - 1;
-				break;
-			case 2:
-				bullet[i]->x = player->x;
-				bullet[i]->y = player->y - 1;
-				break;
-			case 3:
-				bullet[i]->x = player->x - 1;
-				bullet[i]->y = player->y - 1;
-				break;
-			case 4:
-				bullet[i]->x = player->x - 1;
-				bullet[i]->y = player->y;
-				break;
-			case 5:
-				bullet[i]->x = player->x - 1;
-				bullet[i]->y = player->y + 1;
-				break;
-			case 6:
-				bullet[i]->x = player->x;
-				bullet[i]->y = player->y + 1;
-				break;
-			case 7:
-				bullet[i]->x = player->x + 1;
-				bullet[i]->y = player->y + 1;
-				break;
-			default:
-				bullet[i]->x = player->x + 1;
-				bullet[i]->y = player->y;
-				break;
-			}
+				playerBullet[i]->bullet[j] = (Bullet*)malloc(sizeof(Bullet));
+				switch (player->direction)
+				{
+				case 0:
+					playerBullet[i]->bullet[j]->x = player->x + 1 + PlayerGunX + j;
+					playerBullet[i]->bullet[j]->y = player->y + PlayerGunY;
+					break;
+				case 1:
+					playerBullet[i]->bullet[j]->x = player->x + 1 + PlayerGunX + j;
+					playerBullet[i]->bullet[j]->y = player->y - 1 + PlayerGunY - j;
+					break;
+				case 2:
+					playerBullet[i]->bullet[j]->x = player->x + PlayerGunX;
+					playerBullet[i]->bullet[j]->y = player->y - 1 + PlayerGunY - j;
+					break;
+				case 3:
+					playerBullet[i]->bullet[j]->x = player->x - 1 + PlayerGunX - j;
+					playerBullet[i]->bullet[j]->y = player->y - 1 + PlayerGunY - j;
+					break;
+				case 4:
+					playerBullet[i]->bullet[j]->x = player->x - 1 + PlayerGunX - j;
+					playerBullet[i]->bullet[j]->y = player->y + PlayerGunY;
+					break;
+				case 5:
+					playerBullet[i]->bullet[j]->x = player->x - 1 + PlayerGunX - j;
+					playerBullet[i]->bullet[j]->y = player->y + 1 + PlayerGunY + j;
+					break;
+				case 6:
+					playerBullet[i]->bullet[j]->x = player->x + PlayerGunX;
+					playerBullet[i]->bullet[j]->y = player->y + 1 + PlayerGunY + j;
+					break;
+				case 7:
+					playerBullet[i]->bullet[j]->x = player->x + 1 + PlayerGunX + j;
+					playerBullet[i]->bullet[j]->y = player->y + 1 + PlayerGunY + j;
+					break;
+				default:
+					playerBullet[i]->bullet[j]->x = player->x + 1 + PlayerGunX + j;
+					playerBullet[i]->bullet[j]->y = player->y + PlayerGunY;
+					break;
+				}
+				for (int k = 0; k < 8; k++)
+				{
+					playerBullet[i]->bullet[j]->shape[k] = bulletShape[k];
+				}
+				playerBullet[i]->bullet[j]->damage = damage;
+				playerBullet[i]->bullet[j]->destroy[0] = " :";
+				playerBullet[i]->bullet[j]->destroy[1] = "'.";
+				playerBullet[i]->bullet[j]->destroy[2] = "''";
+				playerBullet[i]->bullet[j]->destroy[3] = ".'";
+				playerBullet[i]->bullet[j]->destroy[4] = ": ";
+				playerBullet[i]->bullet[j]->destroy[5] = "'.";
+				playerBullet[i]->bullet[j]->destroy[6] = "..";
+				playerBullet[i]->bullet[j]->destroy[7] = ".'";
+				playerBullet[i]->bullet[j]->direction = player->direction;
+				playerBullet[i]->bullet[j]->speed = speed;
 
-			bullet[i]->shape[0] = shape;
-			bullet[i]->damage = damage;
-			bullet[i]->destroy[0] = " :";
-			bullet[i]->destroy[1] = "'.";
-			bullet[i]->destroy[2] = "''";
-			bullet[i]->destroy[3] = ".'";
-			bullet[i]->destroy[4] = ": ";
-			bullet[i]->destroy[5] = "'.";
-			bullet[i]->destroy[6] = "..";
-			bullet[i]->destroy[7] = ".'";
-			bullet[i]->direction = player->direction;
-			bullet[i]->speed = speed;
+			}
 			break;
 		}
 	}
@@ -929,9 +1321,63 @@ void CreatePlayerBullet(Bullet* bullet[], double speed, int damage,const char* s
 #pragma region Physics
 void PlayerGravity()
 {
-	if (player != nullptr)
+	if (player->isJump)
 	{
-		player->y++;
+		int pos1 = player->y;
+		time += 0.2f;
+		player->y = player->h - V * time + 0.5f * G * time * time;
+		int pos2 = player->y;
+
+		int gab = pos2 - pos1;
+		if (gab > 0)
+		{
+			for (int i = 0; i < gab; i++)
+			{
+				if (Map[pos1 + i][player->x] > 4 || Map[pos1 + i][player->x + 1] > 4)
+				{
+					player->y = pos1 + i - 1;
+					player->isJump = false;
+					break;
+				}
+			}
+		}
+		if (gab < 0)
+		{
+			for (int i = 0; i < gab * -1; i++)
+			{
+				if (Map[pos1 - i-3][player->x] > 4 && Map[pos1 - i-3][player->x + 1] > 4)
+				{
+					player->y = pos1 - i-1;
+					player->isJump = false;
+					break;
+				}
+			}
+		}
+	}
+	if (!player->isJump && Map[player->y + 1][player->x] < 4 && Map[player->y + 1][player->x + 1] < 4)
+	{
+		player->isfloat = true;
+		time = 0.f;
+		player->h = player->y;
+
+	}
+	if (player->isfloat)
+	{
+		int p1 = player->y;
+		time += 0.2f;
+		player->y = player->h + V * time + 0.5f * G * time * time;
+		int p2 = player->y;
+		int gab = p2 - p1;
+		for (int i = 0; i < gab; i++)
+		{
+			if (Map[p1 + i][player->x] > 4 && Map[p1 + i][player->x + 1] > 4)
+			{
+				player->y = p1 + i - 1;
+				player->isfloat = false;
+				break;
+			}
+		}
+
 	}
 }
 void EnemyGravity()
@@ -952,23 +1398,22 @@ void EnemyGravity()
 void ShowMap()
 {
 	SetColor(WHITE);
-	for (int y = 0; y < 20; y++)
+	for (int y = 0; y < MapY; y++)
 	{
-		for (int x = 0; x < 50; x++)
+		for (int x = 0; x < MapX; x++)
 		{
-			posXY(x, y);
 			switch (Map[y][x])
 			{
 			case 5:
-				printf("□");
+				WriteBuffer(x, y, "■", LIGHTGRAY);
 				break;
 			case 6:
-				printf("▩");
+				WriteBuffer(x, y, "▩", LIGHTGRAY);
+				break;
 			default:
 				break;
 			}
 		}
-		printf("\n");
 	}
 }
 void ShowGunUI()
@@ -977,67 +1422,82 @@ void ShowGunUI()
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			SetColor(CYAN);
-			posXY(1, 20 + i);
-			printf(Weaphone[0][i]);
+			WriteBuffer(1, 30 + i, WeaphoneMap[0][i], CYAN);
 		}
 
 		for (int i = 0; i < 3; i++)
 		{
-			SetColor(WHITE);
-			posXY(7, 20 + i);
-			printf(Weaphone[1][i]);
+			WriteBuffer(7, 30 + i, WeaphoneMap[1][i], WHITE);
+
 		}
-		posXY(10, 23);
-		printf("X %d발", player->bulletNum[0]);
+		WriteBuffer(2, 33, "[1]", CYAN);
+		WriteBuffer(8, 33, "[2]", WHITE);
+		posXY(10, 50);
+		//printf("X %d발", player->bulletNum[0]);
 	}
 	if (player->weaponNum == 2)
 	{
 
 		for (int i = 0; i < 3; i++)
 		{
-			SetColor(WHITE);
-			posXY(1, 20 + i);
-			printf(Weaphone[0][i]);
+			WriteBuffer(1, 30 + i, WeaphoneMap[0][i], WHITE);
 		}
-
 		for (int i = 0; i < 3; i++)
 		{
-			SetColor(CYAN);
-			posXY(6, 20 + i);
-			printf(Weaphone[1][i]);
+			WriteBuffer(7, 30 + i, WeaphoneMap[1][i], CYAN);
 		}
-		printf("X %d발", player->bulletNum[0]);
+		WriteBuffer(2, 33, "[1]", WHITE);
+		WriteBuffer(8, 33, "[2]", CYAN);
+		//printf("X %d발", player->bulletNum[0]);
 	}
 }
 void Weaphone_MapInitialize()
 {
-	Weaphone[0][0] = "┌──────┐ ";
-	Weaphone[0][1] = "└────┐ │ ";
-	Weaphone[0][2] = "     └─┘";
+	WeaphoneMap[0][0] = "┌──────┐ ";
+	WeaphoneMap[0][1] = "└────┐ │ ";
+	WeaphoneMap[0][2] = "     └─┘";
 
-	Weaphone[1][0] = "┌────────────────┐ ";
-	Weaphone[1][1] = "└───────┐  │───┐ │ ";
-	Weaphone[1][2] = "        └──┘   └─┘ ";
+	WeaphoneMap[1][0] = "┌────────────────┐ ";
+	WeaphoneMap[1][1] = "└───────┐  │───┐ │ ";
+	WeaphoneMap[1][2] = "        └──┘   └─┘ ";
 
 
 
 }
-void CreateItem()
+void CreateItem(int x, int y, int ItemNumber)  // 좌표,원하는 아이템번호
 {
-	item[0] = (Item*)malloc(sizeof(Item));
-	item[0]->x = 15;
-	item[0]->y = 15;
-	item[0]->color = RED;
-	item[0]->shape = "♡";
-	item[0]->itemEffect = HEAL;
+	for (int i = 0; i < ItemCount; i++)
+	{
+		if (item[i] == nullptr)
+		{
+			item[i] = (Item*)malloc(sizeof(Item));
 
-	item[1] = (Item*)malloc(sizeof(Item));
-	item[1]->x = 18;
-	item[1]->y = 18;
-	item[1]->color = YELLOW;
-	item[1]->shape = "↑";
-	item[1]->itemEffect = ADD_02;
+			item[i]->x = x;
+			item[i]->y = y;
+
+			switch (ItemNumber)
+			{
+			case HEAL:
+				
+				item[i]->color = RED;
+				item[i]->shape[0] = " ___";
+				item[i]->shape[1] = "│♡│";
+				item[i]->shape[2] = "└──┘";
+				item[i]->itemEffect = HEAL;
+				break;
+			case ADD_02:
+				item[i]->color = YELLOW;
+				item[i]->shape[0] = " ___";
+				item[i]->shape[1] = "│↑│";
+				item[i]->shape[2] = "└──┘";
+				item[i]->itemEffect = ADD_02;
+				break;
+			default:
+				break;
+			}
+			break;
+		}
+	}
 }
 void UseItem()
 {
@@ -1045,22 +1505,20 @@ void UseItem()
 	{
 		if (item[i] != nullptr)
 		{
-			SetColor(item[i]->color);
-			posXY(item[i]->x, item[i]->y);
-			printf(item[i]->shape);
+			for (int j = 0; j < 3; j++)
+			{
+				WriteBuffer(item[i]->x, item[i]->y-j, item[i]->shape[2-j], item[i]->color);
+			}
 			if (item[i]->x == player->x && item[i]->y == player->y)
 			{
 				switch (item[i]->itemEffect)
 				{
 				case HEAL:
+					WriteBuffer(21, 21, "+ ♥", item[i]->color);
 					player->hp++;
-					posXY(21, 21);
-					printf("+♥");
 					break;
 				case ADD_02:
-					player->bulletNum[0] += 50;
-					posXY(8, 20);
-					printf("+ 50");
+					WriteBuffer(8, 20, "+ 50", player->bulletNum[0] += 50);
 					break;
 				default:
 					break;
@@ -1071,5 +1529,116 @@ void UseItem()
 		}
 	}
 }
-#pragma endregion
+void CreateTrap(int x, int y, int width, int damage,int delay, const char* shape)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (trap[i] == nullptr)
+		{
+			trap[i] = (Trap*)malloc(sizeof(Trap));
+			trap[i]->x = x;
+			trap[i]->y = y;
+			trap[i]->width = width;
+			trap[i]->damage = damage;
+			trap[i]->attackDelay[0] = delay;
+			trap[i]->attackDelay[1] = 0;
+			trap[i]->shape = shape;
+			break;
+		}
+	}
+}
+void ShowTrap()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (trap[i] != nullptr)
+		{
+			WriteBuffer(trap[i]->x, trap[i]->y, trap[i]->shape, WHITE);
+			if ((trap[i]->x == player->x && trap[i]->y == player->y) || (trap[i]->x == player->x + 1 && trap[i]->y == player->y))
+			{
+				trap[i]->attackDelay[1]++;
+				if (trap[i]->attackDelay[1] >= trap[i]->attackDelay[0])
+				{
+					trap[i]->attackDelay[1] = 0;
+					player->isDownHp = true;
+					player->hp--;
+				}
+			}
+		}
+	}
+}
+void ShowKeyInfo()
+{
 
+	if (GetAsyncKeyState(VK_F1))
+	{
+		isKeyInfo = true;
+	}
+	if (isKeyInfo)
+	{
+		keyInfoDelay[1]++;
+		for (int y = 0; y < 10; y++)
+		{
+			for (int x = 0; x < 50; x++)
+			{
+				switch (KeyInfoMap[y][x])
+				{
+				case 0:
+					WriteBuffer(x + 8, y + 3, "  ", WHITE);
+					break;
+				case 1:
+					WriteBuffer(x + 8, y + 3, "──", WHITE);
+					break;
+				case 2:
+					WriteBuffer(x + 8, y + 3, " │", WHITE);
+					break;
+				case 3:
+					WriteBuffer(x + 8, y + 3, "┌─", WHITE);
+					break;
+				case 4:
+					WriteBuffer(x + 8, y + 3, "─┐", WHITE);
+					break;
+				case 5:
+					WriteBuffer(x + 8, y + 3, "└─", WHITE);
+					break;
+				case 6:
+					WriteBuffer(x + 8, y + 3, "─┘", WHITE);
+					break;
+				case 7:
+					WriteBuffer(x + 8, y + 3, "│ ", WHITE);
+					break;
+				default:
+					break;
+				}
+				WriteBuffer(0, 3, "     ↑", LIGHTMAGENTA);
+				WriteBuffer(0, 5, "남은 플레이어HP", LIGHTMAGENTA);
+				WriteBuffer(0, 34, "     ↑", LIGHTMAGENTA);
+				WriteBuffer(0, 36, "현재 착용중인 무기", LIGHTMAGENTA);
+				WriteBuffer(12, 5, "- 이동 -", BROWN);
+				WriteBuffer(10, 7, "      [↑]         ", BROWN);
+				WriteBuffer(10, 9, "  [←][↓][→]    점프[SPACE]   ", BROWN);
+				WriteBuffer(30, 5, "- 공격 -", BROWN);
+				WriteBuffer(31, 8, "[A]", BROWN);
+				WriteBuffer(40, 5, "- 무기 변경 -", BROWN);
+				WriteBuffer(41, 8, "[1][2][3]", BROWN);
+				WriteBuffer(51, 10, "창 닫기[F2]", BROWN);
+			}
+		}
+		while (isKeyInfo && keyInfoDelay[1] >= keyInfoDelay[0])
+		{
+			if (GetAsyncKeyState(VK_F2))
+			{
+				isKeyInfo = false;
+				keyInfoDelay[1] = 0;
+				break;
+			}
+		}
+
+	}
+	else
+	{
+		WriteBuffer(30, 1, "도움말[F1]", BROWN);
+	}
+
+}
+#pragma endregion
