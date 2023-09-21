@@ -1,0 +1,2 @@
+C:\Users\Administrator\source\repos\GameProject\x64\Debug\GameProject.exe
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\x64\Debug\GameProject.exe
