@@ -1,2 +1,0 @@
-C:\Users\Administrator\source\repos\Project1\x64\Debug\classProject.exe
-C:\Users\Administrator\source\repos\ClassProject\x64\Debug\classProject.exe

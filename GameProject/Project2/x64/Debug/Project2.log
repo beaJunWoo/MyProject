@@ -1,0 +1,15 @@
+﻿  Source.cpp
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(66,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(67,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(416,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(471,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(471,23): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(477,65): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(1748,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(1789,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(1936,41): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2961,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2962,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2965,21): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2966,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Project2.vcxproj -> C:\Users\qowns\OneDrive\바탕 화면\Project2\x64\Debug\Project2.exe
