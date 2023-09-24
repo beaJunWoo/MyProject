@@ -1,15 +1,26 @@
-﻿  Source.cpp
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(66,21): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(67,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(416,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(471,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(471,23): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(477,65): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(1748,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(1789,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(1936,41): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2961,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2962,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2965,21): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\qowns\OneDrive\바탕 화면\Project2\Project2\Source.cpp(2966,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Project2.vcxproj -> C:\Users\qowns\OneDrive\바탕 화면\Project2\x64\Debug\Project2.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Source.cpp
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(68,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(69,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(503,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(558,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(558,23): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(564,65): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(1924,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(1965,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(2112,41): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3001,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3002,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3059,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3059,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3064,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3064,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3069,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3069,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3135,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3136,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3191,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3192,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3195,21): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3196,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Project2.vcxproj -> C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\x64\Debug\DeadLineGame.exe
