@@ -1901,8 +1901,8 @@ void PlayerKnifeAttack()
 			{
 				if (player->x + PlayerSizeX > enemy[i]->x && player->y > enemy[i]->y && player->x < enemy[i]->x + EnemySizeX && player->y - PlayerSizeY < enemy[i]->y + EnemySizeY && enemy[i]->hp>0)
 				{
-					WriteBuffer(player->x - MapPos, player->y + 2, "[斬蕾S]", LIGHTCYAN);
-					if (GetAsyncKeyState(0x53))
+					WriteBuffer(player->x - MapPos, player->y + 2, "[斬蕾A]", LIGHTCYAN);
+					if (GetAsyncKeyState(0x41))
 					{
 						enemy[i]->hp = 0;
 					}
@@ -2514,17 +2514,17 @@ void EnemyBulletProgress(int(*Map)[MapX])
 #pragma region UI
 void GunUI_Init()
 {
-	WeaphoneMap[0][0] = "忙式式式式式式忖 ";
-	WeaphoneMap[0][1] = "戌式式式式忖 弛 ";
+	WeaphoneMap[0][0] = "忙式式式式式式忖";
+	WeaphoneMap[0][1] = "戌式式式式忖 弛";
 	WeaphoneMap[0][2] = "     戌式戎";
 
-	WeaphoneMap[1][0] = "忙式式式式式式式式式式式式式式式式忖 ";
-	WeaphoneMap[1][1] = "戌式式式式式式式忖  弛式式式忖 弛 ";
-	WeaphoneMap[1][2] = "        戌式式戎   戌式戎 ";
+	WeaphoneMap[1][0] = "忙式式式式式式式式式式式式式式式式忖";
+	WeaphoneMap[1][1] = "戌式式式式式式式忖  弛式式式忖 弛";
+	WeaphoneMap[1][2] = "        戌式式戎   戌式戎";
 
-	WeaphoneMap[2][0] = "           ァ         ";
-	WeaphoneMap[2][1] = "                     ";
-	WeaphoneMap[2][2] = "           驕        ";
+	WeaphoneMap[2][0] = "忙式式弛弛式式忖_*";
+	WeaphoneMap[2][1] = "忙式式弛弛式式忖_*";
+	WeaphoneMap[2][2] = "忙式式弛弛式式忖_*";
 
 }
 void GunUI_Rander()
@@ -2541,20 +2541,20 @@ void GunUI_Rander()
 
 		for (int i = 0; i < 3; i++)
 		{
-			WriteBuffer(7, 30 + i, WeaphoneMap[1][i], WHITE);
+			WriteBuffer(8, 30 + i, WeaphoneMap[1][i], WHITE);
 
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			WriteBuffer(13, 30 + i, WeaphoneMap[2][i], WHITE);
+			WriteBuffer(20, 30 + i, WeaphoneMap[2][i], WHITE);
 		}
 		WriteBuffer(2, 33, "[1]", CYAN);
 		WriteBuffer(8, 33, "[2]", WHITE);
 		WriteBuffer(2, 34, "＿", CYAN);
 		WriteBuffer(8, 34, Bullet1_Num, WHITE);
 		WriteBuffer(10, 34, "嫦", WHITE);
-		WriteBuffer(14, 33, "[3]", WHITE);
-		WriteBuffer(14, 34, Bullet2_Num, WHITE);
+		WriteBuffer(20, 33, "[3]", WHITE);
+		WriteBuffer(20, 34, Bullet2_Num, WHITE);
 
 	}
 	if (player->weaponNum == RIFLE)
@@ -2566,19 +2566,19 @@ void GunUI_Rander()
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			WriteBuffer(7, 30 + i, WeaphoneMap[1][i], CYAN);
+			WriteBuffer(8, 30 + i, WeaphoneMap[1][i], CYAN);
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			WriteBuffer(13, 30 + i, WeaphoneMap[2][i], WHITE);
+			WriteBuffer(20, 30 + i, WeaphoneMap[2][i], WHITE);
 		}
 		WriteBuffer(2, 33, "[1]", WHITE);
 		WriteBuffer(8, 33, "[2]", CYAN);
 		WriteBuffer(2, 34, "＿", WHITE);
 		WriteBuffer(8, 34, Bullet1_Num, CYAN);
 		WriteBuffer(10, 34, "嫦", CYAN);
-		WriteBuffer(14, 33, "[3]", WHITE);
-		WriteBuffer(14, 34, Bullet2_Num, WHITE);
+		WriteBuffer(20, 33, "[3]", WHITE);
+		WriteBuffer(20, 34, Bullet2_Num, WHITE);
 
 	}
 	if (player->weaponNum == BOMB)
@@ -2590,11 +2590,11 @@ void GunUI_Rander()
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			WriteBuffer(7, 30 + i, WeaphoneMap[1][i], WHITE);
+			WriteBuffer(8, 30 + i, WeaphoneMap[1][i], WHITE);
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			WriteBuffer(13, 30 + i, WeaphoneMap[2][i], CYAN);
+			WriteBuffer(20, 30 + i, WeaphoneMap[2][i], CYAN);
 
 		}
 		WriteBuffer(2, 33, "[1]", WHITE);
@@ -2602,8 +2602,8 @@ void GunUI_Rander()
 		WriteBuffer(2, 34, "＿", WHITE);
 		WriteBuffer(8, 34, Bullet1_Num, WHITE);
 		WriteBuffer(10, 34, "嫦", WHITE);
-		WriteBuffer(14, 33, "[3]", CYAN);
-		WriteBuffer(14, 34, Bullet2_Num, CYAN);
+		WriteBuffer(20, 33, "[3]", CYAN);
+		WriteBuffer(20, 34, Bullet2_Num, CYAN);
 	}
 }
 void NextPointer_Init(int x, int y)
@@ -3080,12 +3080,13 @@ void PatPorogress(int(*Map)[MapX]) {
 	int min = 9999999;
 	for (int i = 0; i < patBulletCount; i++) {
 		for (int j = 0; j < enemyCount; j++) {
-			if (enemy[j] != nullptr) {
-				if (patBullet[i] != nullptr &&enemy[j]->x < min) {
-					min = enemy[i]->x;
-					nearEnemyNum = i;
-				}	
-			}
+			if (patBullet[i] != nullptr && enemy[j] !=nullptr) {
+				if (enemy[j]->x < min)
+				{
+					min = enemy[j]->x;
+					nearEnemyNum = j;
+				}
+			}	
 		}
 	}
 	
@@ -3282,21 +3283,7 @@ void BombProgress(int(*Map)[MapX])
 #pragma region GameFunction
 
 
-void Weaphone_MapInitialize()
-{
-	WeaphoneMap[0][0] = "忙式式式式式式忖 ";
-	WeaphoneMap[0][1] = "戌式式式式忖 弛 ";
-	WeaphoneMap[0][2] = "     戌式戎";
 
-	WeaphoneMap[1][0] = "忙式式式式式式式式式式式式式式式式忖 ";
-	WeaphoneMap[1][1] = "戌式式式式式式式忖  弛式式式忖 弛 ";
-	WeaphoneMap[1][2] = "        戌式式戎   戌式戎 ";
-
-	WeaphoneMap[2][0] = "           ァ         ";
-	WeaphoneMap[2][1] = "                     ";
-	WeaphoneMap[2][2] = "           驕        ";
-
-}
 void ItemInit(int x, int y, int ItemNumber)  // 謝ル,錳ж朝 嬴檜蠱廓��
 {
 	for (int i = 0; i < ItemCount; i++)
