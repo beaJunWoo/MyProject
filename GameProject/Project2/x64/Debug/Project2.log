@@ -2,25 +2,25 @@
   Source.cpp
 C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(69,21): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
 C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(70,25): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(519,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(574,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(574,23): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(580,65): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(1957,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(1998,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2112,41): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2556,19): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2557,19): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2560,21): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2561,45): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3239,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3240,18): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3305,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3305,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3311,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3311,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3317,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3317,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3402,25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3403,25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(565,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(638,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(638,23): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(644,65): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2050,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2091,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2205,41): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2670,19): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2671,19): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2674,21): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2675,45): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3403,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3404,18): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3469,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3469,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3475,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3475,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3481,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3481,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3566,25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3567,25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Project2.vcxproj -> C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\x64\Debug\DeadLineGame.exe

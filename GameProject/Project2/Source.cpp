@@ -9,7 +9,7 @@
 #define BufferHeight 100
 
 //테스트용
-#define TestStage LOGO
+#define TestStage GAME
 #define TeatStage_ STAGE1
 
 //로고,메뉴크기
@@ -61,7 +61,7 @@ bool guideJump = true;
 const char* LogoTitle[LogoSize];
 const char* MenuTitle[MenuTitleSize];
 const char* MenuMap[MenuPage][MenuSize];
-const char* bulletShape[3][8];
+const char* bulletShape[4][8];
 const char* WeaphoneMap[3][3];
 char* Bullet1_Num = (char*)malloc(sizeof(char));
 char* Bullet2_Num = (char*)malloc(sizeof(char));
@@ -125,8 +125,8 @@ enum Color
 	YELLOW,
 	WHITE,
 };
-Menu menu = LOGO; //테스트중
-Stage stage = STAGE1;
+Menu menu = TestStage; //테스트중
+Stage stage = TeatStage_;
 enum ItemEffect
 {
 	HEAL,
@@ -230,7 +230,7 @@ int stage2_Map[MapY][MapX] =
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6},//0
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,6,6,6,6,6,0,0,0,0,0,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,0,0,1,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
+	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,0,0,4,0,0,0,8,8,8,8,8,8,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0
@@ -385,6 +385,15 @@ struct Enemy
 };
 Enemy* enemy[enemyCount] = {};
 
+struct  ExploeDrone{
+	int x;
+	int y;
+	int moveDelay[2];
+	int hp;
+	const char* shape;
+};
+ExploeDrone* drone = nullptr;
+
 struct Item
 {
 	int x;
@@ -442,6 +451,14 @@ struct Boss
 
 //Function↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //Function↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+#pragma region DoubleBuffer
+void InitBuffer();
+void WriteBuffer(int x, int y, const char* shape, int color);
+void FlipBuffer();
+void ClearBuffer();
+void DestroyBuffer();
+#pragma endregion
+
 #pragma region Logo
 void LogoInitialize();
 void LogoProgress();
@@ -455,7 +472,6 @@ void MenuProgress();
 void MenuRender(int Num, int& LogoPage);
 void MenuRelease();
 #pragma endregion
-void PlayerKnifeAttack();
 
 #pragma region Stage
 void Stage_progress();
@@ -464,49 +480,79 @@ void Stage2();
 void Stage3();
 void Stage4();
 #pragma endregion
-#pragma region Enemy
-void EnemyRander();
-void EnemyInit(int(*Map)[MapX]);
-void EnemyBulletProgress(int(*Map)[MapX]);
-void EnemyPorogress(int(*Map)[MapX]);
-void EnemyHpDownEffect();
-int ResultEnemyCount();
+
+#pragma region Clear
+void ClearStage();
+#pragma endregion
+
+#pragma region Player
+void PlayerInit(int x, int y);
+void PlayerProgress(int(*Map)[MapX]);
+void PlayerRender();
+void PlayerRelease();
+void PlayerHpDownEffect();
+void PlayerReplace(int x, int y);
+void PlayerKnifeAttack();
 #pragma endregion
 
 #pragma region Physics
 void PlayerGravity(int(*Map)[MapX]);
+void EnemyGravity(int(*Map)[MapX]);
 #pragma endregion
-void PlayerInit(int x, int y);
-void PlayerProgress(int(*Map)[MapX]);
-void PlayerRender();
-void MapRender(int(*Map)[MapX]);
-void PlayerHpDownEffect();
-void PlayerReplace(int x, int y);
-void RandomEnemyInit();
-void RandomEnemySpone(int lv);
-#pragma region UI
-void GunUI_Init();
-void GunUI_Rander();
-void ShowKeyInfo();
-#pragma endregion
-void ItemInit(int x, int y, int ItemNumber);
-void RandomItemInit(int(*Map)[MapX]);
-void ItemProRander();
-void PlayerBombInit();
-void BombProgress(int(*Map)[MapX]);
-void TrapInit(int(*Map)[MapX]);
-void TrapRander();
-void PatInit();
-void PatPorogress(int(*Map)[MapX]);
-void PatBulletInit();
+
 #pragma region Bullet
 void BulletShapeInit();
 void PlayerBulletInit(double speed, int damage, int weaponNumber, int(*Map)[MapX]);
 void PlayerBulletProgress(int(*Map)[MapX]);
+void EnemyBulletInit(Enemy* enemy);
+void EnemyBulletProgress(int(*Map)[MapX]);
+void PlayerBombInit();
+void BombProgress(int(*Map)[MapX]);
 #pragma endregion
 
-#pragma region Clear
-void ClearStage();
+#pragma region UI
+void MapRender(int(*Map)[MapX]);
+void GunUI_Init();
+void GunUI_Rander();
+void NextPointer_Init(int x, int y);
+#pragma endregion
+
+#pragma region Enemy
+void EnemyRander();
+void EnemyInit(int(*Map)[MapX]);
+void EnemyPorogress(int(*Map)[MapX]);
+void EnemyHpDownEffect();
+int ResultEnemyCount();
+#pragma endregion
+void RandomEnemyInit();
+void RandomEnemySpone(int lv);
+#pragma region Drone
+void DroneInit();
+void DroneRandomSpone();
+void DroneRender();
+void DroneProgress();
+#pragma endregion
+
+#pragma region Guide
+void GuideMove();
+void GuideAttack();
+void GuideJump();
+#pragma endregion
+
+#pragma region pat
+void PatInit();
+void PatPorogress(int(*Map)[MapX]);
+void PatBulletInit();
+#pragma endregion
+
+#pragma region GameFunction
+void ItemInit(int x, int y, int ItemNumber);
+void RandomItemInit(int(*Map)[MapX]);
+void ItemProRander();
+void TrapInit(int(*Map)[MapX]);
+void TrapRander();
+void ShowKeyInfo();
+void TrapRelease();
 #pragma endregion
 
 //Function↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
@@ -543,6 +589,24 @@ int main()
 }
 //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+
+
+//void CreateBoss1(int x, int y)
+//{
+//	boos = (Boos*)malloc(sizeof(boos));
+//	boos->x = x;
+//	boos->y = y;
+//	boos->shape[0] = "                  |";
+//	boos->shape[1] = "             ___|_|_";
+//	boos->shape[2] = "============|      _/";
+//	boos->shape[3] = "_____==|\\___/=====\\___";
+//	boos->shape[4] = "|______________________|";
+//	boos->shape[5] = "(=========/ \=========)";
+//	boos->shape[6] = " ─────────   ─────────";
+//}
+
+
 
 #pragma region DoubleBuffer
 void InitBuffer()
@@ -1400,7 +1464,8 @@ void MenuRelease()
 #pragma region Stage
 void Stage_progress()
 {
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 10; i++)
+	{
 		ClearRoom[i] = false;
 	}
 	switch (stage)
@@ -1419,13 +1484,17 @@ void Stage_progress()
 }
 void Stage1()
 {
-	
+
 	PlayerInit(5, 27);
 	PatInit();
 	EnemyInit(pMap1);
 	TrapInit(pMap1);
+	
 	while (true)
 	{
+		DroneProgress();
+		DroneRender();
+		DroneRandomSpone();
 		RandomEnemySpone(1);
 		PlayerKnifeAttack();
 		PatPorogress(pMap1);
@@ -1446,7 +1515,8 @@ void Stage1()
 		ShowKeyInfo();
 		FlipBuffer();
 		ClearBuffer();
-		if (player->x >= MapX - 3) {
+		if (player->x >= MapX - 3)
+		{
 			ClearRoom[0] = true;
 			stage = STAGE2;
 			MapPos = 0;
@@ -1481,39 +1551,50 @@ void Stage2()
 		ShowKeyInfo();
 		FlipBuffer();
 		ClearBuffer();
-		if (player->x >= MapX - 3) {
+		if (player->x >= MapX - 3)
+		{
 			stage = STAGE3;
 			MapPos = 0;
 			break;
 		}
 		Sleep(20);
 	}
-	for (int i = 0; i < enemyBulletCount; i++) {
-		if (enemyBullet[i] != nullptr) {
+	for (int i = 0; i < enemyBulletCount; i++)
+	{
+		if (enemyBullet[i] != nullptr)
+		{
 			free(enemyBullet[i]);
 			enemyBullet[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < enemyCount; i++) {
-		if (enemy[i] != nullptr) {
+	for (int i = 0; i < enemyCount; i++)
+	{
+		if (enemy[i] != nullptr)
+		{
 			free(enemy[i]);
 			enemy[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < playerBulletCount; i++) {
-		if (playerBullet[i] != nullptr) {
+	for (int i = 0; i < playerBulletCount; i++)
+	{
+		if (playerBullet[i] != nullptr)
+		{
 			free(playerBullet[i]);
 			playerBullet[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < TrapCount; i++) {
-		if (trap[i] != nullptr) {
+	for (int i = 0; i < TrapCount; i++)
+	{
+		if (trap[i] != nullptr)
+		{
 			free(trap[i]);
 			trap[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < ItemCount; i++) {
-		if (item[i] != nullptr) {
+	for (int i = 0; i < ItemCount; i++)
+	{
+		if (item[i] != nullptr)
+		{
 			free(item[i]);
 			item[i] = nullptr;
 		}
@@ -1522,7 +1603,7 @@ void Stage2()
 }
 void Stage3()
 {
-	
+
 	PlayerReplace(2, 29);
 	EnemyInit(pMap3);
 	TrapInit(pMap3);
@@ -1546,38 +1627,49 @@ void Stage3()
 		ShowKeyInfo();
 		FlipBuffer();
 		ClearBuffer();
-		if (player->x >= MapX - 3) {
+		if (player->x >= MapX - 3)
+		{
 			stage = STAGE4;
 			break;
 		}
 		Sleep(20);
 	}
-	for (int i = 0; i < enemyBulletCount; i++) {
-		if (enemyBullet[i] != nullptr) {
+	for (int i = 0; i < enemyBulletCount; i++)
+	{
+		if (enemyBullet[i] != nullptr)
+		{
 			free(enemyBullet[i]);
 			enemyBullet[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < enemyCount; i++) {
-		if (enemy[i] != nullptr) {
+	for (int i = 0; i < enemyCount; i++)
+	{
+		if (enemy[i] != nullptr)
+		{
 			free(enemy[i]);
 			enemy[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < playerBulletCount; i++) {
-		if (playerBullet[i] != nullptr) {
+	for (int i = 0; i < playerBulletCount; i++)
+	{
+		if (playerBullet[i] != nullptr)
+		{
 			free(playerBullet[i]);
 			playerBullet[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < TrapCount; i++) {
-		if (trap[i] != nullptr) {
+	for (int i = 0; i < TrapCount; i++)
+	{
+		if (trap[i] != nullptr)
+		{
 			free(trap[i]);
 			trap[i] = nullptr;
 		}
 	}
-	for (int i = 0; i < ItemCount; i++) {
-		if (item[i] != nullptr) {
+	for (int i = 0; i < ItemCount; i++)
+	{
+		if (item[i] != nullptr)
+		{
 			free(item[i]);
 			item[i] = nullptr;
 		}
@@ -1901,7 +1993,8 @@ void PlayerRender()
 	WriteBuffer(player->x + showGunX - MapPos, player->y + showGunY, player->Weaphone[player->direction][player->weaponNum], CYAN);
 
 }
-void PlayerRelease() {
+void PlayerRelease()
+{
 	free(player);
 	player = nullptr;
 }
@@ -2133,6 +2226,35 @@ void PlayerBulletInit(double speed, int damage, int weaponNumber, int(*Map)[MapX
 		}
 	}
 }
+void DestroyAnimation(int i, int j){
+	switch (playerBullet[i]->bullet[j]->direction)
+	{
+	case RIGHT:
+		WriteBuffer(playerBullet[i]->bullet[j]->x - 1 - MapPos, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->destroy[0], RED);
+		break;
+	case R_UP:
+		WriteBuffer(playerBullet[i]->bullet[j]->x - 1 - MapPos, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[1], RED);
+		break;
+	case UP:
+		WriteBuffer(playerBullet[i]->bullet[j]->x - MapPos, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[2], RED);
+		break;
+	case L_UP:
+		WriteBuffer(playerBullet[i]->bullet[j]->x + 1 - MapPos, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[3], RED);
+		break;
+	case LEFT:
+		WriteBuffer(playerBullet[i]->bullet[j]->x + 1 - MapPos, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->destroy[4], RED);
+		break;
+	case L_DOWN:
+		WriteBuffer(playerBullet[i]->bullet[j]->x + 1 - MapPos, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[5], RED);
+		break;
+	case DOWN:
+		WriteBuffer(playerBullet[i]->bullet[j]->x - MapPos, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[6], RED);
+		break;
+	case R_DOWN:
+		WriteBuffer(playerBullet[i]->bullet[j]->x - 1 - MapPos, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[7], RED);
+		break;
+	}
+}
 void PlayerBulletProgress(int(*Map)[MapX])
 {
 	for (int i = 0; i < playerBulletCount; i++)
@@ -2192,33 +2314,7 @@ void PlayerBulletProgress(int(*Map)[MapX])
 				}
 				else if (Map[playerBullet[i]->bullet[j]->y][playerBullet[i]->bullet[j]->x] > 5 && playerBullet[i]->bullet[j]->x > MapPos && ScreenX + MapPos > playerBullet[i]->bullet[j]->x)
 				{
-					switch (playerBullet[i]->bullet[j]->direction)
-					{
-					case RIGHT:
-						WriteBuffer(playerBullet[i]->bullet[j]->x - 1 - MapPos, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->destroy[0], RED);
-						break;
-					case R_UP:
-						WriteBuffer(playerBullet[i]->bullet[j]->x - 1 - MapPos, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[1], RED);
-						break;
-					case UP:
-						WriteBuffer(playerBullet[i]->bullet[j]->x - MapPos, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[2], RED);
-						break;
-					case L_UP:
-						WriteBuffer(playerBullet[i]->bullet[j]->x + 1 - MapPos, playerBullet[i]->bullet[j]->y + 1, playerBullet[i]->bullet[j]->destroy[3], RED);
-						break;
-					case LEFT:
-						WriteBuffer(playerBullet[i]->bullet[j]->x + 1 - MapPos, playerBullet[i]->bullet[j]->y, playerBullet[i]->bullet[j]->destroy[4], RED);
-						break;
-					case L_DOWN:
-						WriteBuffer(playerBullet[i]->bullet[j]->x + 1 - MapPos, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[5], RED);
-						break;
-					case DOWN:
-						WriteBuffer(playerBullet[i]->bullet[j]->x - MapPos, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[6], RED);
-						break;
-					case R_DOWN:
-						WriteBuffer(playerBullet[i]->bullet[j]->x - 1 - MapPos, playerBullet[i]->bullet[j]->y - 1, playerBullet[i]->bullet[j]->destroy[7], RED);
-						break;
-					}
+					DestroyAnimation(i, j);
 					for (int k = 0; k < 4; k++)
 					{
 						free(playerBullet[i]->bullet[k]);
@@ -2228,10 +2324,28 @@ void PlayerBulletProgress(int(*Map)[MapX])
 					playerBullet[i] = nullptr;
 					continue;
 				}
+				if (drone != nullptr && playerBullet[i] !=nullptr)
+				{
+					if (drone->x< playerBullet[i]->bullet[j]->x &&drone->x+5 > playerBullet[i]->bullet[j]->x   && playerBullet[i]->bullet[j]->y == drone->y)
+					{
+						drone->hp -= playerBullet[i]->bullet[j]->damage;
+						DestroyAnimation(i, j);
+						for (int k = 0; k < 4; k++)
+						{
+							free(playerBullet[i]->bullet[k]);
+							playerBullet[i]->bullet[j] = nullptr;
+						}
+						free(playerBullet[i]);
+						playerBullet[i] = nullptr;
+						continue;
+					}
+				}
+				 
 				for (int s = 0; s < 4; s++)
 				{
 					for (int k = 0; k < enemyCount; k++)
 					{
+						
 						if (enemy[k] != nullptr && playerBullet[i] != nullptr)
 						{
 							if (playerBullet[i]->bullet[j]->x >= enemy[k]->x && playerBullet[i]->bullet[j]->x < enemy[k]->x + EnemySizeX - 1 && playerBullet[i]->bullet[j]->y >= enemy[k]->y && playerBullet[i]->bullet[j]->y < enemy[k]->y + EnemySizeY && enemy[k]->hp > 0)
@@ -2642,6 +2756,70 @@ void BombProgress(int(*Map)[MapX])
 		}
 
 
+	}
+}
+#pragma endregion
+
+
+#pragma region Drone
+void DroneInit()
+{
+	if (drone == nullptr)
+	{
+		drone = (ExploeDrone*)malloc(sizeof(ExploeDrone));
+		drone->x = MapPos + ScreenX;
+		drone->y = 10;
+		drone->hp = 3;
+		drone->moveDelay[NOW_TIME] = 0;
+		drone->moveDelay[MAX_TIME] = 2;
+		drone->shape = "<(%%%)>";
+	}
+
+
+}
+void DroneRandomSpone()
+{
+	if (rand() % 100 < 2)
+	{
+		DroneInit();
+	}
+}
+void DroneRender()
+{
+	if (drone != nullptr)
+	{
+		WriteBuffer(drone->x-MapPos, drone->y, drone->shape, WHITE);
+	}
+
+}
+void DroneProgress()
+{
+	if (drone != nullptr)
+	{
+		if (drone->x > player->x)
+			drone->x--;
+		if (drone->x < player->x)
+			drone->x++;
+		if (drone->x == player->x && drone->y < player->y)
+			drone->moveDelay[NOW_TIME]++;
+		if (drone->moveDelay[NOW_TIME] >= drone->moveDelay[MAX_TIME])
+		{
+			drone->y++; 
+			drone->moveDelay[NOW_TIME] = 0;
+		}
+		if (drone->hp <= 0)
+		{
+			free(drone);
+			drone = nullptr;
+		}
+		else if (drone->x == player->x && drone->y == player->y)
+		{
+			player->hp -= 2;
+			player->isDownHp = true;
+			free(drone);
+			drone = nullptr;
+		}
+		
 	}
 }
 #pragma endregion
@@ -3075,8 +3253,8 @@ void RandomEnemyInit()
 		if (enemy[i] == nullptr)
 		{
 			enemy[i] = (Enemy*)malloc(sizeof(Enemy));
-			enemy[i]->x = MapPos+ScreenX+rand()% RanderSpare;
-			enemy[i]->y = rand() % (ScreenX-3);
+			enemy[i]->x = MapPos + ScreenX + rand() % RanderSpare;
+			enemy[i]->y = rand() % (MapY - 3);
 
 			enemy[i]->Lv = 1;
 			enemy[i]->rerodingTime[MAX_TIME] = 50;
@@ -3144,7 +3322,7 @@ void RandomEnemySpone(int lv)
 	default:
 		break;
 	}
-	
+
 }
 
 #pragma region Guide
@@ -3215,20 +3393,6 @@ void GuideJump()
 
 }
 #pragma endregion
-
-//void CreateBoss1(int x, int y)
-//{
-//	boos = (Boos*)malloc(sizeof(boos));
-//	boos->x = x;
-//	boos->y = y;
-//	boos->shape[0] = "                  |";
-//	boos->shape[1] = "             ___|_|_";
-//	boos->shape[2] = "============|      _/";
-//	boos->shape[3] = "_____==|\\___/=====\\___";
-//	boos->shape[4] = "|______________________|";
-//	boos->shape[5] = "(=========/ \=========)";
-//	boos->shape[6] = " ─────────   ─────────";
-//}
 
 #pragma region pat
 void PatInit()
@@ -3651,3 +3815,18 @@ void TrapRelease()
 	}
 }
 #pragma endregion
+
+
+//void CreateBoss1(int x, int y)
+//{
+//	boos = (Boos*)malloc(sizeof(boos));
+//	boos->x = x;
+//	boos->y = y;
+//	boos->shape[0] = "                  |";
+//	boos->shape[1] = "             ___|_|_";
+//	boos->shape[2] = "============|      _/";
+//	boos->shape[3] = "_____==|\\___/=====\\___";
+//	boos->shape[4] = "|______________________|";
+//	boos->shape[5] = "(=========/ \=========)";
+//	boos->shape[6] = " ─────────   ─────────";
+//}
