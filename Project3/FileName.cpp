@@ -9,8 +9,8 @@
 #define DOWN y+1
 
 #pragma region DoubleBuffer
-#define BufferWidth 80
-#define BufferHeight 80
+#define BufferWidth 120
+#define BufferHeight 60
 
 HANDLE hBuffer[2];
 int screenIndex;

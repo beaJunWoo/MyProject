@@ -1,26 +1,41 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: 중간 디렉터리(x64\Debug\)에 다른 프로젝트(Project2.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Source.cpp
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(69,21): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(70,25): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(565,12): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(638,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(638,23): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(644,65): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2050,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2091,36): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2205,41): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2670,19): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2671,19): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2674,21): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(2675,45): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3403,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3404,18): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3469,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3469,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3475,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3475,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3481,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3481,23): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3566,25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\Project2\Source.cpp(3567,25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Project2.vcxproj -> C:\Users\Administrator\Desktop\새 폴더\MyProject\GameProject\x64\Debug\DeadLineGame.exe
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(80,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(81,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(703,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(783,18): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(783,23): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(789,65): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(1703,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(1975,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(2389,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(2430,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(2544,41): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3010,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3011,27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3014,21): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3015,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3826,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3827,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3910,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3910,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3913,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3913,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3922,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3922,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3925,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3925,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3934,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3934,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3937,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(3937,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4061,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4062,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4341,22): warning C4129: '=': unrecognized character escape sequence
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4351,22): warning C4129: '=': unrecognized character escape sequence
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4362,22): warning C4129: '=': unrecognized character escape sequence
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4372,22): warning C4129: '=': unrecognized character escape sequence
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4382,22): warning C4129: '=': unrecognized character escape sequence
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4446,19): warning C4552: '+': result of expression not used
+C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\Project2\Source.cpp(4638,18): warning C4129: '_': unrecognized character escape sequence
+  Project2.vcxproj -> C:\Users\qowns\OneDrive\바탕 화면\새 폴더\MyProject\GameProject\x64\Debug\DeadLineGame.exe
