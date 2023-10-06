@@ -5,8 +5,8 @@
 #include <time.h>
 
 //버퍼 크기
-#define BufferWidth 90
-#define BufferHeight 100
+#define BufferWidth 150
+#define BufferHeight 50
 
 //테스트용
 #define TestStage LOGO
@@ -31,7 +31,7 @@
 //각화면 딜레이
 #define LogoDelay 100
 #define MenuDelay 100
-#define StageDelay 25
+#define StageDelay 50
 
 //무기 설정
 #define PistolSpeed 4
@@ -55,6 +55,9 @@
 //define↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 //define↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
+ULONGLONG deltatime = GetTickCount64();
+
+
 //첫 가이드 세팅
 int guideStartTime = 0;
 int guideEndTime = 0;
@@ -63,6 +66,7 @@ bool guideAttack = true;
 bool guideJump = true;
 int DieInfoTime_Start = 0;
 int DieInfoTime_End = 0;
+int saveMap[MapY][MapX];
 
 const char* LogoTitle[LogoSize];
 const char* MenuTitle[MenuTitleSize];
@@ -189,6 +193,7 @@ void ClearBuffer();
 void DestroyBuffer();
 #pragma endregion
 
+#pragma region Map
 int stage1_Map[MapY][MapX] =
 {   //                    10                  20                  30                  40                  50                  60 
 	//0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9
@@ -368,7 +373,6 @@ int Boss1_Map[MapY][MapX] =
 };
 int(*pBoss1)[MapX] = Boss1_Map;
 int Cpy_Map[MapY][MapX] = {};
-
 int KeyInfoMap[10][50] = {
 	{3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4},
 	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -381,6 +385,9 @@ int KeyInfoMap[10][50] = {
 	{7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
 	{5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6},
 };
+#pragma endregion
+
+#pragma region Struct
 struct Player
 {
 	int x;
@@ -406,10 +413,10 @@ struct Player
 };
 Player* player = {};
 
-struct SavePlayer {
+struct SavePlayer
+{
 	int hp;
 	int bulletnum[3];
-	int Map[MapY][MapX];
 };
 SavePlayer* savePlayer = {};
 
@@ -452,7 +459,8 @@ struct Enemy
 };
 Enemy* enemy[enemyCount] = {};
 
-struct  ExploeDrone{
+struct  ExploeDrone
+{
 	int x;
 	int y;
 	int animation;
@@ -512,7 +520,8 @@ struct Bomb
 };
 Bomb* bomb = {};
 
-struct Pat {
+struct Pat
+{
 	float x;
 	float y;
 	int moveDir;
@@ -524,7 +533,6 @@ struct Pat {
 	const char* shape[6][4];
 };
 Pat* pat = {};
-
 
 struct Boss
 {
@@ -542,12 +550,16 @@ struct Boss
 };
 Boss* boss = {};
 
-struct BossBullet {
+struct BossBullet
+{
 	int x;
 	int y;
 	const char* shape[3];
 };
 BossBullet* bossBullet[10] = {};
+#pragma endregion
+
+
 
 //Function↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 //Function↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -584,6 +596,7 @@ void Boss1();
 
 #pragma region Respone
 void RespawnInit(int(*Map)[MapX]);
+void SaveMap(int(*Map)[MapX]);
 void SavePoint(int(*Map)[MapX]);
 int DieProgress();
 #pragma endregion
@@ -600,6 +613,7 @@ void PlayerRelease();
 void PlayerHpDownEffect();
 void PlayerReplace(int x, int y);
 void PlayerKnifeAttack();
+bool PlayerDieProgress();
 #pragma endregion
 
 #pragma region Physics
@@ -684,7 +698,6 @@ void TrapRelease();
 void RandomBuff_Init(int x, int y);
 void RandomBuff_Rander();
 void RandomBuff_Progress();
-void MapReBuild(int(*Map)[MapX]);
 
 #pragma region Stage
 void InitStage(int(*Map)[MapX]);
@@ -734,25 +747,6 @@ int main()
 //↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
-
-//void CreateBoss1(int x, int y)
-//{
-//	boos = (Boos*)malloc(sizeof(boos));
-//	boos->x = x;
-//	boos->y = y;
-//	boos->shape[0] = "                  |";
-//	boos->shape[1] = "             ___|_|_";
-//	boos->shape[2] = "============|      _/";
-//	boos->shape[3] = "_____==|\\___/=====\\___";
-//	boos->shape[4] = "|______________________|";
-//	boos->shape[5] = "(=========/ \=========)";
-//	boos->shape[6] = " ─────────   ─────────";
-//}
-
-
-void MapInit() {
-
-}
 #pragma region DoubleBuffer
 void InitBuffer()
 {
@@ -839,18 +833,21 @@ void LogoProgress()
 	WinUI_init();
 	while (true)
 	{
-		LogoRender(Flicker);
-		Flicker++;
-
-		if (GetAsyncKeyState(VK_SPACE))
+		if (deltatime + LogoDelay <= GetTickCount64())
 		{
-			menu = MENU;
-			break;
-		}
+			deltatime = GetTickCount64();
+			LogoRender(Flicker);
+			Flicker++;
 
-		FlipBuffer();
-		ClearBuffer();
-		Sleep(LogoDelay);
+			if (GetAsyncKeyState(VK_SPACE))
+			{
+				menu = MENU;
+				break;
+			}
+
+			FlipBuffer();
+			ClearBuffer();
+		}
 	}
 	LogoRelease();
 
@@ -1563,14 +1560,17 @@ void MenuProgress()
 	MenuInitialize();
 	while (true)
 	{
-		if (menuNum == 1 && GetAsyncKeyState(VK_RIGHT)) { menuNum = 2; }
-		if (menuNum == 2 && GetAsyncKeyState(VK_LEFT)) { menuNum = 1; }
-		if (menuNum == 1 && GetAsyncKeyState(VK_RETURN)) { menu = GAME; break; }
-		if (menuNum == 2 && GetAsyncKeyState(VK_RETURN)) { menu = EXIT; break; }
-		MenuRender(menuNum, LogoPage);
-		FlipBuffer();
-		ClearBuffer();
-		Sleep(MenuDelay);
+		if (deltatime + MenuDelay <= GetTickCount64())
+		{
+			deltatime = GetTickCount64();
+			if (menuNum == 1 && GetAsyncKeyState(VK_RIGHT)) { menuNum = 2; }
+			if (menuNum == 2 && GetAsyncKeyState(VK_LEFT)) { menuNum = 1; }
+			if (menuNum == 1 && GetAsyncKeyState(VK_RETURN)) { menu = GAME; break; }
+			if (menuNum == 2 && GetAsyncKeyState(VK_RETURN)) { menu = EXIT; break; }
+			MenuRender(menuNum, LogoPage);
+			FlipBuffer();
+			ClearBuffer();
+		}
 	}
 	MenuRelease();
 }
@@ -1607,7 +1607,118 @@ void MenuRelease()
 }
 #pragma endregion
 
-#pragma region Stage
+void RespawnInit(int(*Map)[MapX])
+{
+	if (playerDie && savePlayer != nullptr)
+	{
+		player->hp = savePlayer->hp;
+		for (int i = 0; i < 3; i++)
+		{
+			player->bulletNum[i] = savePlayer->bulletnum[i];
+		}
+
+		pat->x = player->x - 4;
+		
+		playerDie = false;
+	}
+}
+void SaveMap(int(*Map)[MapX])
+{
+	if (player->hp> 0)
+	{
+		for (int y = 0; y < MapY; y++)
+		{
+			for (int x = 0; x < MapX; x++)
+			{
+				saveMap[y][x] = Map[y][x];
+			}
+		}
+	}
+	
+}
+void loadMap(int(*Map)[MapX])
+{
+	for (int y = 0; y < MapY; y++)
+	{
+		for (int x = 0; x < MapX; x++)
+		{
+			Map[y][x] = saveMap[y][x];
+		}
+	}
+}
+void SavePoint(int(*Map)[MapX])
+{
+	savePlayer = (SavePlayer*)malloc(sizeof(SavePlayer));
+	MapPos = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		savePlayer->bulletnum[i] = player->bulletNum[i];
+	}
+	savePlayer->hp = player->hp;
+
+}
+void DieUI_init()
+{
+	DieUI[0] = "Y88b   d88P                     8888888b.  d8b         ";
+	DieUI[1] = " Y88b d88P                      888   Y88b Y8P         ";
+	DieUI[2] = "  Y88o88P                       888    888                 ";
+	DieUI[3] = "   Y888P  .d88b.  888  888      888    888 888.  d88b.";
+	DieUI[4] = "	888  d88""88b 888  888      888    888 888 d8P  Y8b";
+	DieUI[5] = "	888  888  888 888  888      888    888 888 88888888";
+	DieUI[6] = "	888  Y88..88P Y88b 888      888  .d88P 888 Y8b.";
+	DieUI[7] = "    888    Y88P     Y88888      8888888P   888   Y8888 ";
+
+}
+void WinUI_init()
+{
+	WinUI[0] = "db    db  .d88b.  db    db      db   d8b   db d888888b d8b   db ";
+	WinUI[1] = "`8b  d8' .8P  Y8. 88    88      88   I8I   88   `88'   888o  88 ";
+	WinUI[2] = " `8bd8'  88    88 88    88      88   I8I   88    88    88V8o 88 ";
+	WinUI[3] = "   88    88    88 88    88      Y8   I8I   88    88    88 V8o88 ";
+	WinUI[4] = "   88    `8b  d8' 88b  d88      `8b d8'8b d8'   .88.   88  V888 ";
+	WinUI[5] = "   YP     `Y88P'  ~Y8888P'       `8b8' `8d8'  Y888888P VP   V8P ";
+	WinUI[6] = "";
+	WinUI[7] = "";
+}
+int DieProgress()
+{
+	int num = 0;
+	RetryCount--;
+	char* a = (char*)malloc(sizeof(char));
+	_itoa(RetryCount, a, 10);
+
+	while (true)
+	{
+
+		int DieInfoTime_End = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			WriteBuffer(10, 10 + i, DieUI[i], RED);
+		}
+
+		WriteBuffer(20, 20, "Press Enter", RED);
+		WriteBuffer(18, 22, "도전 가능횟수: ", RED);
+		WriteBuffer(25, 22, a, RED);
+		if (RetryCount <= 0)
+		{
+			menu = LOGO;
+			stage = STAGE1;
+			WriteBuffer(10, 20, "도전실패 로고화면으로 돌아갑니다..", RED);
+		}
+		if (GetAsyncKeyState(VK_RETURN))
+		{
+
+			return 1;
+		}
+		FlipBuffer();
+		ClearBuffer();
+		Sleep(StageDelay);
+	}
+	free(a);
+	a = nullptr;
+}
+
+#pragma region Stages
 void Stage_progress()
 {
 	
@@ -1638,341 +1749,211 @@ void Stage_progress()
 	
 }
 
-
 void Stage1()
 {
 	PlayerInit(5, 27);
 	PatInit();
 	RespawnInit(pMap1);
-	
+	SaveMap(pMap1);
 	SavePoint(pMap1);
 	EnemyInit(pMap1);
 	TrapInit(pMap1);
-	MapReBuild(pMap1);
+
 	countTime = 0;
-	RandomBuff_Init(268,25);
+	RandomBuff_Init(268, 25);
 	while (true)
 	{
-		countTime++;
-		//DroneRandomSpone();
-		ProgressStage(pMap1);
-		RenderStage(pMap1);
-		StageUI_Rander(1);
-		RandomBuff_Rander();
-		RandomBuff_Progress();
-		FlipBuffer();
-		ClearBuffer();
-		if (player->x >= MapX - 3)
+		if (deltatime + StageDelay <= GetTickCount64())
 		{
-			stage = STAGE2;
-			MapPos = 0;
-			free(savePlayer);
-			savePlayer = nullptr;
-			break;
-		}
-		if (player->hp <= 0) {
-			DieTime++;	
-		}
-		if (DieTime > 20) {
-			if (DieProgress() == 1) {
-				if (RetryCount <= 0) {
-					free(savePlayer);
-					savePlayer = nullptr;
-				}
-				playerDie = true;
-				leftScreen = false;
+			deltatime = GetTickCount64();
+
+			ProgressStage(pMap1);
+			RenderStage(pMap1);
+			StageUI_Rander(1);
+
+			FlipBuffer();
+			ClearBuffer();
+			if (player->x >= MapX - 3)
+			{
+				stage = STAGE2;
+				MapPos = 0;
+				free(savePlayer);
+				savePlayer = nullptr;
 				break;
 			}
+			if (PlayerDieProgress()) { break; }
 		}
-		Sleep(StageDelay);
 	}
 	ClearStage();
+	loadMap(pMap1);
+}
 	
-}
-void RespawnInit(int(*Map)[MapX]) {
-	if (playerDie && savePlayer !=nullptr) {
-		player->hp = savePlayer->hp;
-		for (int i = 0; i < 3; i++) {
-			player->bulletNum[i] = savePlayer->bulletnum[i];
-		}
-		for (int y = 0; y < MapY; y++) {
-			for (int x = 0; x < MapX; x++) {
-				Map[y][x] = savePlayer->Map[y][x];
-			}
-		}
-		pat->x = player->x - 4;
-		free(savePlayer);
-		savePlayer = nullptr;
-		playerDie = false;
-	}
-}
-void MapReBuild(int(*Map)[MapX]) {
-	if (savePlayer != nullptr) {
-		for (int y = 0; y < MapY; y++) {
-			for (int x = 0; x < MapX; x++) {
-				Map[y][x] = savePlayer->Map[y][x];
-			}
-		}
-	}
-}
-void SavePoint(int(*Map)[MapX]) {
-	savePlayer = (SavePlayer*)malloc(sizeof(SavePlayer));
-	MapPos = 0;
-	for (int i = 0; i < 3; i++) {
-		savePlayer->bulletnum[i] = player->bulletNum[i];
-	}
-	savePlayer->hp = player->hp;
-
-	for (int y = 0; y < MapY; y++) {
-		for (int x = 0; x < MapX; x++) {
-			savePlayer->Map[y][x] = Map[y][x];
-		}
-	}
-}
-void DieUI_init() {
-	DieUI[0] = "Y88b   d88P                     8888888b.  d8b         ";
-	DieUI[1] = " Y88b d88P                      888   Y88b Y8P         ";
-	DieUI[2] = "  Y88o88P                       888    888                 ";
-	DieUI[3] = "   Y888P  .d88b.  888  888      888    888 888.  d88b.";
-	DieUI[4] = "	888  d88""88b 888  888      888    888 888 d8P  Y8b";
-	DieUI[5] = "	888  888  888 888  888      888    888 888 88888888";
-	DieUI[6] = "	888  Y88..88P Y88b 888      888  .d88P 888 Y8b.";
-	DieUI[7] = "    888    Y88P     Y88888      8888888P   888   Y8888 ";
-		
-}
-void WinUI_init() {
-	WinUI[0] = "db    db  .d88b.  db    db      db   d8b   db d888888b d8b   db ";
-	WinUI[1] = "`8b  d8' .8P  Y8. 88    88      88   I8I   88   `88'   888o  88 ";
-	WinUI[2] = " `8bd8'  88    88 88    88      88   I8I   88    88    88V8o 88 ";
-	WinUI[3] = "   88    88    88 88    88      Y8   I8I   88    88    88 V8o88 ";
-	WinUI[4] = "   88    `8b  d8' 88b  d88      `8b d8'8b d8'   .88.   88  V888 ";
-	WinUI[5] = "   YP     `Y88P'  ~Y8888P'       `8b8' `8d8'  Y888888P VP   V8P ";
-	WinUI[6] = "";
-	WinUI[7] = "";
-}
-
-	
-	
-int DieProgress() {
-	int num = 0;
-	RetryCount--;
-	char* a = (char*)malloc(sizeof(char));
-	_itoa(RetryCount, a, 10);
-	
-	while (true) {
-		
-		int DieInfoTime_End = 0;
-		for (int i = 0; i < 8; i++) {
-			WriteBuffer(10, 10+i, DieUI[i], RED);
-		}
-		
-		WriteBuffer(10, 12, "Press Enter", RED);
-		WriteBuffer(10, 22, "도전 가능횟수: ", RED);
-		WriteBuffer(20, 22, a, RED);
-		if (RetryCount <= 0) {
-			menu = LOGO;
-			stage = STAGE1;
-			WriteBuffer(10, 20, "도전실패 로고화면으로 돌아갑니다..", RED);
-		}
-		if (GetAsyncKeyState(VK_RETURN)) {
-
-			return 1;
-		}
-		FlipBuffer();
-		ClearBuffer();
-		Sleep(StageDelay);
-	}
-	free(a);
-	a = nullptr;
-}
 void Stage2()
 {
 	PlayerReplace(2, 27);
 	RandomBuff_Init(268, 25);
 	InitStage(pMap2);
-	countTime = 0;
+
 	while (true)
 	{
-		countTime++;
-		RandomEnemySpone(1);
-		ProgressStage(pMap2);
-		RenderStage(pMap2);
-		StageUI_Rander(2);
-		RandomBuff_Rander();
-		RandomBuff_Progress();
-		FlipBuffer();
-		ClearBuffer();
-		if (player->x >= MapX - 3)
+		if (deltatime + StageDelay <= GetTickCount64())
 		{
-			stage = STAGE3;
-			MapPos = 0;
-			break;
-		}
-		if (player->hp <= 0) {
-			if (DieProgress() == 1) {
-				if (RetryCount <= 0) {
-					free(savePlayer);
-					savePlayer = nullptr;
-				}
-				playerDie = true;
-				leftScreen = false;
+			deltatime = GetTickCount64();
+
+			ProgressStage(pMap2);
+			RenderStage(pMap2);
+			RandomEnemySpone(1);
+			StageUI_Rander(2);
+
+			FlipBuffer();
+			ClearBuffer();
+			if (player->x >= MapX - 3)
+			{
+				stage = STAGE3;
+				MapPos = 0;
 				break;
 			}
+			if (PlayerDieProgress()) { break; }
 		}
-		Sleep(StageDelay);
 	}
 	ClearStage();
-	
+	loadMap(pMap2);
 }
+
 void Stage3()
 {
 	PlayerReplace(2, 27);
 	InitStage(pMap3);
 	RandomBuff_Init(268, 25);
-	countTime = 0;
+
 	while (true)
 	{
-		countTime++;
-		RandomEnemySpone(1);
-		ProgressStage(pMap3);
-		RenderStage(pMap3);
-		StageUI_Rander(3);
-		RandomBuff_Rander();
-		RandomBuff_Progress();
-		FlipBuffer();
-		ClearBuffer();
-		if (player->x >= MapX - 3)
+		if (deltatime + StageDelay <= GetTickCount64())
 		{
-			stage = STAGE4;
-			MapPos = 0;
-			break;
-		}
-		if (player->hp <= 0) {
-			if (DieProgress() == 1) {
-				if (RetryCount <= 0) {
-					free(savePlayer);
-					savePlayer = nullptr;
-				}
-				playerDie = true;
-				leftScreen = false;
+			deltatime = GetTickCount64();
+
+			ProgressStage(pMap3);
+			RenderStage(pMap3);
+			RandomEnemySpone(1);
+			StageUI_Rander(3);
+
+			FlipBuffer();
+			ClearBuffer();
+			if (player->x >= MapX - 3)
+			{
+				stage = STAGE4;
+				MapPos = 0;
 				break;
 			}
+			if (PlayerDieProgress()) { break; }
 		}
-		Sleep(StageDelay);
 	}
 	ClearStage();
-	
+	loadMap(pMap3);
 }
+
 void Stage4()
 {
-	countTime = 0;
 	PlayerReplace(2, 27);
 	InitStage(pMap4);
 	RandomBuff_Init(268, 25);
+
 	while (true)
 	{
-		countTime++;
-		RandomBuff_Rander();
-		RandomEnemySpone(2);
-		RandomBuff_Progress();
-		ProgressStage(pMap4);
-		RenderStage(pMap4);
-		StageUI_Rander(4);
-		FlipBuffer();
-		ClearBuffer();
-		if (player->x >= MapX - 3)
+		if (deltatime + StageDelay <= GetTickCount64())
 		{
-			stage = STAGE_Boss1;
-			MapPos = 0;
-			break;
-		}
-		if (player->hp <= 0) {
-			if (DieProgress() == 1) {
-				if (RetryCount <= 0) {
-					free(savePlayer);
-					savePlayer = nullptr;
-				}
-				playerDie = true;
-				leftScreen = false;
+			deltatime = GetTickCount64();
+
+			ProgressStage(pMap4);
+			RenderStage(pMap4);
+			RandomEnemySpone(2);
+			StageUI_Rander(4);
+
+			FlipBuffer();
+			ClearBuffer();
+			if (player->x >= MapX - 3)
+			{
+				stage = STAGE_Boss1;
+				MapPos = 0;
 				break;
 			}
+			if (PlayerDieProgress()) { break; }
 		}
-		Sleep(StageDelay);
 	}
 	ClearStage();
-	
+	loadMap(pMap4);
 }
-#pragma endregion
 
-void Boss1() {
+void Boss1()
+{
 
 	InitStage(pBoss1);
 	Boss1_Init(268, 19);
 	PlayerReplace(2, 27);
-	countTime = 0;
+
 	while (true)
 	{
-		countTime++;
-		ProgressStage(pBoss1);
-		RenderStage(pBoss1);
-		Boss1_Rander();
-		Boss1_progress();
-		RandomEnemySpone(2);
-		StageUI_Rander(5);
-		DroneRandomSpone();
-		DroneRender();
-		DroneProgress();
-		BossBulletRender();
-		PlayerAttackBoss();
-		BossBulletProgress();
-
-		FlipBuffer();
-		ClearBuffer();
-		if (boss->hp <= 0)
+		if (deltatime + StageDelay <= GetTickCount64())
 		{
-			while (true) {
-				for (int i = 0; i < 8; i++) {
-					WriteBuffer(10, 20+i,WinUI[i], WHITE);
-				}
-				if (GetAsyncKeyState(VK_BACK)) {
-					break;
-				}
-				FlipBuffer();
-				ClearBuffer();
-				Sleep(StageDelay);
-			}
-			WriteBuffer(10, 20, "미션 클리어!!! ", WHITE);
-			menu = LOGO;
-			stage = STAGE1;
-			break;
-		}
-		if (player->hp <= 0) {
-			if (DieProgress() == 1) {
-				if (RetryCount <= 0) {
-					free(savePlayer);
-					savePlayer = nullptr;
-				}
-				playerDie = true;
-				leftScreen = false;
+			deltatime = GetTickCount64();
 
+			ProgressStage(pBoss1);
+			RenderStage(pBoss1);
+			Boss1_Rander();
+			Boss1_progress();
+			RandomEnemySpone(2);
+			StageUI_Rander(5);
+			DroneRandomSpone();
+			DroneRender();
+			DroneProgress();
+			BossBulletRender();
+			PlayerAttackBoss();
+			BossBulletProgress();
+
+			FlipBuffer();
+			ClearBuffer();
+			if (boss->hp <= 0)
+			{
+				while (true)
+				{
+					for (int i = 0; i < 8; i++)
+					{
+						WriteBuffer(10, 20 + i, WinUI[i], WHITE);
+					}
+					if (GetAsyncKeyState(VK_BACK))
+					{
+						break;
+					}
+					FlipBuffer();
+					ClearBuffer();
+					Sleep(StageDelay);
+				}
+				WriteBuffer(10, 20, "미션 클리어!!! ", WHITE);
+				menu = LOGO;
+				stage = STAGE1;
 				break;
 			}
+			if (PlayerDieProgress()) { break; }
+			Sleep(StageDelay);
 		}
-		Sleep(StageDelay);
 	}
 	ClearStage();
-	
+	loadMap(pBoss1);
 }
+#pragma endregion
+
+
 
 
 #pragma region Stage
 void InitStage(int(*Map)[MapX]) {
 	RespawnInit(Map);
+	SaveMap(Map);
 	SavePoint(Map);
 	EnemyInit(Map);
 	TrapInit(Map);
-	MapReBuild(Map);
 	pat->x = player->x;
+	countTime = 0;
 }
 void RenderStage(int(*Map)[MapX]) {
 	ItemProRander();
@@ -1982,8 +1963,10 @@ void RenderStage(int(*Map)[MapX]) {
 	GunUI_Rander();
 	EnemyRander();
 	ShowKeyInfo();
+	RandomBuff_Rander();
 }
 void ProgressStage(int(*Map)[MapX]) {
+	countTime++;
 	PatPorogress(Map);
 	PlayerProgress(Map);
 	PlayerBulletProgress(Map);
@@ -1995,6 +1978,7 @@ void ProgressStage(int(*Map)[MapX]) {
 	PlayerKnifeAttack();
 	MapItemInit(Map);
 	LeftScreen();
+	RandomBuff_Progress();
 	
 }
 void ClearStage() {
@@ -2048,17 +2032,7 @@ void ClearStage() {
 }
 #pragma endregion
 
-void LeftScreen() {
-	if (player->x <= MapPos+10&& player->x>ScreenX && player->x<MapX -ScreenX-10) {
-		leftScreen = true;
-	}
-	if (leftScreen) {
-		MapPos--;
-		if (MapPos <= player->x - ScreenX+30) {
-			leftScreen = false;
-		}
-	}
-}
+
 #pragma region Player
 void PlayerInit(int x, int y)
 {
@@ -2375,6 +2349,29 @@ void PlayerKnifeAttack()
 		}
 	}
 	
+}
+bool PlayerDieProgress()
+{
+	if (player->hp <= 0)
+	{
+		DieTime++;
+	}
+	if (DieTime > 20)
+	{
+		if (DieProgress() == 1)
+		{
+			if (RetryCount <= 0)
+			{
+				free(savePlayer);
+				savePlayer = nullptr;
+			}
+			playerDie = true;
+			leftScreen = false;
+			DieTime = 0;
+			return true;
+		}
+	}
+	return false;
 }
 #pragma endregion
 
@@ -3098,7 +3095,6 @@ void BombProgress(int(*Map)[MapX])
 }
 #pragma endregion
 
-
 #pragma region Drone
 void DroneInit()
 {
@@ -3335,6 +3331,89 @@ void NextPointer_Init(int x, int y)
 		WriteBuffer(x, y + 3, ". . ::::::::::::;;:'", YELLOW);
 		WriteBuffer(x, y + 4, "                :'", YELLOW);
 	}
+
+}
+void LeftScreen()
+{
+	if (player->x <= MapPos + 10 && player->x > ScreenX && player->x < MapX - ScreenX - 10)
+	{
+		leftScreen = true;
+	}
+	if (leftScreen)
+	{
+		MapPos--;
+		if (MapPos <= player->x - ScreenX + 30)
+		{
+			leftScreen = false;
+		}
+	}
+}
+void StageUI_Rander(int stageNum)
+{
+	if (countTime < 30)
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			WriteBuffer(5 + countTime / 4, 5 + i, stageUI[stageNum][i], LIGHTBLUE);
+		}
+	}
+	else if (countTime < 41)
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			WriteBuffer(5 + countTime / 5, 5 + i, stageUI[0][i], LIGHTRED);
+
+		}
+	}
+	if (countTime < 41)
+	{
+		WriteBuffer(5 + (countTime / 20), 12, "목표: 안전하게 목적지까지 도달하여라", WHITE);
+	}
+
+}
+void StageUI()
+{
+	stageUI[0][0] = "      ";
+	stageUI[0][1] = "   ____ _____     / / ";
+	stageUI[0][2] = "  / __ `/ __ \\   / / ";
+	stageUI[0][3] = " / /_/ / /_/ /  /_/ ";
+	stageUI[0][4] = " \\__, /\____/  (_) ";
+	stageUI[0][5] = "/____/                 ";
+
+	stageUI[1][0] = "         __                      ___";
+	stageUI[1][1] = "   _____/ /_____ _____ ____     <  /";
+	stageUI[1][2] = "  / ___/ __/ __ `/ __ `/ _ \\    / / ";
+	stageUI[1][3] = " (__  ) /_/ /_/ / /_/ /  __/   / /  ";
+	stageUI[1][4] = "/____/\\__/\\__,_/\\__, /\\___/   /_/   ";
+	stageUI[1][5] = "               /____/               ";
+
+	stageUI[2][0] = "         __                      ___ ";
+	stageUI[2][1] = "   _____/ /_____ _____ ____     |__ \\ ";
+	stageUI[2][2] = "  / ___/ __/ __ `/ __ `/ _ \\    __/ /";
+	stageUI[2][3] = " (__  ) /_/ /_/ / /_/ /  __/   / __/ ";
+	stageUI[2][4] = "/____/\\__/\\__,_/\\__, /\\___/   /____/ ";
+	stageUI[2][5] = "               /____/                ";
+
+	stageUI[3][0] = "         __                      _____";
+	stageUI[3][1] = "   _____/ /_____ _____ ____     |__  /";
+	stageUI[3][2] = "  / ___/ __/ __ `/ __ `/ _ \\     /_ < ";
+	stageUI[3][3] = " (__  ) /_/ /_/ / /_/ /  __/   ___/ / ";
+	stageUI[3][4] = "/____/\\__/\\__,_/\\__, /\\___/   /____/  ";
+	stageUI[3][5] = "               /____/                 ";
+
+	stageUI[4][0] = "         __                      __ __";
+	stageUI[4][1] = "   _____/ /_____ _____ ____     / // /";
+	stageUI[4][2] = "  / ___/ __/ __ `/ __ `/ _ \\   / // /_";
+	stageUI[4][3] = " (__  ) /_/ /_/ / /_/ /  __/  /__  __/";
+	stageUI[4][4] = "/____/\\__/\\__,_/\\__, /\\___/     /_/   ";
+	stageUI[4][5] = "               /____/                 ";
+
+	stageUI[5][0] = "    ____  ____  __________    ______________   ____________";
+	stageUI[5][1] = "   / __ )/ __ \\/ ___/ ___/   / ___/_  __/   | / ____/ ____/";
+	stageUI[5][2] = "  / __  / / / /\\__ \\\\__ \\    \\__ \\ / / / /| |/ / __/ __/   ";
+	stageUI[5][3] = " / /_/ / /_/ /___/ /__/ /   ___/ // / / ___ / /_/ / /___   ";
+	stageUI[5][4] = "/_____/\\____//____/____/   /____//_/ /_/  |_\\____/_____/  ";
+	stageUI[5][5] = "";
 
 }
 #pragma endregion
@@ -3968,7 +4047,10 @@ void PatPorogress(int(*Map)[MapX])
 	for (int i = 0; i < patBulletCount; i++)
 	{
 		if (patBullet[i] != nullptr && boss != nullptr) {
-			WriteBuffer(patBullet[i]->x - MapPos, patBullet[i]->y, patBullet[i]->shape[0], patBullet[i]->color);
+			if (MapPos < patBullet[i]->x && patBullet[i]->x < MapPos + ScreenX)
+			{
+				WriteBuffer(patBullet[i]->x - MapPos, patBullet[i]->y, patBullet[i]->shape[0], patBullet[i]->color);
+			}
 			if (patBullet[i]->x < boss->x)
 			{
 				patBullet[i]->x++;
@@ -4318,6 +4400,7 @@ void TrapRelease()
 }
 #pragma endregion
 
+#pragma region Boss
 void Boss1_Init(int x, int y)
 {
 	boss = (Boss*)malloc(sizeof(Boss));
@@ -4383,8 +4466,204 @@ void Boss1_Init(int x, int y)
 	boss->shape[4][7] = " ─────────   ─────────";
 	boss->shape[4][8] = "■■■■■■■■■■■■";
 }
+void Boss1_Rander()
+{
 
-void RandomBuff_Init(int x, int y) {
+	if (MapPos + ScreenX >= boss->x)
+	{
+		if (boss->state == 0 && 0 < boss->hp)
+		{
+			boss->expressDellay[NOW_TIME]++;
+			if (boss->expressDellay[NOW_TIME] < 24)
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[0][i], RED);
+				}
+			}
+			else if (boss->expressDellay[NOW_TIME] < 27)
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[1][i], RED);
+				}
+			}
+			else if (boss->expressDellay[NOW_TIME] < 30)
+			{
+				for (int i = 0; i < 9; i++)
+				{
+					WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[2][i], RED);
+				}
+				if (boss->expressDellay[NOW_TIME] == 29)
+				{
+					boss->expressDellay[NOW_TIME] = 0;
+				}
+			}
+		}
+		if (boss->hp < 0)
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[3][i], RED);
+			}
+		}
+		char* b = (char*)malloc(sizeof(char) * 10);
+		_itoa(boss->hp, b, 10);
+		WriteBuffer(boss->x - MapPos, boss->y - 5, b, WHITE);
+		free(b);
+		b = nullptr;
+	}
+}
+void BossBulletInit()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (bossBullet[i] == nullptr)
+		{
+			bossBullet[i] = (BossBullet*)malloc(sizeof(BossBullet));
+			bossBullet[i]->x = boss->x;
+			bossBullet[i]->y = boss->y + 2 + rand() % 3;
+			bossBullet[i]->shape[0] = "   ";
+			bossBullet[i]->shape[1] = "◀■■■■";
+			break;
+		}
+	}
+}
+void BossBulletRender()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (bossBullet[i] != nullptr)
+		{
+			if (MapPos < bossBullet[i]->x && bossBullet[i]->y < MapPos + ScreenX)
+			{
+				WriteBuffer(bossBullet[i]->x - MapPos, bossBullet[i]->y, bossBullet[i]->shape[0], LIGHTMAGENTA);
+				WriteBuffer(bossBullet[i]->x - MapPos, bossBullet[i]->y + 1, bossBullet[i]->shape[1], LIGHTMAGENTA);
+			}
+		}
+	}
+}
+void BossBulletProgress()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (bossBullet[i] != nullptr)
+		{
+			bossBullet[i]->x--;
+			if (bossBullet[i]->x < player->x && player->x < bossBullet[i]->x + 3 && bossBullet[i]->y < player->y && bossBullet[i]->y > player->y - 5)
+			{
+				player->isDownHp = true;
+				player->hp -= 2;
+				free(bossBullet[i]);
+				bossBullet[i] = nullptr;
+				break;
+			}
+			if (bossBullet[i]->x < MapX - ScreenX)
+			{
+				free(bossBullet[i]);
+				bossBullet[i] = nullptr;
+			}
+		}
+	}
+
+}
+void Boss1_progress()
+{
+
+	int speed = 0;
+	if (boss->hp < 400 && 300 < boss->hp)
+	{
+		speed = 10;
+	}
+	else if (boss->hp < 300 && 200 < boss->hp)
+	{
+		speed = 20;
+	}
+	else if (boss->hp < 200 && 100 < boss->hp)
+	{
+		speed = 30;
+	}
+	else if (boss->hp < 100 && 0 < boss->hp)
+	{
+		speed = 40;
+	}
+	if (MapPos + ScreenX >= boss->x)
+	{
+		boss->pageCount++;
+		boss->MoveDelay++;
+		int randNum;
+		if (boss->MoveDelay >= 50 - speed && !boss->is_Move)
+		{
+			do
+			{
+				randNum = rand() % 3;
+			} while (boss->floor == rand() % 3);
+			boss->floor = randNum;
+			boss->is_Move = true;
+		}
+	}
+	if (boss->is_Move)
+	{
+		if (MapY - boss->floor * 9 - 11 < boss->y)
+		{
+			boss->y--;
+		}
+		if (MapY - boss->floor * 9 - 11 > boss->y)
+		{
+			boss->y++;
+		}
+		if (MapY - boss->floor * 9 - 11 == boss->y)
+		{
+			boss->MoveDelay = 0;
+			boss->is_Move = false;
+		}
+	}
+	if (boss->x < player->x + 1 && player->x + 1 < boss->x + 11 && boss->y < player->y - 3 && player->y - 3 < boss->y + 8)
+	{
+		player->hp = -1;
+	}
+	if (boss->hp <= 0 && boss->floor != 0)
+	{
+		boss->floor = 0;
+	}
+	if (50 - speed <= boss->pageCount)
+	{
+		BossBulletInit();
+		boss->pageCount = 0;
+	}
+
+}
+void PlayerAttackBoss()
+{
+	for (int i = 0; i < playerBulletCount; i++)
+	{
+
+		for (int j = 0; j < 4; j++)
+		{
+			if (playerBullet[i] != nullptr && playerBullet[i]->bullet[j] != nullptr)
+			{
+				if (boss->x < playerBullet[i]->bullet[j]->x && boss->x + 11 > playerBullet[i]->bullet[j]->x &&
+					boss->y < playerBullet[i]->bullet[j]->y && boss->y + 8 > playerBullet[i]->bullet[j]->y)
+				{
+					boss->hp -= playerBullet[i]->bullet[j]->damage;
+					for (int k = 0; k < 4; k++)
+					{
+						free(playerBullet[i]->bullet[k]);
+						playerBullet[i]->bullet[k] = nullptr;
+					}
+					free(playerBullet[i]);
+					playerBullet[i] = nullptr;
+
+				}
+			}
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Buff
+void RandomBuff_Init(int x, int y)
+{
 	buffBox = (BuffBox*)malloc(sizeof(BuffBox));
 	buffBox->x = x;
 	buffBox->isGive = false;
@@ -4395,20 +4674,28 @@ void RandomBuff_Init(int x, int y) {
 	buffBox->shape[1] = "|-＆-||";
 	buffBox->shape[2] = "|____||";
 }
-void RandomBuff_Rander() {
-	if (buffBox != nullptr ) {
-		for (int i = 0; i < 3; i++) {
-			if (MapPos < buffBox->x && buffBox->x < MapPos + ScreenX) {
+void RandomBuff_Rander()
+{
+	if (buffBox != nullptr)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			if (MapPos < buffBox->x && buffBox->x < MapPos + ScreenX)
+			{
 				WriteBuffer(buffBox->x - MapPos, buffBox->y + i, buffBox->shape[i], WHITE);
 			}
 		}
 	}
-	
+
 }
-void RandomBuff_Progress() {
-	if (buffBox != nullptr) {
-		if (buffBox->x < player->x && player->x < buffBox->x + 4 && buffBox->y - 3 < player->y && player->y < buffBox->y + 3) {
-			switch (buffBox->buffEffect) {
+void RandomBuff_Progress()
+{
+	if (buffBox != nullptr)
+	{
+		if (buffBox->x < player->x+1 && player->x+1 < buffBox->x+4 && buffBox->y - 3 < player->y && player->y < buffBox->y + 3)
+		{
+			switch (buffBox->buffEffect)
+			{
 			case PLUS_PAT_DAMAGE:
 				WriteBuffer(30, 30, "펫 데미지가 +1증가!", WHITE);
 				WriteBuffer(30, 32, "PRESS ENTER", WHITE);
@@ -4429,10 +4716,14 @@ void RandomBuff_Progress() {
 			}
 			buffBox->Delay++;
 
-			if (buffBox->Delay > 10) {
-				while (true) {
-					if (!buffBox->isGive) {
-						switch (buffBox->buffEffect) {
+			if (buffBox->Delay > 2)
+			{
+				while (true)
+				{
+					if (!buffBox->isGive)
+					{
+						switch (buffBox->buffEffect)
+						{
 						case PLUS_PAT_DAMAGE:
 							pat->damage += 1;
 							break;
@@ -4445,11 +4736,12 @@ void RandomBuff_Progress() {
 						case PLUS_RETRY:
 							RetryCount + 1;
 							break;
-							
+
 						}
 						buffBox->isGive = true;
 					}
-					if (GetAsyncKeyState(VK_RETURN)) {
+					if (GetAsyncKeyState(VK_RETURN))
+					{
 						free(buffBox);
 						buffBox = nullptr;
 						break;
@@ -4459,219 +4751,13 @@ void RandomBuff_Progress() {
 		}
 	}
 }
-
-void Boss1_Rander() {
-
-	if (MapPos + ScreenX >= boss->x) {
-		if (boss->state == 0 && 0<boss->hp) {
-			boss->expressDellay[NOW_TIME]++;
-			if (boss->expressDellay[NOW_TIME] < 24) {
-				for (int i = 0; i < 9; i++) {
-					WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[0][i], RED);
-				}
-			}
-			else if (boss->expressDellay[NOW_TIME] < 27) {
-				for (int i = 0; i < 9; i++) {
-					WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[1][i], RED);
-				}
-			}
-			else if (boss->expressDellay[NOW_TIME] < 30) {
-				for (int i = 0; i < 9; i++) {
-					WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[2][i], RED);
-				}
-				if (boss->expressDellay[NOW_TIME] == 29) {
-					boss->expressDellay[NOW_TIME] = 0;
-				}
-			}
-		}
-		if (boss->hp < 0) {
-			for (int i = 0; i < 9; i++) {
-				WriteBuffer(boss->x - MapPos, boss->y + i, boss->shape[3][i], RED);
-			}
-		}
-		char* b = (char*)malloc(sizeof(char) * 10);
-		_itoa(boss->hp, b, 10);
-		WriteBuffer(boss->x - MapPos, boss->y-5, b, WHITE);
-		free(b);
-		b = nullptr;
-	}
-}
-
-void BossBulletInit() {
-	for (int i = 0; i < 10; i++) {
-		if (bossBullet[i] == nullptr) {
-			bossBullet[i] = (BossBullet*)malloc(sizeof(BossBullet));
-			bossBullet[i]->x = boss->x;
-			bossBullet[i]->y = boss->y +2+rand()%3;
-			bossBullet[i]->shape[0] = "   ";
-			bossBullet[i]->shape[1] = "◀■■■■";
-			break;
-		}
-	}
-}
+#pragma endregion
 
 
-void BossBulletRender() {
-	for (int i = 0; i < 10; i++) {
-		if (bossBullet[i] != nullptr) {
-			WriteBuffer(bossBullet[i]->x - MapPos, bossBullet[i]->y, bossBullet[i]->shape[0], LIGHTMAGENTA);
-			WriteBuffer(bossBullet[i]->x - MapPos, bossBullet[i]->y + 1, bossBullet[i]->shape[1], LIGHTMAGENTA);
-		}
-		}
-	}
-	
-void BossBulletProgress() {
-	for (int i = 0; i < 10; i++) {
-		if (bossBullet[i] != nullptr) {
-			bossBullet[i]->x--;
-			if (bossBullet[i]->x < player->x && player->x < bossBullet[i]->x + 3 && bossBullet[i]->y < player->y && bossBullet[i]->y > player->y - 5) {
-				player->isDownHp = true;
-				player->hp -= 2;
-				free(bossBullet[i]);
-				bossBullet[i] = nullptr;
-				break;
-			}
-			if (bossBullet[i]->x < MapX - ScreenX) {
-				free(bossBullet[i]);
-				bossBullet[i] = nullptr;
-			}
-		}
-	}
-	
-}
-void Boss1_progress() {
-	
-	int speed=0;
-	if (boss->hp < 400 && 300<boss->hp) {
-		speed = 10;
-	}
-	else if (boss->hp < 300 && 200 < boss->hp) {
-		speed = 20;
-	}
-	else if (boss->hp < 200 && 100< boss->hp) {
-		speed = 30;
-	}
-	else if (boss->hp < 100 && 0 < boss->hp) {
-		speed = 40;
-	}
-	if (MapPos + ScreenX >= boss->x) {
-		boss->pageCount++;
-		boss->MoveDelay++;
-		int randNum;
-		if (boss->MoveDelay >= 50-speed && !boss->is_Move) {
-			do
-			{
-				randNum = rand() % 3;
-			} while (boss->floor == rand() % 3);
-			boss->floor = randNum;
-			boss->is_Move = true;
-		}
-	}
-	if (boss->is_Move) {
-		if (MapY - boss->floor * 9 - 11 < boss->y) {
-			boss->y--;
-		}
-		if (MapY - boss->floor * 9 - 11 > boss->y) {
-			boss->y++;
-		}
-		if (MapY - boss->floor * 9 - 11 == boss->y) {
-			boss->MoveDelay = 0;
-			boss->is_Move = false;
-		}
-	}
-	if (boss->x < player->x + 1 && player->x + 1 <boss->x + 11 && boss->y < player->y-3 && player->y - 3 < boss->y + 8) {
-		player->hp = -1;
-	}
-	if (boss->hp <= 0 && boss->floor != 0) {
-		boss->floor = 0;
-	}
-	if (50 - speed <= boss->pageCount) {
-		BossBulletInit();
-		boss->pageCount = 0;
-	}
-
-}
-void PlayerAttackBoss() {
-	for (int i = 0; i < playerBulletCount; i++) {
-		
-		for (int j = 0; j < 4; j++) {
-			if (playerBullet[i] != nullptr && playerBullet[i]->bullet[j] != nullptr) {
-				if (boss->x < playerBullet[i]->bullet[j]->x && boss->x + 11 > playerBullet[i]->bullet[j]->x &&
-					boss->y < playerBullet[i]->bullet[j]->y && boss->y + 8 > playerBullet[i]->bullet[j]->y) {
-					boss->hp -= playerBullet[i]->bullet[j]->damage;
-					for (int k = 0; k < 4; k++) {
-						free(playerBullet[i]->bullet[k]);
-						playerBullet[i]->bullet[k] = nullptr;
-					}
-					free(playerBullet[i]);
-					playerBullet[i] = nullptr;
-
-				}
-		    }
-		}
-	}
-}
 
 
-void StageUI_Rander(int stageNum) {
-	if (countTime < 30) {
-		for (int i = 0; i < 6; i++) {
-			WriteBuffer(5+countTime/4, 5+i, stageUI[stageNum][i], LIGHTBLUE);
-		}
-	}
-	else if (countTime < 41) {
-		for (int i = 0; i < 6; i++) {
-			WriteBuffer(5 + countTime / 5, 5+i, stageUI[0][i], LIGHTRED);
-			
-		}
-	}
-	if (countTime < 41) {
-		WriteBuffer(5 + (countTime / 20), 12, "목표: 안전하게 목적지까지 도달하여라", WHITE);
-	}
-	
-}
-void StageUI() {
-	stageUI[0][0] = "      ";
-	stageUI[0][1] = "   ____ _____     / / ";
-	stageUI[0][2] = "  / __ `/ __ \\   / / ";
-	stageUI[0][3] = " / /_/ / /_/ /  /_/ ";
-	stageUI[0][4] = " \\__, /\____/  (_) ";
-	stageUI[0][5] = "/____/                 ";
 
-	stageUI[1][0] = "         __                      ___";
-	stageUI[1][1] = "   _____/ /_____ _____ ____     <  /";
-	stageUI[1][2] = "  / ___/ __/ __ `/ __ `/ _ \\    / / ";
-	stageUI[1][3] = " (__  ) /_/ /_/ / /_/ /  __/   / /  ";
-	stageUI[1][4] = "/____/\\__/\\__,_/\\__, /\\___/   /_/   ";
-	stageUI[1][5] = "               /____/               ";
 
-	stageUI[2][0] = "         __                      ___ ";
-	stageUI[2][1] = "   _____/ /_____ _____ ____     |__ \\ ";
-	stageUI[2][2] = "  / ___/ __/ __ `/ __ `/ _ \\    __/ /";
-	stageUI[2][3] = " (__  ) /_/ /_/ / /_/ /  __/   / __/ ";
-	stageUI[2][4] = "/____/\\__/\\__,_/\\__, /\\___/   /____/ ";
-	stageUI[2][5] = "               /____/                ";
 
-	stageUI[3][0] = "         __                      _____";
-	stageUI[3][1] = "   _____/ /_____ _____ ____     |__  /";
-	stageUI[3][2] = "  / ___/ __/ __ `/ __ `/ _ \\     /_ < ";
-	stageUI[3][3] = " (__  ) /_/ /_/ / /_/ /  __/   ___/ / ";
-	stageUI[3][4] = "/____/\\__/\\__,_/\\__, /\\___/   /____/  ";
-	stageUI[3][5] = "               /____/                 ";
 
-	stageUI[4][0] = "         __                      __ __";
-	stageUI[4][1] = "   _____/ /_____ _____ ____     / // /";
-	stageUI[4][2] = "  / ___/ __/ __ `/ __ `/ _ \\   / // /_";
-	stageUI[4][3] = " (__  ) /_/ /_/ / /_/ /  __/  /__  __/";
-	stageUI[4][4] = "/____/\\__/\\__,_/\\__, /\\___/     /_/   ";
-	stageUI[4][5] = "               /____/                 ";
-
-	stageUI[5][0] = "    ____  ____  __________    ______________   ____________";
-	stageUI[5][1] = "   / __ )/ __ \\/ ___/ ___/   / ___/_  __/   | / ____/ ____/";
-	stageUI[5][2] = "  / __  / / / /\\__ \\\\__ \\    \\__ \\ / / / /| |/ / __/ __/   ";
-	stageUI[5][3] = " / /_/ / /_/ /___/ /__/ /   ___/ // / / ___ / /_/ / /___   ";
-	stageUI[5][4] = "/_____/\\____//____/____/   /____//_/ /_/  |_\\____/_____/  ";
-	stageUI[5][5] = "";
-
-}
 
