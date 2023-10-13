@@ -127,7 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="SetPos.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Obj.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SetPos.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Project6.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
