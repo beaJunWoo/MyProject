@@ -1,0 +1,66 @@
+#include "Map.h"
+
+void Map::Initalize()
+{
+	shape.push_back("11111111111111111111111111");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("10000000000000000000000001");
+	shape.push_back("11111111111111111111111111");
+}
+
+void Map::Progress()
+{
+}
+
+void Map::Render()
+{
+	for (int y = 0; y < shape.size(); y++)
+	{
+		for (int x = 0; x < shape[y].size(); x++)
+		{
+			switch (shape[y][x])
+			{
+			case '1':
+				DoubleBuffer::Get()->WriteBuffer(x, y, "бс", WHITE);
+			default:
+				break;
+			}
+		}
+	}
+}
+
+void Map::Release()
+{
+}
