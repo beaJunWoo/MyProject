@@ -54,6 +54,10 @@ void Map::Render()
 			{
 			case '1':
 				DoubleBuffer::Get()->WriteBuffer(x, y, "бс", WHITE);
+				break;
+			case '2':
+				DoubleBuffer::Get()->WriteBuffer(x, y, "бс", RED);
+				break;
 			default:
 				break;
 			}

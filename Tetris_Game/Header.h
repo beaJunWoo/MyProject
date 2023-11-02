@@ -37,3 +37,11 @@ enum Color
 	WHITE,
 
 };
+
+enum BlockType {
+	L,
+	Z,
+	E,
+	I,
+	T,
+};

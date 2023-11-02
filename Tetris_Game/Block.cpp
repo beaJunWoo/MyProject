@@ -3,6 +3,7 @@
 
 void Block::Initalize(Map* map)
 {
+	is_Act = true;
 	Index = rand()%6*4;
 	x = 5;
 	y = 10;
@@ -152,10 +153,23 @@ void Block::Progress()
 			else { Index++; }
 		}
 	}
+	else {
+		for (int y = 0; y < shape[Index].size(); y++)
+		{
+			for (int x = 0; x < shape[y].size(); x++)
+			{
+			
+				map->GetMap()[y][x] = '2';
+
+			}
+		}
+		is_Act = false;
+	}
 }
 
 void Block::Render()
 {
+	if(is_Act){}
 	for (int y = 0; y < shape[Index].size(); y++)
 	{
 		for (int x = 0; x < shape[y].size(); x++)

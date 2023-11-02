@@ -3,7 +3,11 @@
 class BlockManager
 {
 	Block* block;
+	
 public:
-
+	void Initalize();
+	void Progress();
+	void Render();
+	void Release();
 };
 

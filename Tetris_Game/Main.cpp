@@ -11,7 +11,7 @@ int main()
 		DoubleBuffer::Get()->ClearBuffer();
 		ScenesManager::Get()->Progress();
 		ScenesManager::Get()->Render();
-		Sleep(500);
+		Sleep(50);
 	}
 	DoubleBuffer::Get()->ReleaseBuffer();
 	ScenesManager::Get()->Release();

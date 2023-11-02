@@ -1,1 +1,2 @@
 C:\Users\Administrator\Desktop\Tetris_Game\x64\Debug\Tetris_Game.exe
+C:\Users\Administrator\Desktop\MyProject\Tetris_Game\x64\Debug\Tetris_Game.exe
