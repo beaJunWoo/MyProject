@@ -1,6 +1,7 @@
 #pragma once
 class Scenes
 {
+	
 public:
 	virtual void Initalize()abstract;
 	virtual void Progress()abstract;

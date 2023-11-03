@@ -40,6 +40,15 @@
     <Filter Include="소스 파일\BlockManager\Block">
       <UniqueIdentifier>{6b1ec8c4-311b-40ed-823c-10e279de724a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Score">
+      <UniqueIdentifier>{9d927321-3356-47bc-afa0-568fb383e69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ScenesManager\Scenes\Ranking">
+      <UniqueIdentifier>{d62276a3-e789-40ff-b89f-0423d2b87f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\DataBase">
+      <UniqueIdentifier>{8335bedd-3f28-43ca-bbf9-d7f76314c165}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DoubleBuffer.cpp">
@@ -72,6 +81,15 @@
     <ClCompile Include="BlockManager.cpp">
       <Filter>소스 파일\BlockManager</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>소스 파일\Score</Filter>
+    </ClCompile>
+    <ClCompile Include="Ranking.cpp">
+      <Filter>소스 파일\ScenesManager\Scenes\Ranking</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>소스 파일\DataBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DoubleBuffer.h">
@@ -103,6 +121,15 @@
     </ClInclude>
     <ClInclude Include="BlockManager.h">
       <Filter>소스 파일\BlockManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>소스 파일\Score</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranking.h">
+      <Filter>소스 파일\ScenesManager\Scenes\Ranking</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>소스 파일\DataBase</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -43,10 +43,10 @@ void Map::Render()
 			switch (shape[y][x])
 			{
 			case '1':
-				DoubleBuffer::Get()->WriteBuffer(x, y, "бс", WHITE);
+				DoubleBuffer::Get()->WriteBuffer(x, y, "бр", WHITE);
 				break;
 			case '2':
-				DoubleBuffer::Get()->WriteBuffer(x, y, "бс", RED);
+				DoubleBuffer::Get()->WriteBuffer(x, y, "бр", RED);
 				break;
 			default:
 				break;

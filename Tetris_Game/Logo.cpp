@@ -7,7 +7,7 @@ void Logo::Initalize()
 
 void Logo::Progress()
 {
-	if (GetAsyncKeyState(VK_RETURN))
+	if (GetAsyncKeyState(0X41))
 	{
 		ScenesManager::Get()->Initalize(MENU);
 	}

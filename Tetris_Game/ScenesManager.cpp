@@ -1,9 +1,9 @@
 #include "ScenesManager.h"
 
 ScenesManager* ScenesManager::scenesManager = nullptr;
-
 void ScenesManager::Initalize(SceneId id)
 {
+
 	if (scene != nullptr)
 	{
 		Release();
@@ -22,6 +22,8 @@ void ScenesManager::Initalize(SceneId id)
 	case STAGE:
 		scene = new Stage;
 		break;
+	case RANKING:
+		scene = new Ranking;
 	default:
 		break;
 	}

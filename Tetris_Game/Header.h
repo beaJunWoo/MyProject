@@ -15,6 +15,7 @@ enum SceneId
 	MENU,
 	LOGO,
 	STAGE,
+	RANKING
 };
 
 enum Color

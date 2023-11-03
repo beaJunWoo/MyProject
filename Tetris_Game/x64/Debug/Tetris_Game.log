@@ -1,3 +1,2 @@
-﻿  Block.cpp
-C:\Users\Administrator\Desktop\MyProject\Tetris_Game\Block.cpp(196,64): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Ranking.cpp
   Tetris_Game.vcxproj -> C:\Users\Administrator\Desktop\MyProject\Tetris_Game\x64\Debug\Tetris_Game.exe

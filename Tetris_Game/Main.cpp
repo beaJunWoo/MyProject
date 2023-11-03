@@ -1,16 +1,19 @@
 #include "DoubleBuffer.h"
 #include "ScenesManager.h"
+#include "DataBase.h"
 
 int main()
-{
-	ULONGLONG deltatime = GetTickCount64();
 
+ {
+	ULONGLONG deltatime = GetTickCount64();
 
 	ScenesManager::Get()->Initalize(LOGO);
 	DoubleBuffer::Get()->InitBuffer();
-	
+
+
 	while (true)
 	{
+		
 		if (deltatime + 10 <= GetTickCount64())
 		{
 			DoubleBuffer::Get()->FlipBuffer();
@@ -21,6 +24,7 @@ int main()
 		}
 		
 	}
+
 	DoubleBuffer::Get()->ReleaseBuffer();
 	ScenesManager::Get()->Release();
 	return 0;
