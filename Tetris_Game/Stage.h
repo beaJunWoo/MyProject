@@ -1,11 +1,11 @@
 #pragma once
 #include "Scenes.h"
 #include "Map.h"
-#include "Block.h"
+#include "BlockManager.h"
 class Stage:public Scenes
 {
 	Map* map;
-	Block* block;
+	BlockManager* blockManager;
 public:
 	virtual void Initalize()override;
 	virtual void Progress()override;

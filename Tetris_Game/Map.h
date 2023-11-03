@@ -6,6 +6,7 @@ class Map
 	vector<string> shape;
 public:
 	vector<string> GetMap() { return shape; }
+	void SetMap(int x, int y, char c);
 	void Initalize();
 	void Progress();
 	void Render();

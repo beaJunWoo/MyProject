@@ -3,15 +3,23 @@
 
 int main()
 {
+	ULONGLONG deltatime = GetTickCount64();
+
+
 	ScenesManager::Get()->Initalize(LOGO);
 	DoubleBuffer::Get()->InitBuffer();
+	
 	while (true)
 	{
-		DoubleBuffer::Get()->FlipBuffer();
-		DoubleBuffer::Get()->ClearBuffer();
-		ScenesManager::Get()->Progress();
-		ScenesManager::Get()->Render();
-		Sleep(50);
+		if (deltatime + 10 <= GetTickCount64())
+		{
+			DoubleBuffer::Get()->FlipBuffer();
+			DoubleBuffer::Get()->ClearBuffer();
+			ScenesManager::Get()->Progress();
+			ScenesManager::Get()->Render();
+			deltatime = GetTickCount64();
+		}
+		
 	}
 	DoubleBuffer::Get()->ReleaseBuffer();
 	ScenesManager::Get()->Release();

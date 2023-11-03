@@ -3,23 +3,23 @@
 void Stage::Initalize()
 {
 	map = new Map;
-	block = new Block;
+	blockManager = new BlockManager;
 
 	map->Initalize();
-	block->Initalize(map);
+	blockManager->Initalize(map);
 }
 
 void Stage::Progress()
 {
 	map->Progress();
-	block->Progress();
+	blockManager->Progress();
 }
 
 void Stage::Render()
 {
 	DoubleBuffer::Get()->WriteBuffer(1, 1, "Stage", WHITE);
 	map->Render();
-	block->Render();
+	blockManager->Render();
 }
 
 void Stage::Release()
@@ -28,7 +28,7 @@ void Stage::Release()
 	delete map;
 	map = nullptr;
 
-	block->Release();
-	delete block;
-	block = nullptr;
+	blockManager->Release();
+	delete blockManager;
+	blockManager = nullptr;
 }

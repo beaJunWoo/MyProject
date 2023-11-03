@@ -1,43 +1,33 @@
 #include "Map.h"
-
+void Map::SetMap(int x, int y, char c)
+{
+	shape[y][x] = c;
+}
 void Map::Initalize()
 {
-	shape.push_back("11111111111111111111111111");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("10000000000000000000000001");
-	shape.push_back("11111111111111111111111111");
+	shape.push_back("111111111111");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("100000000001");
+	shape.push_back("111111111111");
 }
 
 void Map::Progress()
