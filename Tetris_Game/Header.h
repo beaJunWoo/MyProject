@@ -6,12 +6,13 @@
 #include <string>
 using namespace std;
 
-#define BufferWidth 80
-#define BufferHeight 100
+#define BufferWidth 150
+#define BufferHeight 150
 #define PlayerBulletCount 50
 
 enum SceneId
 {
+	EXIT,
 	MENU,
 	LOGO,
 	STAGE,
@@ -46,3 +47,4 @@ enum BlockType {
 	I,
 	T,
 };
+

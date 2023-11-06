@@ -34,9 +34,9 @@ void Score::Progress()
 	{
 		totalScore += score;
 	}
-	for (int i = 1; i < 11; i++)
+	for (int i = 1; i < 10; i++)
 	{
-		if (map->GetMap()[4][i] == '2') { is_FinishGame = true; }
+		if (map->GetMap()[3][i] >= '2') { is_FinishGame = true; }
 	}
 	
 }

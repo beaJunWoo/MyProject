@@ -11,7 +11,12 @@ class Stage:public Scenes
 	BlockManager* blockManager;
 	Score* score;
 	DataBase* dataBase;
+
 	int DataInsertDelay;
+	int NickNameSelectX;
+	int NickNameSelectY;
+
+	vector<const char*>Alphabet[3];
 public:
 	void SetDataBase(DataBase* dataBase) { this->dataBase = dataBase; }
 	virtual void Initalize()override;

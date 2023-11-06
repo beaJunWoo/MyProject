@@ -46,7 +46,6 @@ void BlockManager::Progress()
 	{
 		if (!block->GetIs_Act())
 		{
-			DoubleBuffer::Get()->WriteBuffer(2, 2, "삭제 되었습니다.", WHITE);
 			delete block;
 			block = nullptr;
 		}
@@ -58,7 +57,6 @@ void BlockManager::Progress()
 		block = new Block;
 		block->Initalize(map, NextBlock);
 		block->Set_FallDelayTime(Defalt_Fall_DelayTime);
-		DoubleBuffer::Get()->WriteBuffer(5, 5, to_string(NextBlock).c_str(), WHITE);
 		NextBlock = rand() % 7;
 	}
 	block->Progress();
@@ -74,7 +72,7 @@ void BlockManager::Progress()
 				switch (block->GetShape(NextBlock*4)[y][x])
 				{
 				case '1':
-					DoubleBuffer::Get()->WriteBuffer(x + 15, y + 2,"■",WHITE);
+					DoubleBuffer::Get()->WriteBuffer(x + 15, y + 3,"■",WHITE);
 					break;
 				default:
 					break;
@@ -90,8 +88,8 @@ void BlockManager::Render()
 	{
 		block->Render();
 	}
-	DoubleBuffer::Get()->WriteBuffer(20, 20, "LV:", WHITE);
-	DoubleBuffer::Get()->WriteBuffer(22, 20, to_string(LV).c_str(), WHITE);
+	DoubleBuffer::Get()->WriteBuffer(15, 10, "LV:", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(17, 10, to_string(LV).c_str(), WHITE);
 }
 
 void BlockManager::Release()

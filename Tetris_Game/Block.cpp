@@ -3,14 +3,15 @@
 
 void Block::Initalize(Map* map, int index)
 {
-	Push_MoveDelay= 3;
+
+	Push_MoveDelay= 2;
 	Push_MoveNow=0;
 
 	Fall_DelayTime = 20;
 	Fall_NowTime = 0;
 	Defalt_Fall_DelayTime = 0;
 
-	Push_DelayTime = 10;
+	Push_DelayTime = 5;
 	push_NowTime = 0;
 
 	ChangeShape_NowTime=0;
@@ -209,7 +210,7 @@ void Block::Progress()
 		{
 			if (push_NowTime > 0 && push_NowTime < Push_DelayTime)  //DOwnÅ°¸¦ »ìÂ¦ ´©¸¦¶§
 			{
-				Fall_DelayTime = 0;	//¸Å¿ì ºü¸£°Ô ¶³¾îÁü
+				Fall_DelayTime = 0;            //¸Å¿ì ºü¸£°Ô ¶³¾îÁü
 			}
 			else
 			{
@@ -241,11 +242,33 @@ void Block::Progress()
 
 		//ÁÂ¿ì ÀÌµ¿
 		Move_NowTIme++;
+
+		bool moveLeft = false;
+		bool moveRight = false;
+		for (int y = 0; y < shape[Idx].size(); y++)
+		{
+			for (int x = 0; x < shape[Idx][y].size(); x++)
+			{
+				if (shape[Idx][y][x] == '1') 
+				{
+					if (map->GetMap()[y + this->y][x + 1 + this->x] >= '2')
+					{
+						moveLeft = true;
+					}
+					if (map->GetMap()[y + this->y][x - 1 + this->x] >= '2')
+					{
+						moveRight = true;
+					}
+				}
+			}
+		}
+		
+		
 		if (GetAsyncKeyState(VK_LEFT) && x > 1 && Move_NowTIme >= Move_DelayTime)
 		{
 			Move_NowTIme = 0;
 			x--;
-
+			if (moveRight) { x++; }
 			Push_MoveNow++;
 		}
 		if (GetAsyncKeyState(VK_RIGHT) && x + max < 11&& Move_NowTIme >= Move_DelayTime)
@@ -253,7 +276,7 @@ void Block::Progress()
 
 			Move_NowTIme = 0;
 			x++;
-
+			if (moveLeft) { x--; }
 			Push_MoveNow++;
 		}
 		if (Push_MoveNow >= Push_MoveDelay) { Move_DelayTime = 3; }
@@ -265,13 +288,22 @@ void Block::Progress()
 		{
 			for (int x = 0; x < shape[Idx][y].size(); x++)
 			{
-				switch (shape[Idx][y][x])
+				if (shape[Idx][y][x]=='1')
 				{
-				case '1':
-					map->SetMap(x + this->x, y + this->y, '2');
-					break;
-				default:
-					break;
+					switch (color)
+					{
+					case BLUE:
+						map->SetMap(x + this->x, y + this->y, '2');
+						break;
+					case GREEN:
+						map->SetMap(x + this->x, y + this->y, '3');
+						break;
+					case CYAN:
+						map->SetMap(x + this->x, y + this->y, '4');
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}

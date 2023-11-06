@@ -13,6 +13,7 @@ class Block
 	vector<string> shape[28];
 	Map* map;
 
+
 	//µô·¹ÀÌ 
 	int Push_DelayTime; //ÀÔ·Â ³«ÇÏ µô·¹ÀÌ
 	int push_NowTime;
@@ -21,7 +22,7 @@ class Block
 	int Fall_NowTime;
 	int Defalt_Fall_DelayTime;
 
-	const int ChangeShape_DelayTime=20;
+	const int ChangeShape_DelayTime=15;
 	int ChangeShape_NowTime;
 
 	int Push_MoveDelay;
