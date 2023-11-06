@@ -116,7 +116,9 @@ void Menu::Progress()
 void Menu::Render()
 {
 	DoubleBuffer::Get()->WriteBuffer(22, 15, "-Menu-", WHITE);
-	
+	DoubleBuffer::Get()->WriteBuffer(30, 16, "[조작방법]", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(30, 17, "← → 고르기", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(30, 18, "SPACE 선택", WHITE);
 	for (int j = 0; j < 6; j++)
 	{
 		for (int i = 0; i < MenuText[j].size(); i++)
@@ -145,7 +147,7 @@ void Menu::Render()
 		break;
 	}
 
-	DoubleBuffer::Get()->WriteBuffer(10, 12, "[Stage]", StageTextColor);
+	DoubleBuffer::Get()->WriteBuffer(10, 12, "[Play]", StageTextColor);
 	DoubleBuffer::Get()->WriteBuffer(20, 12, "[Ranking]", RankingTextColor);
 	DoubleBuffer::Get()->WriteBuffer(30, 12, "[Exit]", ExitTextColor);
 }

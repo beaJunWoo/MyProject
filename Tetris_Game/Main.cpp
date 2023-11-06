@@ -14,14 +14,12 @@ int main()
 	while (true)
 	{
 		
-		if (deltatime + 10 <= GetTickCount64())
-		{
-			DoubleBuffer::Get()->FlipBuffer();
-			DoubleBuffer::Get()->ClearBuffer();
-			ScenesManager::Get()->Progress();
-			ScenesManager::Get()->Render();
-			deltatime = GetTickCount64();
-		}
+		DoubleBuffer::Get()->FlipBuffer();
+		DoubleBuffer::Get()->ClearBuffer();
+		ScenesManager::Get()->Progress();
+		ScenesManager::Get()->Render();
+		deltatime = GetTickCount64();
+		
 		
 	}
 
