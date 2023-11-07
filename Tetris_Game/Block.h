@@ -10,6 +10,7 @@ class Block
 	int ChangeIndex;
 	bool is_Act;
 	Color color;
+	bool fastFall;
 	vector<string> shape[28];
 	Map* map;
 

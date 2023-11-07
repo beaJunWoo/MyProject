@@ -13,14 +13,18 @@ int main()
 
 	while (true)
 	{
-		
-		DoubleBuffer::Get()->FlipBuffer();
-		DoubleBuffer::Get()->ClearBuffer();
-		ScenesManager::Get()->Progress();
-		ScenesManager::Get()->Render();
-		deltatime = GetTickCount64();
-		
-		
+		if (deltatime + 10 <= GetTickCount64())
+		{
+			DoubleBuffer::Get()->FlipBuffer();
+			DoubleBuffer::Get()->ClearBuffer();
+			ScenesManager::Get()->Progress();
+			ScenesManager::Get()->Render();
+			if(ScenesManager::Get()->GetFinishGame()) 
+			{
+				break;
+			}
+			deltatime = GetTickCount64();
+		}
 	}
 
 	DoubleBuffer::Get()->ReleaseBuffer();

@@ -1,6 +1,7 @@
 #include "ScenesManager.h"
 
 ScenesManager* ScenesManager::scenesManager = nullptr;
+bool ScenesManager::FinishGame = false;
 void ScenesManager::Initalize(SceneId id)
 {
 
@@ -24,24 +25,35 @@ void ScenesManager::Initalize(SceneId id)
 		break;
 	case RANKING:
 		scene = new Ranking;
+		break;
+	case EXIT:
+		FinishGame = true;
+		break;
 	default:
 		break;
 	}
-	scene->Initalize();
+	if (!FinishGame) {
+		scene->Initalize();
+	}
+	
 }
 
 void ScenesManager::Progress()
 {
+	if(scene!=nullptr)
 	scene->Progress();
 }
 
 void ScenesManager::Render()
 {
+	if (scene != nullptr)
 	scene->Render();
 }
 
 void ScenesManager::Release()
 {
+	if (scene != nullptr){
 	delete scene;
 	scene = nullptr;
+	}
 }

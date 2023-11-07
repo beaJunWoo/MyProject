@@ -26,6 +26,7 @@ void Stage::Initalize()
 	Alphabet[0].push_back("G");
 	Alphabet[0].push_back("Save");
 	Alphabet[0].push_back("AllClear");
+	Alphabet[0].push_back("");
 
 	Alphabet[1].push_back("H");
 	Alphabet[1].push_back("I");
@@ -76,8 +77,8 @@ void Stage::Progress()
 
 
 				DoubleBuffer::Get()->WriteBuffer(20, 16, "[조작방법]", WHITE);
-				DoubleBuffer::Get()->WriteBuffer(20, 17, "← → 좌우 이동", WHITE);
-				DoubleBuffer::Get()->WriteBuffer(20, 18, "↑↓ 위아래 이동", WHITE);
+				DoubleBuffer::Get()->WriteBuffer(20, 17, "방향키 이동", WHITE);
+				DoubleBuffer::Get()->WriteBuffer(20, 18, "ENTER:입력", WHITE);
 				DoubleBuffer::Get()->WriteBuffer(20, 19, "Save 이름 저장하기", WHITE);
 
 				if (DataInsertDelay > 40)
@@ -158,9 +159,9 @@ void Stage::Render()
 
 	DoubleBuffer::Get()->WriteBuffer(20, 16, "[조작방법]", WHITE);
 	DoubleBuffer::Get()->WriteBuffer(20, 17, "← → 좌우 이동", WHITE);
-	DoubleBuffer::Get()->WriteBuffer(20, 18, "SPACE 회전", WHITE);
-	DoubleBuffer::Get()->WriteBuffer(20, 19, "↓길게(천천히 떨어트리기)", WHITE);
-	DoubleBuffer::Get()->WriteBuffer(20, 20, "↓짧게(빨리 떨어트리기)", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(20, 18, "↑모양바꾸기", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(20, 19, "↓(천천히 떨어트리기)", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(20, 20, "SPACE(빨리 떨어트리기)", WHITE);
 
 	score->Render();
 	blockManager->Render();

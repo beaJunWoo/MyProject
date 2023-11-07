@@ -6,16 +6,18 @@ void Block::Initalize(Map* map, int index)
 
 	Push_MoveDelay= 2;
 	Push_MoveNow=0;
-
+	
 	Fall_DelayTime = 20;
 	Fall_NowTime = 0;
 	Defalt_Fall_DelayTime = 0;
 
-	Push_DelayTime = 5;
+	Push_DelayTime = 20;
 	push_NowTime = 0;
 
 	ChangeShape_NowTime=0;
 	Move_NowTIme = 0;
+
+	fastFall = false;
 
 	color = (Color)(rand() % 3+1);
 	is_Act = true;
@@ -208,16 +210,19 @@ void Block::Progress()
 		}
 		else
 		{
-			if (push_NowTime > 0 && push_NowTime < Push_DelayTime)  //DOwn키를 살짝 누를때
-			{
-				Fall_DelayTime = 0;            //매우 빠르게 떨어짐
-			}
-			else
-			{
+			if (!fastFall) {
 				Fall_DelayTime = Defalt_Fall_DelayTime;	//둘다 아닐경우 기존 설정으로 변경
 				push_NowTime = 0;
 			}
 		}
+		if (GetAsyncKeyState(VK_SPACE))
+		{
+			fastFall = true;
+		}
+		if (fastFall) {
+				Fall_DelayTime = 0;            //매우 빠르게 떨어짐
+		}
+		
 
 		int max = 0;
 		for (int i = 0; i < shape[Idx].size(); i++)
@@ -227,8 +232,9 @@ void Block::Progress()
 
 		//모양 변경
 		ChangeShape_NowTime++;
-		if (GetAsyncKeyState(VK_SPACE) && ChangeShape_NowTime>= ChangeShape_DelayTime)
+		if (GetAsyncKeyState(VK_UP) && ChangeShape_NowTime>= ChangeShape_DelayTime)
 		{
+			if(7<=Idx && Idx<=11&& x>9){x-=3; }
 			ChangeIndex++;
 			if (ChangeIndex > 3) { ChangeIndex = 0; }
 			ChangeShape_NowTime = 0;
@@ -254,21 +260,27 @@ void Block::Progress()
 					if (map->GetMap()[y + this->y][x + 1 + this->x] >= '2')
 					{
 						moveLeft = true;
+						break;
 					}
 					if (map->GetMap()[y + this->y][x - 1 + this->x] >= '2')
 					{
 						moveRight = true;
+						break;
 					}
 				}
 			}
+			
 		}
-		
+		bool is_LBlock = false;
+		if (7 < Idx && Idx < 12) { is_LBlock = true; }
 		
 		if (GetAsyncKeyState(VK_LEFT) && x > 1 && Move_NowTIme >= Move_DelayTime)
 		{
 			Move_NowTIme = 0;
 			x--;
-			if (moveRight) { x++; }
+			if (moveRight) {
+				x++; if (is_LBlock) { x++; }
+			}
 			Push_MoveNow++;
 		}
 		if (GetAsyncKeyState(VK_RIGHT) && x + max < 11&& Move_NowTIme >= Move_DelayTime)
@@ -276,7 +288,8 @@ void Block::Progress()
 
 			Move_NowTIme = 0;
 			x++;
-			if (moveLeft) { x--; }
+			if (moveLeft) { x--; if (is_LBlock) { x-=3; }
+			}
 			Push_MoveNow++;
 		}
 		if (Push_MoveNow >= Push_MoveDelay) { Move_DelayTime = 3; }

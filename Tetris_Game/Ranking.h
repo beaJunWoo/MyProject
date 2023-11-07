@@ -8,7 +8,6 @@ class Ranking :public Scenes
 	bool InsertRank;
 	int delay;
 public:
-	bool comp(pair<string, int> a, pair<string, int>b);
 
 	virtual void Initalize()override;
 	virtual void Progress()override;

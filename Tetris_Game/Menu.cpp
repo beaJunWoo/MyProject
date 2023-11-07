@@ -72,6 +72,8 @@ void Menu::Initalize()
 
 void Menu::Progress()
 {
+	if (GetAsyncKeyState(VK_SPACE)) {}
+	if (GetAsyncKeyState(VK_RETURN)) {}
 	SelectInputDelay++;
 	if (SelectInputDelay > 10)
 	{
@@ -107,7 +109,7 @@ void Menu::Progress()
 	}
 	
 
-	if (GetAsyncKeyState(VK_SPACE))
+	if (GetAsyncKeyState(VK_RETURN))
 	{
 		ScenesManager::Get()->Initalize(menuSelect);
 	}
@@ -118,7 +120,7 @@ void Menu::Render()
 	DoubleBuffer::Get()->WriteBuffer(22, 15, "-Menu-", WHITE);
 	DoubleBuffer::Get()->WriteBuffer(30, 16, "[조작방법]", WHITE);
 	DoubleBuffer::Get()->WriteBuffer(30, 17, "← → 고르기", WHITE);
-	DoubleBuffer::Get()->WriteBuffer(30, 18, "SPACE 선택", WHITE);
+	DoubleBuffer::Get()->WriteBuffer(30, 18, "ENTER 선택", WHITE);
 	for (int j = 0; j < 6; j++)
 	{
 		for (int i = 0; i < MenuText[j].size(); i++)
