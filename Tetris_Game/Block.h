@@ -16,8 +16,8 @@ class Block
 
 
 	//µפ·¹ÀÌ 
-	int Push_DelayTime; //ÀÔ·Â ³«ÇÏ µפ·¹ÀÌ
-	int push_NowTime;
+	int Input_LeftRightMoveDelay; //ÀÔ·Â ³«ÇÏ µפ·¹ÀÌ
+	int Input_LeftRightMoveNowTime;
 
 	int Fall_DelayTime; //³«ÇÏ µפ·¹ÀÌ
 	int Fall_NowTime;

@@ -1,7 +1,9 @@
 #include "ScenesManager.h"
 
 ScenesManager* ScenesManager::scenesManager = nullptr;
+
 bool ScenesManager::FinishGame = false;
+
 void ScenesManager::Initalize(SceneId id)
 {
 
@@ -41,18 +43,19 @@ void ScenesManager::Initalize(SceneId id)
 void ScenesManager::Progress()
 {
 	if(scene!=nullptr)
-	scene->Progress();
+		scene->Progress();
 }
 
 void ScenesManager::Render()
 {
 	if (scene != nullptr)
-	scene->Render();
+		scene->Render();
 }
 
 void ScenesManager::Release()
 {
-	if (scene != nullptr){
+	if (scene != nullptr)
+	{
 	delete scene;
 	scene = nullptr;
 	}

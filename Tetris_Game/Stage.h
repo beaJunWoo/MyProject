@@ -16,9 +16,14 @@ class Stage:public Scenes
 	int NickNameSelectX;
 	int NickNameSelectY;
 
+	string NickName;
+
 	vector<const char*>Alphabet[3];
 public:
 	void SetDataBase(DataBase* dataBase) { this->dataBase = dataBase; }
+
+	void SaveNickName();
+
 	virtual void Initalize()override;
 	virtual void Progress()override;
 	virtual void Render()override;

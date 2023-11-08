@@ -11,8 +11,8 @@ void Block::Initalize(Map* map, int index)
 	Fall_NowTime = 0;
 	Defalt_Fall_DelayTime = 0;
 
-	Push_DelayTime = 20;
-	push_NowTime = 0;
+	Input_LeftRightMoveDelay = 20;
+	Input_LeftRightMoveNowTime = 0;
 
 	ChangeShape_NowTime=0;
 	Move_NowTIme = 0;
@@ -23,9 +23,13 @@ void Block::Initalize(Map* map, int index)
 	is_Act = true;
 	Index = index*4;
 	ChangeIndex = 0;
+	
 	x = 5;
 	y = 0;
+	
+	this->map = map;
 
+#pragma region BlockShapes
 //┌ 블럭	
 #pragma region Shapeㄱ(R:)
 	
@@ -167,7 +171,8 @@ void Block::Initalize(Map* map, int index)
 	shape[27].push_back("010");
 	shape[27].push_back("111");
 #pragma endregion
-	this->map = map;
+#pragma endregion
+
 }
 
 void Block::Progress()
@@ -193,17 +198,15 @@ void Block::Progress()
 
 	if (is_Act)
 	{
-		
 		//떨어지는 속도 조절을 위해 딜레이타임 설정
-
 		//낙하
 		Fall_NowTime++;
 		if (Fall_DelayTime <= Fall_NowTime) { y++; Fall_NowTime = 0; }	//계속해서 낙하
 
 		if (GetAsyncKeyState(VK_DOWN))
 		{
-			push_NowTime++;
-			if (push_NowTime >= Push_DelayTime)	// DOWN키를 계속 유지할때
+			Input_LeftRightMoveNowTime++;
+			if (Input_LeftRightMoveNowTime >= Input_LeftRightMoveDelay)	// DOWN키를 계속 유지할때
 			{
 				Fall_DelayTime = 3;	//기존보다 조금 빠르게 떨어짐
 			}
@@ -212,7 +215,7 @@ void Block::Progress()
 		{
 			if (!fastFall) {
 				Fall_DelayTime = Defalt_Fall_DelayTime;	//둘다 아닐경우 기존 설정으로 변경
-				push_NowTime = 0;
+				Input_LeftRightMoveNowTime = 0;
 			}
 		}
 		if (GetAsyncKeyState(VK_SPACE))

@@ -9,9 +9,11 @@
 class ScenesManager
 {
 	Scenes* scene = nullptr;
-	static ScenesManager* scenesManager;
 	DataBase database;
+	
+	static ScenesManager* scenesManager;
 	static bool FinishGame;
+
 public:
 	static bool GetFinishGame() { return FinishGame; }
 	DataBase& GetDataBase() { return database; }

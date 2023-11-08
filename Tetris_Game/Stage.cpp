@@ -17,6 +17,7 @@ void Stage::Initalize()
 	NickNameSelectX = 0;
 	NickNameSelectY = 0;
 
+#pragma region NickNameAlphBetKey
 	Alphabet[0].push_back("A");
 	Alphabet[0].push_back("B");
 	Alphabet[0].push_back("C");
@@ -49,8 +50,96 @@ void Stage::Initalize()
 	Alphabet[2].push_back("X");
 	Alphabet[2].push_back("Y");
 	Alphabet[2].push_back("Z");
+#pragma endregion
 }
 using std::numeric_limits;
+void Stage::SaveNickName() {
+	NickName = "";
+	while (true)
+	{
+		DataInsertDelay++;
+		DoubleBuffer::Get()->FlipBuffer();
+		DoubleBuffer::Get()->ClearBuffer();
+		DoubleBuffer::Get()->WriteBuffer(2, 2, NickName.c_str(), WHITE);
+		DoubleBuffer::Get()->WriteBuffer(1, 1, "랭킹에 저장할 이름을입력해주세요.", WHITE);
+
+
+		DoubleBuffer::Get()->WriteBuffer(20, 16, "[조작방법]", WHITE);
+		DoubleBuffer::Get()->WriteBuffer(20, 17, "방향키 이동", WHITE);
+		DoubleBuffer::Get()->WriteBuffer(20, 18, "ENTER:입력", WHITE);
+		DoubleBuffer::Get()->WriteBuffer(20, 19, "Save 이름 저장하기", WHITE);
+
+		if (DataInsertDelay > 40)
+		{
+			if (GetAsyncKeyState(VK_RIGHT))
+			{
+				NickNameSelectX++;
+				DataInsertDelay = 0;
+			}
+			if (GetAsyncKeyState(VK_LEFT))
+			{
+				NickNameSelectX--;
+				DataInsertDelay = 0;
+			}
+			if (GetAsyncKeyState(VK_UP))
+			{
+				NickNameSelectY--;
+				DataInsertDelay = 0;
+			}
+			if (GetAsyncKeyState(VK_DOWN))
+			{
+				NickNameSelectY++;
+				DataInsertDelay = 0;
+			}
+			int NickNameBlockMinX = 0;
+			int NickNameBlockMaxX = 9;
+			int NickNameBlockMinY = 0;
+			int NickNameBlockMaxY = 2;
+
+			if (NickNameSelectX < NickNameBlockMinX) { NickNameSelectX = 0; }
+			if (NickNameSelectX > NickNameBlockMaxX) { NickNameSelectX = 9; }
+			if (NickNameSelectY < NickNameBlockMinY) { NickNameSelectY = 0; }
+			if (NickNameSelectY > NickNameBlockMaxY) { NickNameSelectY = 2; }
+		}
+
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < Alphabet[i].size(); j++)
+			{
+				if (i == NickNameSelectY && j == NickNameSelectX)
+					DoubleBuffer::Get()->WriteBuffer(10 + j * 3, 5 + i, Alphabet[i][j], RED);
+				else
+					DoubleBuffer::Get()->WriteBuffer(10 + j * 3, 5 + i, Alphabet[i][j], WHITE);
+			}
+		}
+		if (GetAsyncKeyState(VK_RETURN) && DataInsertDelay > 60)
+		{
+			if (!(Alphabet[NickNameSelectY][NickNameSelectX] == "←"
+				|| Alphabet[NickNameSelectY][NickNameSelectX] == "AllClear"
+				|| Alphabet[NickNameSelectY][NickNameSelectX] == "Save"))
+			{
+				NickName += Alphabet[NickNameSelectY][NickNameSelectX];
+			}
+
+			if (Alphabet[NickNameSelectY][NickNameSelectX] == "←")
+			{
+				if (NickName.size() > 0)
+				{
+					NickName.erase(NickName.end() - 1);
+				}
+			}
+			if (Alphabet[NickNameSelectY][NickNameSelectX] == "AllClear")
+			{
+				NickName.clear();
+			}
+			if (Alphabet[NickNameSelectY][NickNameSelectX] == "Save")
+			{
+				break;
+			}
+			DataInsertDelay = 0;
+		}
+	}
+}
 void Stage::Progress()
 {
 	//게임 진행중일때
@@ -66,89 +155,9 @@ void Stage::Progress()
 	{
 		if (DataInsertDelay > 100)
 		{
-			string NickName = "";
-			while (true)
-			{
-				DataInsertDelay++;
-				DoubleBuffer::Get()->FlipBuffer();
-				DoubleBuffer::Get()->ClearBuffer();
-				DoubleBuffer::Get()->WriteBuffer(2, 2, NickName.c_str(), WHITE);
-				DoubleBuffer::Get()->WriteBuffer(1, 1, "랭킹에 저장할 이름을입력해주세요.", WHITE);
-
-
-				DoubleBuffer::Get()->WriteBuffer(20, 16, "[조작방법]", WHITE);
-				DoubleBuffer::Get()->WriteBuffer(20, 17, "방향키 이동", WHITE);
-				DoubleBuffer::Get()->WriteBuffer(20, 18, "ENTER:입력", WHITE);
-				DoubleBuffer::Get()->WriteBuffer(20, 19, "Save 이름 저장하기", WHITE);
-
-				if (DataInsertDelay > 40)
-				{
-					if (GetAsyncKeyState(VK_RIGHT))
-					{
-						NickNameSelectX++;
-						DataInsertDelay = 0;
-					}
-					if (GetAsyncKeyState(VK_LEFT))
-					{
-						NickNameSelectX--;
-						DataInsertDelay = 0;
-					}
-					if (GetAsyncKeyState(VK_UP))
-					{
-						NickNameSelectY--;
-						DataInsertDelay = 0;
-					}
-					if (GetAsyncKeyState(VK_DOWN))
-					{
-						NickNameSelectY++;
-						DataInsertDelay = 0;
-					}
-					if (NickNameSelectX < 0) { NickNameSelectX = 0; }
-					if (NickNameSelectX > 9) { NickNameSelectX = 9; }
-					if (NickNameSelectY < 0) { NickNameSelectY = 0; }
-					if (NickNameSelectY > 2) { NickNameSelectY = 2; }
-				}
-
-				for (int i = 0; i < 3; i++)
-				{
-					for (int j = 0; j < Alphabet[i].size(); j++)
-					{
-						if (i == NickNameSelectY && j == NickNameSelectX)
-							DoubleBuffer::Get()->WriteBuffer(10 + j * 3, 5 + i, Alphabet[i][j], RED);
-						else
-							DoubleBuffer::Get()->WriteBuffer(10 + j * 3, 5 + i, Alphabet[i][j], WHITE);
-					}
-				}
-				if (GetAsyncKeyState(VK_RETURN) && DataInsertDelay > 60)
-				{
-					if (!(Alphabet[NickNameSelectY][NickNameSelectX] == "←"
-						|| Alphabet[NickNameSelectY][NickNameSelectX] == "AllClear"
-						|| Alphabet[NickNameSelectY][NickNameSelectX] == "Save"))
-					{
-						NickName += Alphabet[NickNameSelectY][NickNameSelectX];
-					}
-
-					if (Alphabet[NickNameSelectY][NickNameSelectX] == "←")
-					{
-						if (NickName.size() > 0)
-						{
-							NickName.erase(NickName.end() - 1);
-						}
-					}
-					if (Alphabet[NickNameSelectY][NickNameSelectX] == "AllClear")
-					{
-						NickName.clear();
-					}
-					if (Alphabet[NickNameSelectY][NickNameSelectX] == "Save")
-					{
-						break;
-					}
-					DataInsertDelay = 0;
-				}
-			}
+			SaveNickName();
 
 			ScenesManager::Get()->GetDataBase().GetRankingData().push_back(make_pair(NickName, score->GetTotalScore()));
-
 			ScenesManager::Get()->Initalize(RANKING);
 		}
 	}

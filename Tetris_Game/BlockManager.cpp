@@ -14,7 +14,9 @@ void BlockManager::Progress()
 {
 	//일정시간이후 스피드 증가
 	Time++;
+
 	DoubleBuffer::Get()->WriteBuffer(3, 3, to_string(Defalt_Fall_DelayTime).c_str(), WHITE);
+
 	if (Time%5000==0&& Defalt_Fall_DelayTime>0)
 	{
 		Defalt_Fall_DelayTime -= LV*(LV*0.5); //스피드 기본값 감소
